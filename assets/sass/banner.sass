@@ -1,0 +1,44 @@
+.banner
+  &__wrap
+    overflow: hidden
+    position: relative
+  &__item
+    width: 100%
+    aspect-ratio: 107/40
+    background-size: cover
+    background-repeat: no-repeat
+    background-position: center
+    position: relative
+    border-radius: 53px
+    overflow: hidden
+  &__text
+    position: absolute
+    width: 327px
+    left: 115px
+    top: 57px
+    bottom: 57px
+    display: flex
+    flex-direction: column
+    h3
+      font: 700 40px/1 $font-family
+      color: $white
+    h2
+      font: 700 115px/1.2 $font-family
+      color: $darkViolet
+  &__title
+    flex: 1 0 auto
+  .button
+    flex-shrink: 0
+  &__arrow
+    position: absolute
+    top: 200px
+    width: 44px
+    height: 44px
+    background: url("assets/images/banner-arrow.svg") center no-repeat
+    z-index: 300
+    cursor: pointer
+    &.prev
+      left: 29px
+    &.next
+      right: 29px
+      transform: rotate(180deg)

@@ -1,0 +1,56 @@
+.footer
+  background: linear-gradient(180deg, #c98dc8 0%, #6d128f 69.54%)
+  padding: 33px 14px
+  &__wrap
+    display: grid
+    grid-template-columns: repeat(4, 1fr)
+    color: #fff
+    gap: 106px
+  h4
+    font: 700 24px $font-family
+    color: $orange
+  &__col
+    padding-bottom: 1em
+    h4
+      margin-bottom: 17px
+  .menu a
+    font: 500 14px $font-family
+    color: #fff
+  &__list
+    display: flex
+    flex-direction: column
+    gap: 14px
+  &__link
+    display: flex
+    align-items: center
+    font: 500 14px $font-family
+    color: #fff
+    gap: 6px
+    span:before
+      content: '- '
+    svg
+      max-width: 29px
+      max-height: 22px
+      fill: $orange
+    &.youtube svg
+      max-width: 25px
+  &__qr
+    text-align: right
+    display: flex
+    flex-direction: column
+    align-items: flex-end
+    gap: 16px
+    &-img
+      width: 80px
+      height: 80px
+    &-desc
+      font: 500 14px $font-family
+      text-align: right
+  &__storelist
+    display: grid
+    grid-template-columns: repeat(3, 24px)
+    gap: 24px
+  &__copy
+    margin-top: -1em
+    font: 400 14px $font-family
+    color: #d1d1d1

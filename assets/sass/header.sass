@@ -1,0 +1,157 @@
+.header
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25)
+  background: linear-gradient(180deg, #660d8b 0%, #bb4fb5 64.06%, #d8a6d7 99.48%)
+  padding: 17px
+  &__wrap
+    display: flex
+    align-items: center
+    justify-content: space-between
+    gap: 30px
+  &__logo
+    display: block
+    flex-shrink: 0
+    line-height: 1
+    svg
+      width: 100%
+      max-width: 253px
+      aspect-ratio: 253/65
+
+  &__row
+    display: flex
+    align-items: center
+    gap: 17px
+  &__admin
+    max-width: 177px
+  &__phone
+    display: flex
+    align-items: center
+    justify-content: flex-end
+    gap: 8px
+    &::before
+      content: ''
+      width: 24px
+      height: 24px
+      background: url("assets/images/phone.png") center no-repeat
+      background-size: cover
+      display: block
+      flex-shrink: 0
+    &-list
+      display: flex
+      flex-direction: column
+      align-items: flex-end
+      gap: 8px
+      a
+        font: 500 10px /1.2 $font-family
+        text-align: right
+        color: $white
+  &__links
+    margin-top: 18px
+    display: flex
+    align-items: center
+    gap: 28px
+    justify-content: flex-end
+  &__link
+    display: flex
+    align-items: center
+    gap: 8px
+    font: 700 12px / 1.10345 $second-family
+    color: $white
+    &::before
+      content: ''
+      width: 20px
+      height: 16px
+      background-position: center
+      background-repeat: no-repeat
+      background-size: cover
+    &.admin:before
+      background-image: url("assets/images/account.svg")
+    &.cart:before
+      background-image: url("assets/images/cart.svg")
+  &__search
+    input
+      background: transparent
+      color: $white
+      font: 700 10px $font-family
+      text-transform: uppercase
+    &::after
+      content: ''
+      width: 23px
+      height: 14px
+      background: url("assets/images/search.svg") center no-repeat
+
+.header-menu
+  .menu
+    display: flex
+    flex-wrap: wrap
+    gap: 57px
+    align-items: center
+    position: relative
+    padding: 12px 0
+  .sub-menu
+    display: none
+    position: absolute
+    flex-direction: column
+    border-radius: 0 0 22px 22px
+    padding: 8px 24px 32px 24px
+    width: 336px
+    max-height: 726px
+    overflow-y: auto
+    box-shadow: 0 6px 6px 0 rgba(165, 150, 173, 0.3)
+    background: $bg
+    top: 99%
+    left: 0
+    z-index: 3
+    .menu-item
+      border-bottom: 1px solid #fdfcff
+      padding: 14px 8px 14px 16px
+      width: 100%
+      font: 500 14px/17px $font-family
+      color: #450e62
+      &.menu-item-has-children
+        display: flex
+        flex-direction: column
+        .sub-menu
+          position: relative
+          display: flex
+          gap: 12px
+          width: 230px
+          box-shadow: none
+          overflow: initial
+          max-height: 1px
+          overflow: hidden
+          padding: 0
+          .menu-item
+            padding: 0
+            border: none
+            a
+              font: 400 14px / 1.42857 $font-family
+        &:hover
+          .sub-menu
+            max-height: unset
+            height: auto
+            padding: 12px 0
+    &:hover
+      display: flex
+  .menu-item
+    a
+      font: 700 12px / 2.1425 $font-family
+      color: $text
+    &:hover > a
+      color: $lightViolet
+  .menu-item-has-children
+    position: relative
+    &>a
+      display: flex
+      align-items: center
+      gap: 2px
+      z-index: 1
+      &::after
+        content: ''
+        width: 20px
+        height: 20px
+        background: url("assets/images/arrow-down.svg") center no-repeat
+    &:hover
+      &>.sub-menu
+        display: flex
+      &>a::after
+        transform: rotate(180deg)

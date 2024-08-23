@@ -1,0 +1,26 @@
+{
+  "name": "storefront",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "=== Storefront === Contributors: automattic, tiagonoronha, jameskoster Requires at least: 5.3.4 Tested up to: 6.5 Stable tag: 4.6.0 Version: 4.6.0 WC requires at least: 4.2 WC tested up to: 8.8 License: GPLv3 or later License URI: https://www.gnu.org/licenses/gpl-3.0.html Tags: e-commerce, two-columns, left-sidebar, right-sidebar, custom-background, custom-colors, custom-header, custom-menu, featured-images, full-width-template, threaded-comments, accessibility-ready, rtl-language-support, footer-widgets, sticky-post, theme-options, editor-style",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "browser-sync": "^3.0.2",
+    "gulp": "^5.0.0",
+    "gulp-autoprefixer": "^9.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^5.1.0",
+    "gulp-uglify": "^3.0.2",
+    "gulp-uglify-es": "^3.0.0",
+    "sass": "^1.77.8"
+  }
+}

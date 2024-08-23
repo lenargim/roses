@@ -1,0 +1,75 @@
+.slider
+  position: relative
+  &__pagination
+    position: absolute
+    bottom: 20px
+    display: flex
+    align-items: center
+    justify-content: center
+    z-index: 3
+    .swiper-pagination-bullet
+      background: $white
+      transform: rotate(-45deg)
+      border-radius: 0
+      opacity: 1
+      width: 8.5px
+      height: 8.5px
+      margin: 0 6px !important
+      &-active
+        background: $darkViolet
+  &__item
+    display: grid
+    grid-template-columns: 1fr 1fr
+  &__content
+    position: relative
+    padding: 23px 66px
+    display: flex
+    align-items: center
+    justify-content: center
+    margin-left: -10%
+  &__text
+    position: relative
+    display: flex
+    flex-direction: column
+    gap: 30px
+    align-items: center
+    color: $white
+    text-align: center
+    width: 300px
+    aspect-ratio: 1/1
+    border: 2px solid #6f1490
+    padding: 20px
+    &>*
+      transform: translate(0,0)
+      max-width: 230px
+    &::before
+      content: ''
+      position: absolute
+      aspect-ratio: 1/1
+      display: block
+      width: 306px
+      background: $darkViolet
+      transform: translate(-50%,-50%) rotate(45deg)
+      left: 50%
+      top: 50%
+    .date
+      font: 700 14px / 1 $font-family
+      color: $orange
+    .title
+      font: 700 20px $font-family
+      display: flex
+      align-items: center
+      justify-content: center
+      gap: 13px
+      &::before, &::after
+        content: ''
+        width: 8px
+        height: 8px
+        display: block
+        background: $orange
+        transform: rotate(45deg)
+    .name
+      font: 700 20px $font-family
+    .text
+      margin-top: 18px
+      font: 400 16px $font-family
