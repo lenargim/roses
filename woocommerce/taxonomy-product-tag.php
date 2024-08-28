@@ -1,22 +1,53 @@
 <?php
-/**
- * The Template for displaying products in a product tag. Simply includes the archive template
- *
- * This template can be overridden by copying it to yourtheme/woocommerce/taxonomy-product-tag.php.
- *
- * HOWEVER, on occasion WooCommerce will need to update template files and you
- * (the theme developer) will need to copy the new files to your theme to
- * maintain compatibility. We try to do this as little as possible, but it does
- * happen. When this occurs the version of the template file will be bumped and
- * the readme will list any important changes.
- *
- * @see         https://woocommerce.com/document/template-structure/
- * @package     WooCommerce\Templates
- * @version     4.7.0
- */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly.
 }
+//get_header( 'shop' );
+global $wp_query;
+$cat_obj = $wp_query->get_queried_object();
+if ($cat_obj->parent === 0) {
+	wc_get_template('archive-product.php');
+} else {
+	$terms = get_terms(
+		['taxonomy' => 'product_cat',
+			'hide_empty' => false,
+			'parent' => $cat_obj->term_id,
 
-wc_get_template( 'archive-product.php' );
+		]);
+
+	get_template_part('parts/header'); ?>
+
+  <section class="catalog section">
+    <div class="container">
+      <div class="catalog__wrap">
+        <div class="catalog__sidebar">
+									<?php get_template_part('parts/sidebar-menu'); ?>
+
+        </div>
+        <div class="catalog__main">
+									<?php get_template_part('parts/new'); ?>
+
+									<?php if ($terms): ?>
+           <div class="grid grid-4 catalog__loop">
+												<?php foreach ($terms as $term):
+													$thumb_id = get_term_meta($term->term_id, 'thumbnail_id', true);
+													$term_img = lenar_get_img(wp_get_attachment_url($thumb_id, 'product-category')); ?>
+              <a href="<?php echo get_term_link($term) ?>"
+                 style="background-image: url(<?php echo $term_img ?>)"
+                 class="grid__item"><span><?php echo $term->name ?></span></a>
+												<?php endforeach; ?>
+           </div>
+									<?php endif; ?>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+	<?php
+	get_template_part('parts/extra-sale');
+	get_template_part('parts/map'); ?>
+
+	<?php get_template_part('parts/footer');
+}

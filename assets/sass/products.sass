@@ -1,0 +1,67 @@
+.products
+  display: grid
+  grid-template-columns: repeat(3,210px)
+  gap: 24px 32px
+  align-self: flex-end
+  &__item
+    position: relative
+    border-radius: 15px
+    overflow: hidden
+    display: flex
+    flex-direction: column
+    transition: all .2s ease
+    &-img
+      display: block
+      border-radius: 15px
+      overflow: hidden
+      margin-bottom: 16px
+      width: 100%
+      aspect-ratio: 1/1
+      &-link
+        position: relative
+    &-data
+      flex: 1 0 auto
+      position: relative
+      display: flex
+      flex-direction: column
+      gap: 11px
+    &-info
+      flex: 1 0 auto
+    &-height
+      font: 400 12px / 1.66667 $font-family
+    &-name
+      font: 500 14px /1.42857 $font-family
+    &-bottom
+      display: flex
+      justify-content: space-between
+      align-items: flex-end
+    &-price
+      font: 700 15px / 1.59502 $font-family
+    &-tags
+      position: absolute
+      z-index: 1
+      display: flex
+      align-items: center
+      justify-content: flex-start
+      flex-wrap: wrap
+      gap: 5px
+      top: 12px
+      left: 9px
+      right: 9px
+    &-tag
+      border-radius: 20px
+      padding: 5px 12px
+      font: 600 9px / 1.55556 $font-family
+      color: #fff
+      background: $darkViolet
+
+
+.yith-wcwl-add-to-wishlist
+  position: absolute
+  right: 12px
+  bottom: calc(100% + 30px)
+  width: 30px
+  height: 30px
+
+  .delete_item
+    font-size: 0

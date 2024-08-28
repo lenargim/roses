@@ -33,17 +33,18 @@ if ( $total <= 1 ) {
 	echo paginate_links(
 		apply_filters(
 			'woocommerce_pagination_args',
-			array( // WPCS: XSS ok.
+			array(
 				'base'      => $base,
 				'format'    => $format,
 				'add_args'  => false,
 				'current'   => max( 1, $current ),
 				'total'     => $total,
-				'prev_text' => is_rtl() ? '&rarr;' : '&larr;',
-				'next_text' => is_rtl() ? '&larr;' : '&rarr;',
+        'prev_next' => false,
+				'prev_text' => '',
+				'next_text' => '',
 				'type'      => 'list',
 				'end_size'  => 3,
-				'mid_size'  => 3,
+				'mid_size'  => 1,
 			)
 		)
 	);

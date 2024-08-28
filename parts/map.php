@@ -1,5 +1,6 @@
 <section class="section background map">
   <div class="container">
+    <h2>Остались вопросы?</h2>
     <div class="map__wrap">
       <img src="<?php echo IMAGES_PATH . 'map.jpg' ?>" alt="Карта проезда" class="map__img">
 					<?php $map = get_field('map', 16) ?>

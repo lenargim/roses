@@ -1,0 +1,72 @@
+.new
+  &__slider
+    border-radius: 22px
+    padding: 24px 44px
+    max-width: 837px
+    overflow: hidden
+    position: relative
+  &__item
+    position: relative
+    border-radius: 15px
+    overflow: hidden
+    max-width: 137px
+    min-height: 250px !important
+    display: flex
+    flex-direction: column
+    transform: none !important
+    z-index: -1
+    transition: all .2s ease
+    opacity: 0
+    &-img
+      display: block
+      border-radius: 15px
+      overflow: hidden
+      margin-bottom: 12px
+      width: 100%
+      aspect-ratio: 1/1
+    &-data
+      flex: 1 0 auto
+      position: relative
+      display: flex
+      flex-direction: column
+      gap: 8px
+    &-info
+      flex: 1 0 auto
+    &-height
+      font: 400 10px / 1.2 $font-family
+      margin-bottom: 8px
+    &-name
+      font: 500 14px /1.42857 $font-family
+    &-bottom
+      display: flex
+      justify-content: space-between
+      align-items: flex-end
+    &-price
+      font: 700 14px / 1.71429 $font-family
+  .swiper-slide-visible .new__item
+    animation: show .4s ease forwards
+    //z-index: 1
+
+  &__arrow
+    width: 14px
+    height: 28px
+    fill: $lightViolet
+    position: absolute
+    z-index: 3
+    cursor: pointer
+    top: calc(50% - 14px)
+    &.prev
+      left: 15px
+    &.next
+      right: 15px
+      transform: rotate(180deg)
+
+@keyframes show
+  0%
+    opacity: 0
+    z-index: -1
+  1%
+    z-index: 1
+  100%
+    opacity: 1
+    z-index: 1

@@ -1,0 +1,30 @@
+.woocommerce-pagination
+  display: grid
+  grid-template-columns: repeat(3, 210px)
+  gap: 24px 32px
+  justify-content: end
+  margin-top: 24px
+  .page-numbers
+    display: flex
+    align-items: center
+    justify-content: flex-start
+    gap: 8px
+    grid-column: 1/4
+    li
+      &> *
+        width: 30px
+        height: 30px
+        border: 1px solid $lightViolet
+        border-radius: 5px
+        display: flex
+        align-items: center
+        justify-content: center
+        font: 700 12px / 2.15257 $font-family
+        text-align: center
+      a
+        color: $darkViolet
+        background: transparent
+    & .current
+      background: $lightViolet
+      color: $white
+      cursor: initial

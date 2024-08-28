@@ -172,7 +172,6 @@ svg
   cursor: pointer
   white-space: nowrap
   user-select: none
-  box-sizing: border-box
   box-shadow: 2px 2px 4px 0 rgba(154, 48, 148, 0.1)
   padding: 8px 22px
   font: 700 10px / 2 $font-family
@@ -181,7 +180,7 @@ svg
   border-radius: 20px
   width: fit-content
   min-width: 181px
-  height: 37px
+  box-sizing: border-box
   &.orange
     background: $orange
     color: $white
@@ -192,6 +191,9 @@ svg
     background: $white
     border: 1px solid $orange
     color: $orange
+    &:hover
+      background: $orange
+      color: $white
   &.lightOrange
     background: $lightOrange
     color: $white
@@ -205,7 +207,17 @@ svg
       color: $white
       &::placeholder
         color: $white
-
+  &.filter
+    border: 1px solid $lightViolet
+    color: $darkViolet
+    background: $white
+    min-width: unset
+  &.buy
+    padding: 5px 18px
+    min-width: 81px
+  &.product-button
+    min-width: 125px
+    padding: 8px 40px
 .section
   padding: 40px 0
 .h2
@@ -223,24 +235,32 @@ svg
     height: 8px
     transform: rotate(45deg)
     background-color: $darkViolet
-.grid-3
+.grid
   display: grid
-  grid-template-columns: repeat(3, 1fr)
-  &__item
-    aspect-ratio: 345/200
-.grid-5
-  display: grid
-  grid-template-columns: repeat(5, 1fr)
-  &__item
-    aspect-ratio: 1/1
-.grid-3, .grid-5
-  gap: 17.5px
+  &.grid-3
+    grid-template-columns: repeat(3, 1fr)
+    gap: 17.5px
+    .grid__item
+      aspect-ratio: 345/200
+  &.grid-4
+    grid-template-columns: repeat(4,1fr)
+    gap: 12px
+    .grid__item
+      aspect-ratio: 1/1
+  &.grid-5
+    grid-template-columns: repeat(5, 1fr)
+    gap: 17.5px
+    .grid__item
+      aspect-ratio: 1/1
   &__item
     width: 100%
     border-radius: 22px
     position: relative
-    background: $bg
+    background-color: $bg
     overflow: hidden
+    background-position: center
+    background-repeat: no-repeat
+    background-size: cover
     span
       position: absolute
       left: 12px
@@ -250,14 +270,8 @@ svg
       text-transform: uppercase
       text-align: center
       height: 2.4em
-      color: $textBlack
-      z-index: 2
-  .has-img
-    background-position: center
-    background-repeat: no-repeat
-    background-size: cover
-    span
       color: $white
+      z-index: 2
     &::after
       content: ''
       filter: blur(50px)

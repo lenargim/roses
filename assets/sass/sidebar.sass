@@ -1,0 +1,51 @@
+.sidebar
+  text-align: left
+  &__parent
+    margin-bottom: 16px
+  &__toggle
+    //display: grid
+    //grid-template-rows: auto 0fr
+    //gap: 8px
+    //transition: grid-template-rows .5s ease
+    &.open
+      //grid-template-rows: auto 1fr
+      &>.sidebar__list
+        max-height: 1000px
+        transition: max-height 1s ease-in-out
+      &>.sidebar__button svg
+        transform: rotate(180deg)
+  &__list
+    overflow: hidden
+    padding-left: 8px
+    transition: max-height 0.5s cubic-bezier(0, 1, 0, 1)
+    max-height: 0
+  &__categories
+    margin-bottom: 8px
+  &__button
+    display: flex
+    align-items: center
+    justify-content: flex-start
+    gap: 4px
+    font: 600 14px / 1.2 $font-family
+    text-transform: uppercase
+    color: $text
+    margin: 0 0 8px
+    padding: 0
+    text-align: left
+    transition: all .1s ease
+    svg
+      fill: $text
+      width: 20px
+      height: 20px
+      flex-shrink: 0
+    &:hover
+      background-color: transparent
+      color: $lightViolet
+      svg
+        fill: $lightViolet
+  &__children
+    a
+      font: 500 12px/2 $font-family
+      color: $text
+      &.current
+        color: $lightViolet
