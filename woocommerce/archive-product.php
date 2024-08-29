@@ -6,12 +6,10 @@ if (!defined('ABSPATH')) {
 //get_header( 'shop' );
 global $wp_query;
 $cat_obj = $wp_query->get_queried_object();
-
 $terms = get_terms(
 	['taxonomy' => 'product_cat',
 		'hide_empty' => false,
-		'parent' => $cat_obj->term_id,
-
+		'parent' => 0,
 	]);
 
 get_template_part('parts/header'); ?>

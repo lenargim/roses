@@ -28,3 +28,28 @@
       background: $lightViolet
       color: $white
       cursor: initial
+
+.breadcrumbs
+  margin-bottom: 30px
+  & > span
+    display: flex
+    align-items: center
+    flex-wrap: nowrap
+    gap: 22px
+    & *
+      font: 500 12px $font-family
+      color: $darkViolet
+      white-space: nowrap
+    &>span:not(:last-of-type)
+      position: relative
+      &::before
+        content: ''
+        position: absolute
+        width: 4px
+        height: 4px
+        left: calc(100% + 8px)
+        top: 4.5px
+        transform: rotate(45deg)
+        background: $darkViolet
+    .breadcrumb_last
+     color: $lightViolet

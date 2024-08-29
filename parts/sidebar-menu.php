@@ -6,15 +6,18 @@ $allParentCategories = get_terms([
 	'hide_empty' => false,
 	'parent' => 0
 ]);
-//var_dump($cat_obj);
-
 ?>
 
 <div class="sidebar">
+	<?php
+	if ( function_exists('yoast_breadcrumb') ) {
+		yoast_breadcrumb( '<p id="breadcrumbs" class="breadcrumbs">','</p>' );
+	}
+	?>
 	<?php foreach ($allParentCategories as $parentCat):
 		$termId = $parentCat->term_id;
-		$isCurrent = $cat_obj->term_id === $termId;
-    $isParent = $cat_obj->parent === $termId;
+		$isCurrent = isset($cat_obj->term_id) && $cat_obj->term_id === $termId;
+    $isParent = isset($cat_obj->parent) && $cat_obj->parent === $termId;
     $isOpen = $isParent || $isCurrent;
 		$children = get_terms([
 			'taxonomy' => 'product_cat',

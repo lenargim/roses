@@ -17,7 +17,7 @@ function lenar_enqueue_scripts()
 		wp_enqueue_script('home-script', get_template_directory_uri() . '/assets/js/home.js', array('swiper-lib'));
 	}
 
-	if (is_product_category() || is_product_tag()) {
+	if (is_product_category() || is_product_tag() || is_shop()) {
 		wp_enqueue_style('swiper-styles', 'https://unpkg.com/swiper@8/swiper-bundle.min.css');
 		wp_enqueue_script('swiper-lib', 'https://unpkg.com/swiper@8/swiper-bundle.min.js', array('jquery'));
 		wp_enqueue_script('shop-script', get_template_directory_uri() . '/assets/js/shop.js', array('swiper-lib'));
