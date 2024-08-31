@@ -1,58 +1,47 @@
 <?php
-/**
- * Single Product Image
- *
- * This template can be overridden by copying it to yourtheme/woocommerce/single-product/product-image.php.
- *
- * HOWEVER, on occasion WooCommerce will need to update template files and you
- * (the theme developer) will need to copy the new files to your theme to
- * maintain compatibility. We try to do this as little as possible, but it does
- * happen. When this occurs the version of the template file will be bumped and
- * the readme will list any important changes.
- *
- * @see     https://woocommerce.com/document/template-structure/
- * @package WooCommerce\Templates
- * @version 9.0.0
- */
-
-defined( 'ABSPATH' ) || exit;
-
-// Note: `wc_get_gallery_image_html` was added in WC 3.3.2 and did not exist prior. This check protects against theme overrides being used on older versions of WC.
-if ( ! function_exists( 'wc_get_gallery_image_html' ) ) {
-	return;
-}
-
+defined('ABSPATH') || exit;
 global $product;
 
-$columns           = apply_filters( 'woocommerce_product_thumbnails_columns', 4 );
+$columns = apply_filters('woocommerce_product_thumbnails_columns', 4);
 $post_thumbnail_id = $product->get_image_id();
-$wrapper_classes   = apply_filters(
+$attachment_ids = $product->get_gallery_image_ids();
+array_unshift($attachment_ids, $post_thumbnail_id);
+$wrapper_classes = apply_filters(
 	'woocommerce_single_product_image_gallery_classes',
 	array(
 		'woocommerce-product-gallery',
-		'woocommerce-product-gallery--' . ( $post_thumbnail_id ? 'with-images' : 'without-images' ),
-		'woocommerce-product-gallery--columns-' . absint( $columns ),
+		'woocommerce-product-gallery--' . ($post_thumbnail_id ? 'with-images' : 'without-images'),
 		'images',
 	)
 );
-?>
-<div class="<?php echo esc_attr( implode( ' ', array_map( 'sanitize_html_class', $wrapper_classes ) ) ); ?>" data-columns="<?php echo esc_attr( $columns ); ?>" style="opacity: 0; transition: opacity .25s ease-in-out;">
-	<div class="woocommerce-product-gallery__wrapper">
-		<?php
-		if ( $post_thumbnail_id ) {
-			$html = wc_get_gallery_image_html( $post_thumbnail_id, true );
-		} else {
-			$wrapper_classname = $product->is_type( 'variable' ) && ! empty( $product->get_available_variations( 'image' ) ) ?
-				'woocommerce-product-gallery__image woocommerce-product-gallery__image--placeholder' :
-				'woocommerce-product-gallery__image--placeholder';
-			$html              = sprintf( '<div class="%s">', esc_attr( $wrapper_classname ) );
-			$html             .= sprintf( '<img src="%s" alt="%s" class="wp-post-image" />', esc_url( wc_placeholder_img_src( 'woocommerce_single' ) ), esc_html__( 'Awaiting product image', 'woocommerce' ) );
-			$html             .= '</div>';
-		}
+if ($attachment_ids && $post_thumbnail_id): ?>
+  <div class="product-single__gallery">
+    <div class="product-single__thumbs swiper-thumbs">
+      <div class="swiper-wrapper">
+							<?php foreach ($attachment_ids as $attachment_id): ?>
+         <div class="swiper-slide">
+										<?php $product_img = lenar_get_img(wp_get_attachment_url($attachment_id, 'product-thumb')); ?>
+           <img src="<?php echo $product_img ?>" alt="<?php echo $product->name ?>" class="product-single__thumb">
+         </div>
+							<?php endforeach; ?>
+      </div>
+    </div>
 
-		echo apply_filters( 'woocommerce_single_product_image_thumbnail_html', $html, $post_thumbnail_id ); // phpcs:disable WordPress.XSS.EscapeOutput.OutputNotEscaped
-
-		do_action( 'woocommerce_product_thumbnails' );
-		?>
-	</div>
-</div>
+    <div class="product-single__images swiper-product">
+					<?php wc_get_template('single-product/sale-flash.php'); ?>
+      <div class="product-single__tags">
+							<?php echo wc_get_product_tag_list($product->ID, ''); ?>
+      </div>
+      <div class="prev product-single__arrow product-single__prev"></div>
+      <div class="next product-single__arrow product-single__next"></div>
+      <div class="swiper-wrapper">
+							<?php foreach ($attachment_ids as $attachment_id): ?>
+         <div class="swiper-slide">
+										<?php $product_img = lenar_get_img(wp_get_attachment_url($attachment_id, 'product-img')); ?>
+           <img src="<?php echo $product_img ?>" alt="<?php echo $product->name ?>" class="product-single__image">
+         </div>
+							<?php endforeach; ?>
+      </div>
+    </div>
+  </div>
+<?php endif; ?>

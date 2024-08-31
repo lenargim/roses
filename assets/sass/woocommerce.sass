@@ -30,7 +30,18 @@
       cursor: initial
 
 .breadcrumbs
-  margin-bottom: 30px
+  display: flex
+  justify-content: flex-start
+  align-items: center
+  gap: 16px
+  .back
+    width: 24px
+    height: 24px
+    display: block
+    flex-shrink: 0
+    background: url("assets/images/back.svg") center no-repeat
+    padding: 0
+    margin: 0
   & > span
     display: flex
     align-items: center
@@ -53,3 +64,40 @@
         background: $darkViolet
     .breadcrumb_last
      color: $lightViolet
+
+.buttonset
+  display: flex
+  align-items: center
+  justify-content: space-between
+  border: 1px solid #fe8d13
+  border-radius: 22px
+  padding: 10px 13px
+  width: 91px
+  .quantity
+    line-height: 1
+  input
+    font: 500 14px / 17px $third-family
+    color: $text
+    text-align: center
+    padding: 0
+  .minus, .plus
+    width: 12px
+    height: 12px
+    position: relative
+    margin: 0
+    padding: 0
+    &::before, &:after
+      position: absolute
+      background: $orange
+    &::before
+      content: ''
+      width: 100%
+      height: 1px
+      top: 5.5px
+      left: 0
+  .plus:after
+    content: ''
+    height: 100%
+    width: 1px
+    left: 5.5px
+    top: 0

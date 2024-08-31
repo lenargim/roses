@@ -65,3 +65,147 @@
 
   .delete_item
     font-size: 0
+.product-single
+  &__title
+    display: flex
+    align-items: center
+    justify-content: flex-start
+    margin-top: 40px
+    gap: 40px
+    flex-wrap: wrap
+    h1
+      font: 600 30px/37px $font-family
+    .sku
+      font: 600 20px/1.2 $font-family
+      text-align: center
+      color: $orange
+  &__wrap
+    margin-top: 32px
+    display: grid
+    grid-template-columns: 1fr 415px
+    gap: 32px 40px
+  &__gallery
+    display: grid
+    grid-template-columns: 71px 1fr
+    gap: 24px
+  &__thumbs
+    width: 100%
+    position: relative
+    max-height: 436px
+    z-index: 9
+  &__thumb
+    display: block
+    width: 100%
+    aspect-ratio: 1/1
+    cursor: pointer
+    overflow: hidden
+    border: 4px solid $lightViolet
+    border-radius: 15px
+  .swiper-slide-thumb-active .product-single__thumb
+    border-color: $darkViolet
+  &__images
+    position: relative
+    overflow: hidden
+    border: 4.50px solid $lightViolet
+    border-radius: 15px
+    aspect-ratio: 520/436
+  &__image
+    width: 100%
+    height: 100%
+    object-fit: cover
+  &__sale
+    position: absolute
+    border-radius: 20px
+    padding: 8px 16px
+    background-color: $orange
+    color: $white
+    font: 600 12px / 1.16667 $font-family
+    z-index: 2
+    top: 17px
+    right: 16px
+    cursor: initial
+  &__tags
+    display: flex
+    align-items: center
+    flex-wrap: wrap
+    gap: 12px
+    position: absolute
+    top: 17px
+    left: 16px
+    z-index: 2
+    a
+      border-radius: 20px
+      padding: 8px 16px
+      font: 600 12px / 1.16667 $font-family
+      color: $white
+      background-color: $lightViolet
+  &__arrow
+    position: absolute
+    width: 40px
+    height: 40px
+    background: url("assets/images/product-arrow.svg") center no-repeat
+    z-index: 2
+    top: calc(50% - 20px)
+    cursor: pointer
+  &__prev
+    left: 16px
+  &__next
+    right: 16px
+    transform: rotate(180deg)
+  &__summary
+    border: 2px solid #bd7dc1
+    border-radius: 15px
+    padding: 40px 32px
+  &__table
+    .row
+      display: flex
+      align-items: center
+      justify-content: space-between
+      gap: 16px
+      margin-bottom: 12px
+      &:first-child
+        margin-bottom: 32px
+      &:last-child
+        margin-bottom: 0
+      &:not(:first-child)
+        border-bottom: 1px solid #f9f1f9
+      &>span
+        &:first-child
+          font: 700 12px / 2.15257 $font-family
+          color: $lightViolet
+        &:last-child
+          text-align: right
+          font: 400 12px / 1.66667 $font-family
+          color: $textBlack
+          display: flex
+          align-items: center
+    .price
+      display: flex
+      flex-direction: column
+      margin-right: 47px
+      del
+        font: 400 14px / 1.42857 $font-family
+        text-decoration: line-through
+        color: #868695
+      ins
+        font: 700 18px / 1.33333 $font-family
+        text-decoration: none
+    .data
+      display: flex
+      flex-direction: column
+    .stock-status
+      font: 700 10px / 2 $font-family
+      text-transform: uppercase
+      text-align: center
+      color: $orange
+  .cart
+    display: flex
+    align-items: center
+    justify-content: flex-start
+    gap: 8px
+    margin-top: 65px
+    position: relative
+    .added_to_cart
+      position: absolute
+      bottom: -2em
+      right: 0

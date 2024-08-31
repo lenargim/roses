@@ -10,6 +10,8 @@ function lenar_enqueue_scripts()
 	wp_deregister_style('storefront-woocommerce-style');
 	wp_deregister_style('storefront-style');
 	wp_deregister_style('gutenberg-blocks');
+	remove_theme_support( 'wc-product-gallery-zoom' );
+//	add_theme_support( 'wc-product-gallery-slider' );
 
 	if (is_front_page()) {
 		wp_enqueue_style('swiper-styles', 'https://unpkg.com/swiper@8/swiper-bundle.min.css');
@@ -17,7 +19,7 @@ function lenar_enqueue_scripts()
 		wp_enqueue_script('home-script', get_template_directory_uri() . '/assets/js/home.js', array('swiper-lib'));
 	}
 
-	if (is_product_category() || is_product_tag() || is_shop()) {
+	if (is_product_category() || is_product_tag() || is_shop() || is_product()) {
 		wp_enqueue_style('swiper-styles', 'https://unpkg.com/swiper@8/swiper-bundle.min.css');
 		wp_enqueue_script('swiper-lib', 'https://unpkg.com/swiper@8/swiper-bundle.min.js', array('jquery'));
 		wp_enqueue_script('shop-script', get_template_directory_uri() . '/assets/js/shop.js', array('swiper-lib'));
@@ -60,6 +62,8 @@ function lenar_init()
 	add_image_size('product-new', 137, 137, ['center', 'center']);
 	add_image_size('extra-sale', 345, 200, ['center', 'center']);
 	add_image_size('product-category', 200, 200, ['center', 'center']);
+	add_image_size('product-img', 520, 520, ['center', 'center']);
+	add_image_size('product-thumb', 71, 71, ['center', 'center']);
 
 
 }
@@ -131,4 +135,15 @@ function show_svg_in_media_library( $response ) {
 	}
 
 	return $response;
+}
+
+function get_prod_stock_status_label($stock_status){
+	if ($stock_status === 'instock'):
+		$stock_status_ru = 'В наличии';
+	elseif ($stock_status === 'outofstock'):
+		$stock_status_ru = 'Нет в наличии';
+	else:
+		$stock_status_ru = 'Предзаказ';
+	endif;
+	return $stock_status_ru;
 }

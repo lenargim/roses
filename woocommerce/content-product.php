@@ -46,7 +46,7 @@ if (empty($product) || !$product->is_visible()) {
 			<?php endif; ?>
   </a>
   <div class="products__item-data">
-			<?php echo do_shortcode('[yith_wcwl_add_to_wishlist]') ?>
+<!--			--><?php //echo do_shortcode('[yith_wcwl_add_to_wishlist]') ?>
     <a href="<?php the_permalink() ?>" class="products__item-info">
       <span class="products__item-height">Высота: 60 - 80 см</span>
       <div class="products__item-name"><?php echo $title; ?></div>

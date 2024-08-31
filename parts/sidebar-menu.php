@@ -10,10 +10,9 @@ $allParentCategories = get_terms([
 
 <div class="sidebar">
 	<?php
-	if ( function_exists('yoast_breadcrumb') ) {
+	if ( function_exists('yoast_breadcrumb') ):
 		yoast_breadcrumb( '<p id="breadcrumbs" class="breadcrumbs">','</p>' );
-	}
-	?>
+	endif; ?>
 	<?php foreach ($allParentCategories as $parentCat):
 		$termId = $parentCat->term_id;
 		$isCurrent = isset($cat_obj->term_id) && $cat_obj->term_id === $termId;

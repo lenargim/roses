@@ -12,4 +12,26 @@ jQuery(document).ready(function () {
     watchSlidesProgress: true,
     allowTouchMove: false
   });
+
+
+  const swiper_thumbnail = new Swiper('.swiper-thumbs', {
+    slidesPerView: 5,
+    spaceBetween: 20,
+    direction: 'vertical'
+  });
+
+  new Swiper('.swiper-product', {
+    slidesPerView: 1,
+    speed: 400,
+    loop: true,
+    navigation: {
+      nextEl: '.next',
+      prevEl: '.prev',
+    },
+    thumbs: {
+      swiper: swiper_thumbnail,
+    }
+  });
+
+
 });
