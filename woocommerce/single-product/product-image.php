@@ -44,4 +44,6 @@ if ($attachment_ids && $post_thumbnail_id): ?>
       </div>
     </div>
   </div>
+<?php else: ?>
+  <img src="<?php echo lenar_get_img(''); ?>" alt="<?php echo $product->name ?>" class="product-single__image">
 <?php endif; ?>

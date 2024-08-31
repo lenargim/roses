@@ -37,6 +37,14 @@
       align-items: flex-end
     &-price
       font: 700 15px / 1.59502 $font-family
+      display: flex
+      flex-direction: column
+      del
+        font: 400 9px /1.2 $font-family
+        text-decoration: line-through
+        color: #868695
+      ins
+        text-decoration: initial
     &-tags
       position: absolute
       z-index: 1
@@ -54,6 +62,12 @@
       font: 600 9px / 1.55556 $font-family
       color: #fff
       background: $darkViolet
+    &-attr
+      display: flex
+      align-items: center
+      justify-content: space-between
+      gap: 1em
+      height: 20px
 
 
 .yith-wcwl-add-to-wishlist
@@ -234,3 +248,7 @@
     h3
       text-align: center
       padding-bottom: 24px
+  &__related
+    max-width: 930px
+    margin: 0 auto
+    overflow: hidden

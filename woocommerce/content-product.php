@@ -46,13 +46,20 @@ if (empty($product) || !$product->is_visible()) {
 			<?php endif; ?>
   </a>
   <div class="products__item-data">
-<!--			--><?php //echo do_shortcode('[yith_wcwl_add_to_wishlist]') ?>
+    <!--			--><?php //echo do_shortcode('[yith_wcwl_add_to_wishlist]') ?>
     <a href="<?php the_permalink() ?>" class="products__item-info">
-      <span class="products__item-height">Высота: 60 - 80 см</span>
+     <span class="products__item-attr">
+      <?php $height = $product->get_attribute('pa_height'); ?>
+						<?php if ($height): ?>
+        <span class="products__item-height">Высота: <?php echo $height; ?></span>
+						<?php endif; ?>
+       </span>
       <div class="products__item-name"><?php echo $title; ?></div>
     </a>
     <div class="products__item-bottom">
-      <div class="products__item-price"><?php echo $price . '₽'; ?></div>
+
+<!--      <div class="products__item-price">--><?php //echo $price . '₽'; ?><!--</div>-->
+      <div class="products__item-price"><?php echo $product->get_price_html(); ?></div>
       <a href="<?php echo $product->add_to_cart_url() ?>" class="button white product-button">купить</a>
     </div>
   </div>

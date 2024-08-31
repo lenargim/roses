@@ -38,7 +38,14 @@ if (empty($product) || !$product->is_visible()) {
     </a>
     <div class="new__item-data">
       <a href="<?php the_permalink() ?>" class="new__item-info">
-        <span class="new__item-height">Высота: 60 - 80 см</span>
+							<?php $height = $product->get_attribute('pa_height'); ?>
+
+        <span class="new__item-attr">
+           <?php if ($height): ?>
+             <span class="new__item-height">Высота: <?php echo $height; ?></span>
+            <?php endif; ?>
+         </span>
+
         <div class="new__item-name"><?php echo $title; ?></div>
       </a>
       <div class="new__item-bottom">

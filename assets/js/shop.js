@@ -33,5 +33,17 @@ jQuery(document).ready(function () {
     }
   });
 
+  new Swiper('.product-single__related', {
+    slidesPerView: 4,
+    speed: 400,
+    loop: true,
+    spaceBetween: 31,
+    navigation: {
+      nextEl: '.next',
+      prevEl: '.prev',
+    },
+    watchSlidesProgress: true,
+    allowTouchMove: false
+  });
 
 });

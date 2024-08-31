@@ -16,6 +16,6 @@ get_template_part('parts/header'); ?>
 					<?php endwhile; ?>
     </div>
   </div>
-
+<?php woocommerce_related_products(); ?>
 <?php get_template_part('parts/extra-sale'); ?>
 <?php get_template_part('parts/footer'); ?>
