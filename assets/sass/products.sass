@@ -66,6 +66,12 @@
   .delete_item
     font-size: 0
 .product-single
+  padding: 32px 0
+  h1
+    font: 600 30px/37px $font-family
+  h3
+    font: 600 20px/1.2 $font-family
+    color: $text
   &__title
     display: flex
     align-items: center
@@ -73,8 +79,7 @@
     margin-top: 40px
     gap: 40px
     flex-wrap: wrap
-    h1
-      font: 600 30px/37px $font-family
+
     .sku
       font: 600 20px/1.2 $font-family
       text-align: center
@@ -209,3 +214,23 @@
       position: absolute
       bottom: -2em
       right: 0
+  &__desc
+    border-radius: 22px
+    padding: 40px 24px 82px
+    background: $bg
+    h3
+      padding-bottom: 32px
+    h4
+      padding-bottom: 4px
+      color: $lightViolet
+    p
+      font: 400 16px/20px $font-family
+      &:not(:last-child)
+        padding-bottom: 32px
+  &__feature
+    border-radius: 22px
+    padding: 24px 35px 40px
+    background-color: $bg
+    h3
+      text-align: center
+      padding-bottom: 24px

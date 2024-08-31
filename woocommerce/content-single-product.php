@@ -17,14 +17,13 @@ endif; ?>
 	<?php
 	$prod_id = $product->ID;
 	$sku = $product->get_sku();
-  $stock_label = get_prod_stock_status_label($product->get_stock_status());
+	$stock_label = get_prod_stock_status_label($product->get_stock_status());
 	if ($sku): ?>
    <span class="sku">Артикул <?php echo $sku; ?></span>
 	<?php endif; ?>
 </div>
 <div id="product-<?php the_ID(); ?>" class="product-single__wrap">
 	<?php wc_get_template('single-product/product-image.php'); ?>
-
   <div class="product-single__summary">
     <div class="product-single__table">
       <div class="row">
@@ -65,10 +64,8 @@ endif; ?>
       </div>
     </div>
 			<?php
-						woocommerce_template_single_add_to_cart();
-
-
-						/**
+			woocommerce_template_single_add_to_cart();
+			/**
 				* @hooked woocommerce_template_single_title - 5
 				* @hooked woocommerce_template_single_rating - 10
 				* @hooked woocommerce_template_single_price - 10
@@ -81,7 +78,14 @@ endif; ?>
 			//			do_action('woocommerce_single_product_summary');
 			?>
   </div>
-
+  <div class="product-single__desc">
+    <h3>Описание товара</h3>
+			<?php echo $product->get_description(); ?>
+  </div>
+  <div class="product-single__feature">
+    <h3>Характеристики</h3>
+    <?php wc_display_product_attributes( $product ); ?>
+  </div>
 	<?php
 	/**
 		* @hooked woocommerce_output_product_data_tabs - 10
