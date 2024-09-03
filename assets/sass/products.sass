@@ -8,17 +8,18 @@
     border-radius: 15px
     overflow: hidden
     display: flex
+    height: 100%
     flex-direction: column
     transition: all .2s ease
     &-img
       display: block
       border-radius: 15px
       overflow: hidden
-      margin-bottom: 16px
       width: 100%
       aspect-ratio: 1/1
       &-link
         position: relative
+        margin-bottom: 16px
     &-data
       flex: 1 0 auto
       position: relative
@@ -111,7 +112,7 @@
     width: 100%
     position: relative
     max-height: 436px
-    z-index: 9
+    z-index: 2
   &__thumb
     display: block
     width: 100%
@@ -175,7 +176,11 @@
     border: 2px solid #bd7dc1
     border-radius: 15px
     padding: 40px 32px
+    height: 100%
+    display: flex
+    flex-direction: column
   &__table
+    flex: 1 0 auto
     .row
       display: flex
       align-items: center
@@ -201,6 +206,7 @@
     .price
       display: flex
       flex-direction: column
+      align-items: flex-start
       margin-right: 47px
       del
         font: 400 14px / 1.42857 $font-family
@@ -249,6 +255,15 @@
       text-align: center
       padding-bottom: 24px
   &__related
-    max-width: 930px
-    margin: 0 auto
+    position: relative
+    padding: 0 70px
     overflow: hidden
+    .swiper-slide
+      opacity: 1
+      visibility: visible
+      transition: opacity .2s ease
+    .swiper-slide:not(.swiper-slide-visible)
+      opacity: 0
+      a
+        pointer-events: none
+        cursor: default

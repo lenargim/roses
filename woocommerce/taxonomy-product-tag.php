@@ -17,7 +17,6 @@ if (!defined('ABSPATH')) {
         </div>
         <div class="catalog__main">
 									<?php get_template_part('parts/new'); ?>
-									<?php woocommerce_catalog_ordering() ?>
 									<?php get_template_part('parts/filters'); ?>
 									<?php
 									if (woocommerce_product_loop()): ?>

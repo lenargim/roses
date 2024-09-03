@@ -1,23 +1,25 @@
 .new
+  max-width: 837px
   &__slider
     border-radius: 22px
     padding: 24px 44px
-    max-width: 837px
     overflow: hidden
     position: relative
+    .swiper-slide
+      opacity: 1
+      transition: all .2s ease
+    .swiper-slide:not(.swiper-slide-visible)
+      opacity: 0
+      a
+        pointer-events: none
+        cursor: default
   &__item
     position: relative
     border-radius: 15px
     overflow: hidden
-
-    min-height: 250px !important
     height: 100%
     display: flex
     flex-direction: column
-    transform: none !important
-    opacity: 0
-    transition: all .2s ease
-    z-index: -1
     &-img
       display: block
       border-radius: 15px
@@ -50,9 +52,6 @@
       justify-content: space-between
       gap: 1em
       height: 12px
-  .swiper-slide-visible .new__item
-    animation: show .4s ease forwards
-    //z-index: 1
 
   &__arrow
     width: 14px
@@ -67,13 +66,3 @@
     &.next
       right: 15px
       transform: rotate(180deg)
-
-@keyframes show
-  0%
-    opacity: 0
-    z-index: -1
-  1%
-    z-index: 1
-  100%
-    opacity: 1
-    z-index: 1

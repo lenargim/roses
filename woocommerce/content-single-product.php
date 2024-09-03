@@ -13,7 +13,6 @@ endif; ?>
 
 <div class="product-single__title">
   <h1><?php the_title(); ?></h1>
-
 	<?php
 	$prod_id = $product->ID;
 	$sku = $product->get_sku();
@@ -38,24 +37,28 @@ endif; ?>
             </span>
         </span>
       </div>
-      <div class="row">
+      <?php $main_category = yoast_get_primary_term('product_cat', $prod_id);
+      if ($main_category): ?>
+       <div class="row">
         <span>
           Класс роз:
         </span>
         <span><?php echo yoast_get_primary_term('product_cat', $prod_id); ?></span>
       </div>
-      <div class="row">
-        <span>
-          Возраст:
-        </span>
-        <span></span>
-      </div>
-      <div class="row">
-        <span>
-          Контейнер:
-        </span>
-        <span></span>
-      </div>
+      <?php endif; ?>
+
+<!--      <div class="row">-->
+<!--        <span>-->
+<!--          Возраст:-->
+<!--        </span>-->
+<!--        <span></span>-->
+<!--      </div>-->
+<!--      <div class="row">-->
+<!--        <span>-->
+<!--          Контейнер:-->
+<!--        </span>-->
+<!--        <span></span>-->
+<!--      </div>-->
       <div class="row">
         <span>
           Акция:

@@ -17,9 +17,7 @@ get_template_part('parts/header'); ?>
 									<?php get_template_part('parts/sidebar-menu'); ?>
         </div>
         <div class="catalog__main">
-									<?php get_template_part('parts/new'); ?>
-									<?php woocommerce_catalog_ordering() ?>
-									<?php
+									<?php get_template_part('parts/new');
 									if ($isParentCat):
                   $terms = get_terms(
                     ['taxonomy' => 'product_cat',

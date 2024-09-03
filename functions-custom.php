@@ -24,6 +24,15 @@ function lenar_enqueue_scripts()
 		wp_enqueue_script('swiper-lib', 'https://unpkg.com/swiper@8/swiper-bundle.min.js', array('jquery'));
 		wp_enqueue_script('shop-script', get_template_directory_uri() . '/assets/js/shop.js', array('swiper-lib'));
 	}
+
+
+	wp_enqueue_script( 'selectWoo', WC()->plugin_url() . '/assets/js/selectWoo/selectWoo.full.min.js', array( 'jquery' ), '1.0.6' );
+//	wp_enqueue_style( 'selectWoo', WC()->plugin_url() . '/assets/css/select2.css' );
+
+
+	$translation_array = array( 'templateUrl' => get_stylesheet_directory_uri() );
+	wp_localize_script( 'shop-script', 'object_name', $translation_array );
+
 }
 
 add_action('init', 'lenar_init');
@@ -169,3 +178,31 @@ function remove_short_description() {
 	remove_meta_box( 'postexcerpt', 'product', 'normal');
 }
 add_action('add_meta_boxes', 'remove_short_description', 999);
+
+add_filter('woocommerce_catalog_orderby', 'wc_customize_product_sorting');
+
+function wc_customize_product_sorting($sorting_options){
+
+	$sorting_options = [
+		'price'      => __( 'По цене', 'woocommerce' ),
+		'price-desc' => __( 'По цене', 'woocommerce' ),
+		'popularity' => __( 'Sort by popularity', 'woocommerce' ),
+		'date'       => __( 'По новизне', 'woocommerce' ),
+		'title'      => __( 'По алфавиту (А-Я)', 'woocommerce' ),
+		'title-desc' => __( 'По алфавиту (Я-А)', 'woocommerce' ),
+	];
+	return $sorting_options;
+}
+
+
+add_filter('term_link', 'truemisha_ne_sbrasyvat_filtr', 10, 3);
+function truemisha_ne_sbrasyvat_filtr( $url, $term, $taxonomy ) {
+	// сначала мы проверяем, присутствует у нас в данный момент сортировка
+	$orderby = ! empty( $_GET[ 'orderby' ] ) ? $_GET[ 'orderby' ]  : '';
+	// если присутствует, то добавляем её в конечный урл
+	if( $orderby ) {
+		return add_query_arg( 'orderby', $orderby, $url );
+	} else {
+		return $url;
+	}
+}
