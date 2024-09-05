@@ -14,6 +14,7 @@ $wrapper_classes = apply_filters(
 		'images',
 	)
 );
+$tags = wc_get_product_terms($product->get_id(), 'product_tag', ['fields' => 'slugs']);
 if ($attachment_ids && $post_thumbnail_id): ?>
   <div class="product-single__gallery">
     <div class="product-single__thumbs swiper-thumbs">
@@ -26,11 +27,16 @@ if ($attachment_ids && $post_thumbnail_id): ?>
 							<?php endforeach; ?>
       </div>
     </div>
-
     <div class="product-single__images swiper-product">
 					<?php wc_get_template('single-product/sale-flash.php'); ?>
       <div class="product-single__tags">
-							<?php echo wc_get_product_tag_list($product->ID, ''); ?>
+							<?php if (in_array('bestseller', $tags)): ?>
+         <div class="product-single__tag bestseller">Хит продаж</div>
+							<?php endif; ?>
+							<?php if (in_array('new', $tags)): ?>
+         <div class="product-single__tag new">Новинка</div>
+							<?php endif; ?>
+
       </div>
       <div class="prev product-single__arrow product-single__prev"></div>
       <div class="next product-single__arrow product-single__next"></div>

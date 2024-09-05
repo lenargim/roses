@@ -51,6 +51,8 @@
    </section>
 	<?php endif; ?>
 
+	<?php get_template_part('parts/recommended'); ?>
+
 	<?php if ($terms): ?>
    <section class="section">
      <div class="container">
@@ -63,8 +65,7 @@
              class="grid__item"
              style="background-image: url(<?php echo $term_img; ?>)">
             <span><?php echo $term->name; ?></span>
-          </a>
-								<?php endforeach; ?>
+          </a><?php endforeach; ?>
        </div>
      </div>
    </section>

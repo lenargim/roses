@@ -206,3 +206,46 @@ function truemisha_ne_sbrasyvat_filtr( $url, $term, $taxonomy ) {
 		return $url;
 	}
 }
+
+
+add_action( 'template_redirect', 'truemisha_recently_viewed_product_cookie', 20 );
+function truemisha_recently_viewed_product_cookie() {
+	// если находимся не на странице товара, ничего не делаем
+	if ( ! is_product() ) {
+		return;
+	}
+	if ( empty( $_COOKIE[ 'woocommerce_recently_viewed_2' ] ) ) {
+		$viewed_products = array();
+	} else {
+		$viewed_products = (array) explode( '|', $_COOKIE[ 'woocommerce_recently_viewed_2' ] );
+	}
+	// добавляем в массив текущий товар
+	if ( ! in_array( get_the_ID(), $viewed_products ) ) {
+		$viewed_products[] = get_the_ID();
+	}
+	// нет смысла хранить там бесконечное количество товаров
+	if ( sizeof( $viewed_products ) > 4 ) {
+		array_shift( $viewed_products ); // выкидываем первый элемент
+	}
+	// устанавливаем в куки
+	wc_setcookie( 'woocommerce_recently_viewed_2', join( '|', $viewed_products ) );
+}
+
+add_shortcode( 'recently_viewed_products', 'truemisha_recently_viewed_products' );
+
+function truemisha_recently_viewed_products() {
+	if( empty( $_COOKIE[ 'woocommerce_recently_viewed_2' ] ) ) {
+		$viewed_products = array();
+	} else {
+		$viewed_products = (array) explode( '|', $_COOKIE[ 'woocommerce_recently_viewed_2' ] );
+	}
+
+	if ( empty( $viewed_products ) ) {
+		return;
+	}
+	// надо ведь сначала отображать последние просмотренные
+	$viewed_products = array_reverse( array_map( 'absint', $viewed_products ) );
+	$product_ids = join( ",", $viewed_products );
+	return do_shortcode( "[products ids='$product_ids']" );
+
+}

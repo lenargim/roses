@@ -16,6 +16,10 @@ get_template_part('parts/header'); ?>
 					<?php endwhile; ?>
     </div>
   </div>
-<?php woocommerce_related_products(); ?>
+<?php woocommerce_related_products(); //  upsells ?>
+
+
+<?php get_template_part('parts/recent'); ?>
+<?php get_template_part('parts/crosssale'); ?>
 <?php get_template_part('parts/extra-sale'); ?>
 <?php get_template_part('parts/footer'); ?>

@@ -10,14 +10,14 @@ $allParentCategories = get_terms([
 
 <div class="sidebar">
 	<?php
-	if ( function_exists('yoast_breadcrumb') ):
-		yoast_breadcrumb( '<p id="breadcrumbs" class="breadcrumbs">','</p>' );
+	if (function_exists('yoast_breadcrumb')):
+		yoast_breadcrumb('<p id="breadcrumbs" class="breadcrumbs">', '</p>');
 	endif; ?>
 	<?php foreach ($allParentCategories as $parentCat):
 		$termId = $parentCat->term_id;
 		$isCurrent = isset($cat_obj->term_id) && $cat_obj->term_id === $termId;
-    $isParent = isset($cat_obj->parent) && $cat_obj->parent === $termId;
-    $isOpen = $isParent || $isCurrent;
+		$isParent = isset($cat_obj->parent) && $cat_obj->parent === $termId;
+		$isOpen = $isParent || $isCurrent;
 		$children = get_terms([
 			'taxonomy' => 'product_cat',
 			'parent' => $termId,
@@ -31,16 +31,17 @@ $allParentCategories = get_terms([
      <button class="sidebar__button"
              type="button">
        <span><?php echo $parentCat->name ?></span>
-       <?php echo $svg;?>
+						<?php echo $svg; ?>
      </button>
 				<?php if ($children): ?>
       <div class="sidebar__list">
         <div class="sidebar__categories sidebar__toggle <?php if ($isOpen) echo 'open' ?>">
-          <button type="button" class="sidebar__button"><span>По Классам</span> <?php echo $svg;?></button>
+          <button type="button" class="sidebar__button"><span>По Классам</span> <?php echo $svg; ?></button>
           <div class="sidebar__children sidebar__list">
 											<?php foreach ($children as $child): ?>
-                      <?php $isCurrentLink = $cat_obj->term_id === $child->term_id; ?>
-             <a href="<?php echo get_term_link($child) ?>" class="<?php if ($isCurrentLink) echo 'current' ?>"><?php echo $child->name; ?></a>
+												<?php $isCurrentLink = isset($cat_obj->term_id) && $cat_obj->term_id === $child->term_id; ?>
+             <a href="<?php echo get_term_link($child) ?>"
+                class="<?php if ($isCurrentLink) echo 'current' ?>"><?php echo $child->name; ?></a>
 											<?php endforeach; ?>
           </div>
         </div>
@@ -48,7 +49,7 @@ $allParentCategories = get_terms([
 									<?php
 									$tags = get_terms('product_tag');
 									?>
-          <button type="button" class="sidebar__button"><span>По группам</span><?php echo $svg;?></button>
+          <button type="button" class="sidebar__button"><span>По группам</span><?php echo $svg; ?></button>
           <div class="sidebar__children sidebar__list">
 											<?php foreach ($tags as $tag): ?>
              <a href="<?php echo get_term_link($tag) ?>"><?php echo $tag->name; ?></a>

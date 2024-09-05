@@ -32,39 +32,22 @@ endif; ?>
         <span>
           <?php woocommerce_template_single_price() ?>
           <span class="data">
-          <span class="total-sales"><?php echo $product->get_total_sales() . ' заказов'; ?></span>
+            <?php if ($product->get_total_sales() >= 5): ?>
+              <span class="total-sales"><?php echo $product->get_total_sales() . ' заказов'; ?></span>
+												<?php endif; ?>
           <span class="stock-status"><?php echo $stock_label; ?></span>
             </span>
         </span>
       </div>
-      <?php $main_category = yoast_get_primary_term('product_cat', $prod_id);
-      if ($main_category): ?>
+					<?php $main_category = yoast_get_primary_term('product_cat', $prod_id);
+					if ($main_category): ?>
        <div class="row">
         <span>
           Класс роз:
         </span>
-        <span><?php echo yoast_get_primary_term('product_cat', $prod_id); ?></span>
-      </div>
-      <?php endif; ?>
-
-<!--      <div class="row">-->
-<!--        <span>-->
-<!--          Возраст:-->
-<!--        </span>-->
-<!--        <span></span>-->
-<!--      </div>-->
-<!--      <div class="row">-->
-<!--        <span>-->
-<!--          Контейнер:-->
-<!--        </span>-->
-<!--        <span></span>-->
-<!--      </div>-->
-      <div class="row">
-        <span>
-          Акция:
-        </span>
-        <span></span>
-      </div>
+         <span><?php echo yoast_get_primary_term('product_cat', $prod_id); ?></span>
+       </div>
+					<?php endif; ?>
     </div>
 			<?php
 			woocommerce_template_single_add_to_cart();
