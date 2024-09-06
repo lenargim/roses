@@ -1,0 +1,101 @@
+.cart-block
+  padding: 40px 0
+  &__wrap
+    display: grid
+    grid-template-columns: repeat(12, 1fr)
+    gap: 20px
+  &__table
+    border-radius: 15px
+    padding: 32px 16px
+    background: $bg
+    &-wrap
+      grid-column: 1/9
+    &-top
+      display: flex
+      align-items: center
+      justify-content: space-between
+      gap: 1em
+      margin-bottom: 16px
+      span
+        font: 600 20px $font-family
+        color: $text
+  &__update
+    display: none
+  &__side
+    background: $bg
+    border-radius: 15px
+    padding: 40px 32px
+    display: flex
+    flex-direction: column
+    gap: 32px
+    &-wrap
+      grid-column: 9/13
+    &-block
+      padding-bottom: 24px
+      border-bottom: 1px solid $lightViolet
+    &-row
+      display: flex
+      align-items: center
+      justify-content: space-between
+      gap: .5em
+      font: 500 12px $font-family
+      color: $text
+      &:not(:last-child)
+        padding-bottom: 12px
+    &-total
+      font: 600 16px $font-family
+      text-transform: uppercase
+      display: flex
+      align-items: center
+      justify-content: space-between
+      gap: .5em
+      color: $text
+    &-accept
+      margin-top: 16px
+  &__after
+    .button
+      margin-top: 16px
+    .text
+      margin-top: 12px
+      color: $darkViolet
+      font: 500 12px / 1.2 $font-family
+.delivery-calc
+  h2
+    font: 700 20px $font-family
+    text-transform: uppercase
+    color: $darkViolet
+    margin-bottom: 32px
+  &__wrap
+    display: grid
+    grid-template-columns: repeat(12, 1fr)
+    gap: 20px
+  &__box
+    grid-column: 3/11
+    padding: 40px
+    border-radius: 22px
+    background: $bg
+  &__calc
+    display: flex
+    align-items: flex-start
+    gap: 40px
+    width: 100%
+  &__form
+    width: 100%
+    position: relative
+    select
+      display: none
+  &__total
+    width: 240px
+    border: 1px solid #bd7dc1
+    border-radius: 20px
+    padding: 24px
+    background: $white
+    flex-shrink: 0
+    p
+      font: 500 16px $font-family
+      color: $text
+      padding-bottom: 16px
+    span
+      font: 700 20px $font-family
+      text-transform: uppercase
+      color: $darkViolet

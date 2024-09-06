@@ -75,6 +75,8 @@
   width: 91px
   .quantity
     line-height: 1
+  label
+    display: none
   input
     font: 500 14px / 17px $third-family
     color: $text
@@ -86,6 +88,7 @@
     position: relative
     margin: 0
     padding: 0
+    flex-shrink: 0
     &::before, &:after
       position: absolute
       background: $orange
@@ -194,12 +197,68 @@
   &[data-selected="true"]:before
 
     background: url("assets/images/order-fill.svg") center no-repeat
-  //&[id$="price"]:after
-  //  content: ''
-  //  background: url("../images/order-price.svg") center no-repeat
-  //&[id$="price-desc"]:after
-  //  content: ''
-  //  background: url("../images/order-price.svg") center no-repeat
-  //  transform: rotate(180deg)
 .select2-selection__rendered
   white-space: nowrap
+
+.woocommerce-cart-form
+  .actions
+    display: none
+  &__contents
+    display: flex
+    flex-direction: column
+    gap: 16px
+  &__cart-item
+    display: flex
+    align-items: center
+    gap: 44px
+    background: $white
+    border-radius: 15px
+    padding: 12px 24px 12px 8px
+    .product-thumbnail
+      display: flex
+      align-items: flex-start
+      gap: 8px
+      max-width: 230px
+    .product-data
+      display: flex
+      flex-direction: column
+      align-items: flex-start
+      gap: .5em
+    .product-name
+      font: 500 12px / 1.66667 $font-family
+    .product-price
+      display: flex
+      align-items: center
+      gap: 44px
+      font: 700 15px / 1.59502 $font-family
+      text-align: center
+      margin-left: auto
+      .price
+        white-space: nowrap
+        width: 55px
+        &::before
+          display: block
+          font: 400 9px / 1.55556 $font-family
+          text-align: center
+          color: #868695
+          max-width: 55px
+          content: 'Цена'
+          white-space: initial
+      .regular::before
+        content: 'Цена без скидки'
+      .sale
+        color: $darkViolet
+        &::before
+          content: 'Цена со скидкой'
+      .empty::before
+        content: 'Скидка'
+    .product-remove
+      img
+        width: 25px
+        height: 25px
+    img
+      border-radius: 15px
+      width: 73px
+      height: 73px
+      overflow: hidden
+      flex-shrink: 0

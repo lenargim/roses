@@ -11,7 +11,6 @@ function lenar_enqueue_scripts()
 	wp_deregister_style('storefront-style');
 	wp_deregister_style('gutenberg-blocks');
 	remove_theme_support( 'wc-product-gallery-zoom' );
-//	add_theme_support( 'wc-product-gallery-slider' );
 
 	if (is_front_page()) {
 		wp_enqueue_style('swiper-styles', 'https://unpkg.com/swiper@8/swiper-bundle.min.css');
@@ -25,9 +24,11 @@ function lenar_enqueue_scripts()
 		wp_enqueue_script('shop-script', get_template_directory_uri() . '/assets/js/shop.js', array('swiper-lib'));
 	}
 
-
 	wp_enqueue_script( 'selectWoo', WC()->plugin_url() . '/assets/js/selectWoo/selectWoo.full.min.js', array( 'jquery' ), '1.0.6' );
-//	wp_enqueue_style( 'selectWoo', WC()->plugin_url() . '/assets/css/select2.css' );
+	wp_dequeue_style( 'select2' );
+  if (is_cart()) {
+			wp_enqueue_script('cart-script', get_template_directory_uri() . '/assets/js/cart.js', array('jquery'));
+  }
 
 
 	$translation_array = array( 'templateUrl' => get_stylesheet_directory_uri() );
@@ -72,9 +73,7 @@ function lenar_init()
 	add_image_size('extra-sale', 345, 200, ['center', 'center']);
 	add_image_size('product-category', 200, 200, ['center', 'center']);
 	add_image_size('product-img', 520, 520, ['center', 'center']);
-	add_image_size('product-thumb', 71, 71, ['center', 'center']);
-
-
+	add_image_size('product-thumb', 73, 73, ['center', 'center']);
 }
 
 function trim_phone($phone)
@@ -142,7 +141,6 @@ function show_svg_in_media_library( $response ) {
 			],
 		];
 	}
-
 	return $response;
 }
 
@@ -182,7 +180,6 @@ add_action('add_meta_boxes', 'remove_short_description', 999);
 add_filter('woocommerce_catalog_orderby', 'wc_customize_product_sorting');
 
 function wc_customize_product_sorting($sorting_options){
-
 	$sorting_options = [
 		'price'      => __( 'По цене', 'woocommerce' ),
 		'price-desc' => __( 'По цене', 'woocommerce' ),
@@ -248,4 +245,90 @@ function truemisha_recently_viewed_products() {
 	$product_ids = join( ",", $viewed_products );
 	return do_shortcode( "[products ids='$product_ids']" );
 
+}
+
+// NOTE: 8 - before `wp_print_head_scripts`
+add_action( 'wp_head', 'myajax_data', 8 );
+function myajax_data(){
+	$data = [
+		'url' => admin_url( 'admin-ajax.php' ),
+	];
+	?>
+	<script id="myajax_data">
+   window.myajax = <?= wp_json_encode( $data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) ?>
+	</script>
+	<?php
+}
+
+
+add_action( 'wp_ajax_empty_cart', 'lenar_empty_cart' );
+add_action( 'wp_ajax_nopriv_empty_cart', 'lenar_empty_cart' );
+
+function lenar_empty_cart() {
+	WC()->cart->empty_cart();
+}
+
+function remove_item_from_cart() {
+	$cart = WC()->instance()->cart;
+	$id = $_POST['product_id'];
+	$cart_id = $cart->generate_cart_id($id);
+	$cart_item_id = $cart->find_product_in_cart($cart_id);
+
+	if($cart_item_id){
+		$cart->set_quantity($cart_item_id, 0);
+			ob_start();
+			wc_get_template('cart/cart.php');
+			$output = ob_get_contents();
+			ob_end_clean();
+			echo $output;
+			wp_die();
+	}
+	return false;
+}
+
+add_action('wp_ajax_remove_item_from_cart', 'remove_item_from_cart');
+add_action('wp_ajax_nopriv_remove_item_from_cart', 'remove_item_from_cart');
+
+
+
+function update_item_amount_in_cart() {
+	$key    = sanitize_text_field( $_POST['key'] );
+	$number = intval( sanitize_text_field( $_POST['number'] ) );
+	if ( $key && $number > 0 ) {
+			WC()->cart->set_quantity($key, $number);
+			ob_start();
+			wc_get_template('cart/cart.php');
+			$output = ob_get_contents();
+			ob_end_clean();
+			echo $output;
+			wp_die();
+
+		}
+  return false;
+}
+
+add_action('wp_ajax_update_item_amount_in_cart', 'update_item_amount_in_cart'); // If called from admin panel
+add_action('wp_ajax_nopriv_update_item_amount_in_cart', 'update_item_amount_in_cart'); // If called from elsewhere
+
+
+function get_total_products_discount ()
+{
+	$discount_total = 0;
+  $regular_total = 0;
+
+	foreach (WC()->cart->get_cart() as $cart_item_key => $values) {
+
+		$_product = $values['data'];
+			$regular_price = $_product->get_regular_price();
+		if ($_product->is_on_sale()) {
+			$sale_price = $_product->get_sale_price();
+			$discount = ($regular_price - $sale_price) * $values['quantity'];
+			$discount_total += $discount;
+		}
+    $regular_total += $regular_price* $values['quantity'];
+
+	}
+  $data['discount_total'] = $discount_total;
+  $data['regular_total'] = $regular_total;
+  return $data;
 }

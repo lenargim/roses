@@ -63,5 +63,6 @@
 </footer>
 <?php get_template_part('parts/modal'); ?>
 <?php wp_footer(); ?>
+<div class="loader-box"><span class="loader"></span></div>
 </body>
 </html>
