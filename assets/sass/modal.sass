@@ -1,361 +1,42 @@
-.overlay
+.dark
   position: fixed
   left: 0
   right: 0
   top: 0
   bottom: 0
-  background: rgba(36, 36, 36, 0.72)
+  background: rgba(47, 31, 58, 0.5)
+  align-items: center
+  justify-content: center
   z-index: 3
   display: none
-
-  &.active
-    display: block
-
-.modal
-  position: absolute
-  top: 12px
-  right: 12px
-  bottom: 12px
-  max-width: 588px
-  width: 100%
-  border-radius: 12px
-  background: #fff
-  padding: 44px
-  display: none
-  overflow-y: auto
-  @include max(767)
-    padding: 12px 20px 20px
-    top: 0
-    right: 0
-    bottom: 0
-    left: 0
-    border: none
-
   &.active
     display: flex
-
-  .close
-    box-shadow: 0 1px 2px rgba(13, 18, 30, 0.04)
-    border-radius: 200px
-    border: 1px solid $gray100
-    width: 36px
-    height: 36px
-    display: flex
-    align-items: center
-    justify-content: center
-    cursor: pointer
-
-    svg
-      width: 20px
-      height: 20px
-      stroke: $accent700
-
-.modal-reviews
-  overflow: hidden
-  @include max(767)
-    padding-bottom: 100px
-
-  &__item
+  .modal
+    box-shadow: 2px 2px 4px 0 rgba(185, 136, 96, 0.49)
+    background: $bg
+    padding: 48px
+    border-radius: 25px
+    max-width: 440px
     position: relative
-    padding-bottom: 50px
-    @include max(767)
-      height: 100%
-      overflow-y: auto
-      overflow-x: hidden
-      padding: 0
-
-  &__row
-    display: flex
-    align-items: center
-    justify-content: flex-start
-    //gap: 16px
-    margin-bottom: 24px
-    @include _flex-gap(16px)
-
-  .navigation
-    position: absolute
-    z-index: 2
-    bottom: 44px
-    left: 44px
-    @include max(767)
-      display: flex
-      left: 20px
-
-  .reviews__item-rating
-    position: relative
-    margin-bottom: 24px
-
-  .swiper-slide
-    &:nth-child(1n) .logo
-      background: $accent50
-
-    &:nth-child(2n) .logo
-      background: $warning25
-
-    &:nth-child(3n) .logo
-      background: $success50
-
-    &:nth-child(4n) .logo
-      background: $destructive50
-
-.modal-reviews, .modal-help
-  .close
-    position: absolute
-    top: 44px
-    right: 44px
-    z-index: 2
-    @include max(767)
-      top: 12px
-      right: 16px
-
-.modal-help
-  flex-direction: column
-  //@include flex-gap(24px, 'column nowrap')
-  @include max(767)
-    padding-top: 60px
-  //@include flex-gap(20px, 'column nowrap')
-  .pre
-    color: $gray400
-    margin-bottom: 8px
-    font: 500 14px/20px $mainFont
-
-  &__title
-    font: 500 24px/32px $mainFont
-    margin-bottom: 24px
-
-  &__desc
-    color: $gray700
-    //max-width: 400px
-    //margin: 0 auto
-    margin-bottom: 36px
-
-  &__list
-    display: flex
-    flex-direction: column
-    //gap: 1px
-    @include flex-gap(1px, 'column nowrap')
-    margin-bottom: 36px
-
-    a
-      color: $accent600
-      padding: 12px 0
-      display: flex
-      align-items: center
-      justify-content: space-between
-
-      &:not(:last-of-type)
-        border-bottom: 1px solid $gray50
-
-      &::after
-        content: ''
-        background: url("./assets/images/svg/arrow-modal.svg") center/contain no-repeat
-        width: 10px
-        height: 10px
-
-  &__more
-    height: 100%
-
-    &-title
-      font: 500 16px/24px $mainFont
-      margin-bottom: 16px
-
-    &-link
-      padding: 24px
-      border: 1px solid $gray50
-      border-radius: 12px
-      width: 100%
-      font: 500 16px/24px $mainFont
-      color: $accent600
-      text-align: left
-
-      svg
-        width: 20px
-        height: 20px
-        margin-bottom: 26px
-        display: block
-
-  &__footer
-    color: $gray700
-    text-align: center
-
-    a
-      color: $accent600
-
-.modal-question
-  flex-direction: column
-  @include flex-gap(24px, 'column nowrap')
-
-  &__title
-    display: flex
-    align-items: center
-    justify-content: space-between
-    //gap: 1em
-    @include _flex-gap(1em)
-
-    span
-      font: 500 24px/32px $mainFont
-
-  &__desc
-    color: $gray700
-
-  &__form
-    display: flex
-    flex-direction: column
-    //gap: 40px
-    @include flex-gap(40px, 'column nowrap')
-    @include max(767)
-      //gap: 24px
-      @include flex-gap(24px, 'column nowrap')
-
-    .wpcf7-spinner
-      position: absolute
-      right: 30px
-      bottom: 30px
-
-  &__footer
-    text-align: center
-    font: 500 14px/20px $mainFont
-    color: $gray500
-    margin-top: 16px
-
-    a
-      color: $gray800
-      text-decoration: underline
-
-  &__submit
-    box-sizing: border-box
-
-.modal-send, .modal-review-send
-  flex-direction: column
-  justify-content: center
-  align-items: center
-
-  .closed
-    position: absolute
-    top: 44px
-    right: 44px
-
-  .closed-bottom
-    position: absolute
-    left: 44px
-    right: 44px
-    bottom: 44px
-
-  svg
-    display: block
-    margin: 0 auto
-
-  &__wrap
-    display: flex
-    flex-direction: column
-    //gap: 20px
-    align-items: center
-    width: 340px
-    padding-bottom: 50px
-    @include flex-gap(20px, 'column nowrap')
-    @include max(767)
-      width: 100%
-
-  &__title
-    font: 500 24px/32px $mainFont
-
-  &__desc
-    text-align: center
-
-    .thx-email
-      color: $accent600
-      text-decoration: underline
-
-  @include max(767)
-    .button
-      width: unset
-      left: 16px
-      right: 16px
-
-.modal-review
-  flex-direction: column
-  @include max(767)
-    padding-top: 60px
-    .close
-      position: absolute
-      top: 12px
-      right: 16px
-
-  &__title
-    display: flex
-    align-items: center
-    justify-content: space-between
-    //gap: 1em
-    margin-bottom: 24px
-    @include _flex-gap(1em)
-    @include max(767)
-      margin-bottom: 20px
-
-    span
-      font: 500 24px/32px $mainFont
-
-  &__product
-    margin-bottom: 32px
-
-    span
-      color: $gray600
-      font: 400 14px/20px $mainFont
-
-    &-wrap
-      margin-top: 12px
-      display: flex
-      align-items: center
-      //gap: 16px
-      @include _flex-gap(16px)
-
-    &-img
-      width: 48px
-      height: 48px
-      border-radius: 12px
-      overflow: hidden
-
-    &-name
-      font-weight: 500
-
-    &-price
-      font-weight: 500
-      margin-left: auto
-
-  .comment-form
-    display: flex
-    flex-direction: column
-    //gap: 25px
-    @include flex-gap(25px, 'column nowrap')
-
-  .stars
-    span
-      display: flex
-      align-items: center
-      justify-content: flex-start
-      //gap: 4px
-      @include _flex-gap(4px)
-
-    a
-      display: block
+    &__close
       width: 24px
       height: 24px
-      background: url("./assets/images/svg/star-dark.svg") center/cover no-repeat
-      font-size: 0
-
-    &.selected
-      a
-        background: url("./assets/images/svg/star-orange.svg") center/cover no-repeat
-
-        &.active ~ a
-          background: url("./assets/images/svg/star-dark.svg") center/cover no-repeat
-
-  .comment-form-rating.invalid .stars
-    a
-      background: url("./assets/images/svg/star-red.svg") center/cover no-repeat
-.modal-subscription
-  @include max(767)
-    padding-top: 60px
-  .close
-    position: absolute
-    top: 12px
-    right: 16px
+      position: absolute
+      right: 24px
+      top: 24px
+      cursor: pointer
+      background: url("assets/images/close.svg") center no-repeat
+    &__title
+      font: 600 20px $font-family
+      color: $darkViolet
+    &__desc
+      font: 500 14px $font-family
+      color: $text
+      margin-top: 12px
+    &__form
+      margin-top: 24px
+      display: flex
+      flex-direction: column
+      gap: 12px
+    .button
+      margin-top: 12px

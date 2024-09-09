@@ -117,4 +117,18 @@ jQuery(document).ready(function () {
     templateSelection: formatState,
     selectionAdapter: $.fn.selectWoo.amd.require('customSingleSelectionAdapter'),
   });
+
+
+  $('.filters .filter').on('click', function () {
+    $(this).parent().toggleClass('open')
+  })
+
+
+  $(document).mouseup( function(e){ // событие клика по веб-документу
+    const div = $( ".filter__wrap" ); // тут указываем ID элемента
+    if ( !div.is(e.target) // если клик был не по нашему блоку
+      && div.has(e.target).length === 0 ) { // и не по его дочерним элементам
+      div.removeClass('open')
+    }
+  });
 });

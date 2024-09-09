@@ -1,66 +1,63 @@
 <?php
-/**
- * Checkout Form
- *
- * This template can be overridden by copying it to yourtheme/woocommerce/checkout/form-checkout.php.
- *
- * HOWEVER, on occasion WooCommerce will need to update template files and you
- * (the theme developer) will need to copy the new files to your theme to
- * maintain compatibility. We try to do this as little as possible, but it does
- * happen. When this occurs the version of the template file will be bumped and
- * the readme will list any important changes.
- *
- * @see https://woocommerce.com/document/template-structure/
- * @package WooCommerce\Templates
- * @version 3.5.0
- */
-
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit;
 }
 
-do_action( 'woocommerce_before_checkout_form', $checkout );
-
-// If checkout registration is disabled and not logged in, the user cannot checkout.
-if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_required() && ! is_user_logged_in() ) {
-	echo esc_html( apply_filters( 'woocommerce_checkout_must_be_logged_in_message', __( 'You must be logged in to checkout.', 'woocommerce' ) ) );
-	return;
-}
-
+do_action('woocommerce_before_checkout_form', $checkout);
 ?>
 
-<form name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url( wc_get_checkout_url() ); ?>" enctype="multipart/form-data">
+<form name="checkout" method="post" class="checkout woocommerce-checkout"
+      action="<?php echo esc_url(wc_get_checkout_url()); ?>" enctype="multipart/form-data">
 
-	<?php if ( $checkout->get_checkout_fields() ) : ?>
-
-		<?php do_action( 'woocommerce_checkout_before_customer_details' ); ?>
-
-		<div class="col2-set" id="customer_details">
-			<div class="col-1">
-				<?php do_action( 'woocommerce_checkout_billing' ); ?>
-			</div>
-
-			<div class="col-2">
-				<?php do_action( 'woocommerce_checkout_shipping' ); ?>
-			</div>
-		</div>
-
-		<?php do_action( 'woocommerce_checkout_after_customer_details' ); ?>
-
-	<?php endif; ?>
-	
-	<?php do_action( 'woocommerce_checkout_before_order_review_heading' ); ?>
-	
-	<h3 id="order_review_heading"><?php esc_html_e( 'Your order', 'woocommerce' ); ?></h3>
-	
-	<?php do_action( 'woocommerce_checkout_before_order_review' ); ?>
-
-	<div id="order_review" class="woocommerce-checkout-review-order">
-		<?php do_action( 'woocommerce_checkout_order_review' ); ?>
-	</div>
-
-	<?php do_action( 'woocommerce_checkout_after_order_review' ); ?>
-
+  <section class="section delivery-calc">
+    <div class="container">
+      <div class="delivery-calc__wrap">
+        <div class="delivery-calc__box">
+          <h2>Калькулятор стоимости доставки</h2>
+          <div class="delivery-calc__calc">
+            <div class="delivery-calc__form">
+              <select name="delivery-type" class="button filter big" id="delivery-type">
+                <option></option>
+              </select>
+              <select name="pickup-address" id="pickup-address">
+                <option></option>
+              </select>
+													<?php do_action( 'woocommerce_checkout_order_review' ); ?>
+              <select name="payment-type" id="payment-type">
+                <option></option>
+              </select>
+              <div class="text-wrap">
+                <input type="text" id="billing_address_1" name="billing_address_1"  placeholder="г. Москва">
+                <label for="billing_address_1">Адрес доставки</label>
+              </div>
+              <div class="text-wrap">
+                <input type="text" id="order_price" placeholder="0₽">
+                <label for="order_price">Сумма заказа</label>
+              </div>
+              <div class="input-wrap">
+                <input type="checkbox" id="is_from_cart" class="checkbox">
+                <label for="is_from_cart">
+                  <span>Расчитать сумму товаров из текущей корзины</span>
+                </label>
+              </div>
+              <div class="input-wrap">
+                <input type="checkbox" id="is_action" class="checkbox">
+                <label for="is_action">
+                  <span>Акционные товары</span>
+                </label>
+              </div>
+              <button type="button" disabled class="button big orange">расчитать стоимость</button>
+            </div>
+            <div class="delivery-calc__total">
+              <p>Предварительная стоимость доставки:</p>
+              <span>0₽</span>
+            </div>
+          </div>
+									<?php echo wc_get_template('checkout/modal-order.php'); ?>
+        </div>
+      </div>
+    </div>
+  </section>
 </form>
 
-<?php do_action( 'woocommerce_after_checkout_form', $checkout ); ?>
+<?php do_action('woocommerce_after_checkout_form', $checkout); ?>

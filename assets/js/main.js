@@ -109,4 +109,8 @@ $(document).ready(function () {
 
   });
 
+
+  $('.modal__close').on('click', function () {
+    $('.dark').removeClass('active');
+  })
 })

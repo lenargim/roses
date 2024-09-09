@@ -126,79 +126,6 @@
     align-items: center
     justify-content: flex-start
     gap: 5px
-.select2-container
-  height: 36px
-  &--open
-    z-index: 3
-    .select2-selection
-      &::after
-        transform: rotate(180deg)
-    &.select2-container--above .select2-selection
-      border-radius: 0 0 20px 20px
-    &.select2-container--below .select2-selection
-      border-radius: 20px 20px 0 0
-.select2-selection
-  width: 171px !important
-  gap: 1px
-  border: 1px solid #bd7dc1
-  border-radius: 20px
-  padding: 4px 16px
-  display: flex
-  align-items: center
-  justify-content: space-between
-  font: 700 12px / 2.15257 $font-family
-  color: $darkViolet
-  cursor: pointer
-  transition: none
-  &::after
-    content: ''
-    width: 21px
-    height: 21px
-    display: block
-    background: url("assets/images/order-arrow.svg") center no-repeat
-.select2-search
-  display: none
-.select2-dropdown--above .select2-results__options
-  border-radius: 22px 22px 0 0
-  border-top: 1px solid #bd7dc1
-.select2-dropdown--below .select2-results__options
-  border-radius: 0 0 22px 22px
-  border-bottom: 1px solid #bd7dc1
-.select2-results__options
-  background: $white
-  border-left: 1px solid #bd7dc1
-  border-right: 1px solid #bd7dc1
-  border-radius: 0 0 22px 22px
-  padding: 10px 12px 24px 12px
-  width: 171px
-  max-height: 240px
-  display: flex
-  flex-direction: column
-  gap: 7px
-  overflow: hidden
-.select2-results__option
-  font: 600 12px/20px $font-family
-  color: $darkViolet
-  cursor: pointer
-  display: flex
-  align-items: center
-  justify-content: flex-start
-  gap: 5px
-  position: relative
-  white-space: nowrap
-  &::before, &::after
-    display: block
-    width: 18px
-    height: 18px
-    flex-shrink: 0
-  &::before
-    content: ''
-    background: url("assets/images/order-emty.svg") center no-repeat
-  &[data-selected="true"]:before
-
-    background: url("assets/images/order-fill.svg") center no-repeat
-.select2-selection__rendered
-  white-space: nowrap
 
 .woocommerce-cart-form
   .actions
@@ -262,3 +189,5 @@
       height: 73px
       overflow: hidden
       flex-shrink: 0
+.woocommerce-checkout-payment
+  display: none

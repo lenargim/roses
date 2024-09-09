@@ -13,7 +13,7 @@ get_template_part('parts/header'); ?>
         </div>
         <div class="catalog__main">
 									<?php get_template_part('parts/new-slider'); ?>
-									<?php get_template_part('parts/filters'); ?>
+          									<?php get_template_part('parts/filters'); ?>
 									<?php if (woocommerce_product_loop()): ?>
            <div class="catalog__loop">
 												<?php while (have_posts()):

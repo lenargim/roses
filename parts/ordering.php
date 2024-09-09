@@ -10,9 +10,6 @@
 		'title-desc' => __( 'По алфавиту (Я-А)', 'woocommerce' ),
 	];
 	$default_orderby = wc_get_loop_prop( 'is_search' ) ? 'relevance' : apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby', '' ) );
-	// phpcs:disable WordPress.Security.NonceVerification.Recommended
-//	$orderby = isset( $_GET['orderby'] ) ? wc_clean( wp_unslash( $_GET['orderby'] ) ) : $default_orderby;
-	// phpcs:enable WordPress.Security.NonceVerification.Recommended
 
 	if ( wc_get_loop_prop( 'is_search' ) ) {
 		$catalog_orderby_options = array_merge( array( 'relevance' => __( 'Relevance', 'woocommerce' ) ), $catalog_orderby_options );

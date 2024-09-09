@@ -11,5 +11,30 @@
     padding: 5px 16px
   .sort
     padding: 5px 12px
-  .filters
+  .filter
     padding: 5px 16px
+    justify-content: space-between
+.filter
+  &__wrap
+    width: 300px
+    position: relative
+    &.open
+      .filter
+        border-bottom-left-radius: 0
+        border-bottom-right-radius: 0
+      .filter__list
+        display: block
+  &__list
+    display: none
+    background: $white
+    border-bottom: 1px solid #bd7dc1
+    border-left: 1px solid #bd7dc1
+    border-right: 1px solid #bd7dc1
+    border-radius: 0 0 22px 22px
+    padding: 24px 16px
+    position: absolute
+    left: 0
+    right: 0
+    max-height: 80vh
+    z-index: 2
+    overflow-y: auto

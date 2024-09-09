@@ -128,7 +128,7 @@ $cart = WC()->cart;
         <span><?php echo $cart->get_cart_total(); ?></span>
       </div>
       <div class="cart-block__side-arrange">
-        <button type="button" class="button orange big">оформить заказ</button>
+        <button type="button" class="button orange big open-order">оформить заказ</button>
         <div class="cart-block__side-accept">
           <div class="input-wrap">
             <input type="checkbox" id="accept" class="checkbox">
