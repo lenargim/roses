@@ -1,0 +1,88 @@
+.delivery-page
+  padding-bottom: 0
+  .banner
+    position: relative
+    border-radius: 53px
+    overflow: hidden
+    margin-bottom: 50px
+    h1
+      font: 700 48px $font-family
+      color: #fff
+      position: absolute
+      left: 32px
+      bottom: 55px
+      max-width: 500px
+  strong, h4
+    font: 700 16px $font-family
+    color: $darkViolet
+  .infographic
+    max-width: 767px
+    margin: 0 auto
+  .smallblock
+    margin-top: 40px
+    display: grid
+    grid-template-columns: repeat(12, 1fr)
+    gap: 20px
+    &>*
+      grid-column: 3/11
+  .wp-block-media-text
+    font: 400 16px $font-family
+    color: $textBlack
+    display: flex
+    gap: 32px
+    align-items: flex-start
+    &:not(:last-child)
+      margin-bottom: 32px
+    &__content
+      padding: 0
+  figure
+    max-width: 90px
+    flex-shrink: 0
+    align-self: initial !important
+  h2
+    text-align: center
+    color: $darkViolet
+    font: 700 28px $font-family
+    margin-bottom: 40px
+  section.table
+    padding-top: 40px
+    width: 100%
+  table
+    font: 500 14px $font-family
+    text-align: center
+    color: $textBlack
+    width: 100%
+    border-collapse: separate
+    border-spacing: 0
+    tr:nth-child(1),
+    tr:nth-child(2),
+    td:first-child
+      background: $bg
+    td
+      height: 65px
+      font: 500 14px $font-family
+      text-align: center
+      vertical-align: middle
+      padding: 0
+      border-top: 1px solid $lightViolet
+      border-left: 1px solid $lightViolet
+      &:last-child
+        border-right: 1px solid $lightViolet
+    tr:first-child
+      td:not(:first-child)
+        font-weight: 700
+      td:first-child
+        border-top-left-radius: 22px
+    tr:first-child td:last-child
+      border-top-right-radius: 22px
+    tr:last-child
+      td
+        border-bottom: 1px solid $lightViolet
+      td:first-child
+        border-bottom-left-radius: 22px
+    tr:last-child td:last-child
+      border-bottom-right-radius: 22px
+    tr:first-child td
+      border-top-style: solid
+    tr td:first-child
+      border-left-style: solid
