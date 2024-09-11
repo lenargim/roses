@@ -32,19 +32,21 @@ function lenar_enqueue_scripts()
 //	wp_dequeue_style( 'plugin' );
 	if (is_checkout()) {
 		wp_enqueue_script('cart-script', get_template_directory_uri() . '/assets/js/cart.js', array('jquery'));
-		wp_register_script('dadata', 'https://cdn.jsdelivr.net/npm/suggestions-jquery@20.3.0/dist/js/jquery.suggestions.min.js');
-		wp_enqueue_script('dadata');
-		wp_enqueue_style('dadata-style', 'https://cdn.jsdelivr.net/npm/suggestions-jquery@20.3.0/dist/css/suggestions.min.css');
-		wp_enqueue_script('dadata-style');
 	}
 
-  if (is_page(229)) {
+  if (is_page(229) || is_checkout()) {
 			wp_register_script('dadata', 'https://cdn.jsdelivr.net/npm/suggestions-jquery@20.3.0/dist/js/jquery.suggestions.min.js');
 			wp_enqueue_script('dadata');
 			wp_enqueue_style('dadata-style', 'https://cdn.jsdelivr.net/npm/suggestions-jquery@20.3.0/dist/css/suggestions.min.css');
 			wp_enqueue_script('dadata-style');
+			wp_enqueue_script('delivery-script', get_template_directory_uri() . '/assets/js/delivery.js', array('dadata'));
   }
 
+  if (is_page(304)) {
+			wp_enqueue_style('swiper-styles', 'https://unpkg.com/swiper@8/swiper-bundle.min.css');
+			wp_enqueue_script('swiper-lib', 'https://unpkg.com/swiper@8/swiper-bundle.min.js', array('jquery'));
+			wp_enqueue_script('club-script', get_template_directory_uri() . '/assets/js/club.js', array('swiper-lib'));
+  }
 
 	$translation_array = array('templateUrl' => get_stylesheet_directory_uri());
 	wp_localize_script('shop-script', 'object_name', $translation_array);
@@ -77,11 +79,42 @@ function lenar_init()
 		'query_var' => true,
 		'rewrite' => true,
 		'capability_type' => 'post',
-		'has_archive' => true,
+		'has_archive' => false,
 		'hierarchical' => false,
 		'menu_position' => null,
 		'menu_icon' => 'dashicons-list-view',
 		'supports' => array('title', 'excerpt', 'thumbnail')
+	));
+
+	register_post_type('vacancy', array(
+		'labels' => array(
+			'name' => 'Вакансии', // Основное название типа записи
+			'singular_name' => 'Вакансия', // отдельное название записи типа Book
+			'add_new' => 'Добавить вакансию',
+			'add_new_item' => 'Добавить новую вакансию',
+			'edit_item' => 'Редактировать вакансию',
+			'new_item' => 'Новая вакансия',
+			'view_item' => 'View',
+			'search_items' => 'Искать вакансию',
+			'not_found' => 'not found',
+			'not_found_in_trash' => 'not_found_in_trash',
+			'parent_item_colon' => '',
+			'menu_name' => 'Вакансии'
+
+		),
+		'public' => true,
+    'show_in_rest' => true,
+		'publicly_queryable' => true,
+		'show_ui' => true,
+		'show_in_menu' => true,
+		'query_var' => true,
+		'rewrite' => true,
+		'capability_type' => 'post',
+		'has_archive' => true,
+		'hierarchical' => false,
+		'menu_position' => null,
+		'menu_icon' => 'dashicons-list-view',
+		'supports' => array('title', 'editor', 'excerpt', 'thumbnail')
 	));
 
 	add_image_size('product-new', 137, 137, ['center', 'center']);

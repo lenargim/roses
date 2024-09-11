@@ -46,3 +46,47 @@
   &__paragraph
     font: 500 15px $font-family
     margin-bottom: 1em
+
+.gallery
+  img
+    width: 100%
+    display: block
+    object-fit: cover
+  &__desc
+    position: absolute
+    font: 600 20px/1.2 $font-family
+    color: $darkViolet
+    bottom: calc(100% + 24px)
+    left: 0
+    right: 0
+  &__slide
+    border: 5px solid #bd7dc1
+    border-radius: 15px
+    overflow: hidden
+    img
+      aspect-ratio: 2/1
+.gallery-slider
+  margin-top: 2em
+  position: relative
+  .swiper-slide
+    opacity: 0
+    transition: opacity .2s ease
+    &-active
+      opacity: 1
+.gallery-thumbs
+  margin-top: 8px
+  padding: 0 48px
+  position: relative
+  .swiper-slide
+    border: 2.50px solid $lightViolet
+    border-radius: 15px
+    overflow: hidden
+    cursor: pointer
+    opacity: 0
+    transition: opacity .2s ease
+    &-visible
+      opacity: 1
+    &-thumb-active
+      border-color: $darkViolet
+    img
+      aspect-ratio: 3/2

@@ -1,0 +1,46 @@
+.vacancy-page
+  &__wrap
+    display: flex
+    flex-direction: column
+    gap: 24px
+    margin-top: 32px
+  &__item
+    border: 1px solid $lightViolet
+    border-radius: 22px
+    padding: 16px 32px 16px 16px
+    display: flex
+    &-img
+      flex-shrink: 0
+      max-width: 160px
+      aspect-ratio: 1/1
+      overflow: hidden
+      border-radius: 22px
+      margin-right: 22px
+    h3
+      font: 700 20px/1.2 $font-family
+      text-transform: uppercase
+      color: $text
+      margin-bottom: 13px
+    &-excerpt
+      span
+        color: $grey
+        font: 500 14px/17px $font-family
+      p
+        margin-top: 8px
+        font: 500 14px $font-family
+        color: $textBlack
+    &-side
+      margin-left: 16px
+      display: flex
+      flex-direction: column
+      align-items: flex-end
+      justify-content: space-between
+      gap: 1em
+    &-payment
+      font: 700 15px / 1.59502 $font-family
+  &__desc
+    font: 500 16px $font-family
+    color: $textBlack
+    strong
+      font-weight: 700
+      color: $darkViolet

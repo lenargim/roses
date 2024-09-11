@@ -1,0 +1,137 @@
+.club
+  padding-top: 40px
+  color: $textBlack
+  .banner
+    position: relative
+    border-radius: 53px
+    overflow: hidden
+    margin-bottom: 50px
+    h1
+      font: 700 40px/1.1 $font-family
+      color: #fff
+      position: absolute
+      left: 32px
+      right: 32px
+      bottom: 55px
+      text-align: center
+  h2
+    font: 700 28px $font-family
+    color: $darkViolet
+    text-align: center
+    margin-bottom: 40px
+  strong
+    font: 700 16px $font-family
+    color: $darkViolet
+  .programm
+    padding-top: 40px
+    ol
+      display: flex
+      flex-direction: column
+      gap: 32px
+      margin-bottom: 50px
+    li
+      font: 600 16px $font-family
+      text-transform: uppercase
+      display: flex
+      align-items: center
+      justify-content: flex-start
+      gap: 34px
+      counter-increment: num
+      &::before
+        content: "0" counter(num)
+        font: 700 39px $font-family
+        color: rgba(111, 20, 144, 0.29)
+  &__tariffs
+    display: grid
+    grid-template-columns: repeat(3, 1fr)
+    gap: 23.5px
+    &-wrap
+      padding-top: 50px
+  &__item
+    border-radius: 15px
+    overflow: hidden
+    display: flex
+    flex-direction: column
+    &-img
+      display: block
+      line-height: 1
+    &-data
+      flex: 1 0 auto
+      background: rgba(244, 230, 244, 0.58)
+      padding: 17px 46px
+      display: flex
+      flex-direction: column
+    &-info
+      flex: 1 0 auto
+      color: $text
+      font: 500 14px / 1.21429 $font-family
+    &-button
+      margin: 0 auto
+      flex-shrink: 0
+    &-title
+      font: 700 14px $font-family
+      text-transform: uppercase
+      text-align: center
+      color: $darkViolet
+    &-price
+      margin-top: 12px
+      color: $text
+      text-align: center
+      span
+        font: 700 14px / 1.21429 $font-family
+        color: $darkViolet
+    &-list
+      ul
+        margin-top: 1em
+      li
+        display: flex
+        align-items: flex-start
+        justify-content: flex-start
+        gap: 9px
+        &:before
+          content: ''
+          width: 2.5px
+          height: 2.5px
+          border-radius: 50%
+          display: block
+          background-color: $text
+          margin-top: .5em
+          flex-shrink: 0
+    &-button
+      margin-top: 22px
+      width: 228px
+  &__join
+    display: flex
+    justify-content: space-between
+    gap: 20px
+    &-img
+      max-width: 360px
+      position: relative
+      border-radius: 22px
+      overflow: hidden
+      img
+        display: block
+        width: 100%
+        aspect-ratio: 12/7
+      .button
+        display: block
+        position: absolute
+        left: 12px
+        right: 12px
+        bottom: 12px
+        width: auto
+    &-text
+      max-width: 450px
+      display: flex
+      flex-direction: column
+      gap: 1em
+      justify-content: space-between
+      font: 400 16px $font-family
+      color: $textBlack
+      h4
+        margin-bottom: 16px
+        font: 600 20px/1.2 $font-family
+        color: $text
+      a
+        color: $darkViolet
+        font-weight: 700

@@ -571,7 +571,7 @@
       </a>
       <div class="header__row">
         <a href="#" class="button violet">Новые поступления</a>
-        <a href="<?php echo get_page_link(32); ?>" class="button orange">Бесплатная доставка</a>
+        <a href="<?php echo get_page_link(229); ?>" class="button orange">Бесплатная доставка</a>
         <div class="header__search button search">
           <input type="search" placeholder="я ищу...">
         </div>

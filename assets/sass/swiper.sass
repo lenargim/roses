@@ -22,6 +22,8 @@
     grid-template-columns: 1fr 1fr
   &__img
     width: 100%
+    object-fit: cover
+    aspect-ratio: 5/4
   &__content
     position: relative
     padding: 23px 66px
@@ -83,6 +85,8 @@
     z-index: 2
     top: calc(50% - 20px)
     cursor: pointer
+    &.swiper-button-disabled
+      background: url("assets/images/slider-arrow-disabled.svg") center no-repeat
   &__prev
     left: 0
   &__next

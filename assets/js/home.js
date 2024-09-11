@@ -1,9 +1,9 @@
 jQuery(document).ready(function () {
   new Swiper('.banner__wrap', {
     slidesPerView: 1,
-    speed: 400,
+    speed: 700,
     loop: true,
-    spaceBetween: 100,
+    spaceBetween: 200,
     navigation: {
       nextEl: '.next',
       prevEl: '.prev',
@@ -12,7 +12,7 @@ jQuery(document).ready(function () {
       el: '.slider__pagination'
     }
   });
-  new Swiper('.slider', {
+  new Swiper('.club-slider', {
     slidesPerView: 1,
     speed: 400,
     loop: true,

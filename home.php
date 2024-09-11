@@ -73,7 +73,7 @@
 
 	<?php get_template_part('parts/extra-sale'); ?>
 	<?php get_template_part('parts/services'); ?>
-	<?php get_template_part('parts/slider'); ?>
+	<?php get_template_part('parts/club-slider'); ?>
 	<?php get_template_part('parts/about'); ?>
 	<?php get_template_part('parts/map'); ?>
 
