@@ -71,6 +71,7 @@ if (version_compare(get_bloginfo('version'), '4.7.3', '>=') && (is_admin() || is
 	*/
 
 require_once(dirname(__FILE__) . '/functions-custom.php');
+require_once(dirname(__FILE__) . '/mailer.php');
 
 // sidebar menu
 

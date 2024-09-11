@@ -3,6 +3,16 @@
   display: flex
   flex-direction: column-reverse
   gap: 8px
+  &.error
+    &:after
+      font-size: 10px
+      left: 10px
+      bottom: -1.5em
+      position: absolute
+      color: red
+      content: 'Обязательное поле'
+    input
+      border-color: red
   input
     width: 100%
     border: 1px solid #bd7dc1
@@ -14,3 +24,27 @@
   label
     font: 500 14px $font-family
     color: $text
+.file-wrap
+  input[type="file"]
+    position: absolute
+    z-index: -1
+    opacity: 0
+    display: block
+    width: 0
+    height: 0
+  .file-text
+    font: 500 14px $font-family
+    text-decoration: underline
+    text-decoration-skip-ink: none
+    color: $orange
+    display: flex
+    align-items: center
+    justify-content: flex-start
+    gap: 4px
+    cursor: pointer
+    &::after
+      content: ''
+      display: block
+      width: 17px
+      height: 17px
+      background: url("assets/images/file.svg") center no-repeat

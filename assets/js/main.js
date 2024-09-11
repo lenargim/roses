@@ -66,13 +66,13 @@ $(document).ready(function () {
     if (bType === 'plus') {
       const maxVal = input.attr('max');
       if (!maxVal) {
-        newVal = val+1;
+        newVal = val + 1;
       } else {
-        newVal = val+1 <= maxVal ? val+1 : maxVal;
+        newVal = val + 1 <= maxVal ? val + 1 : maxVal;
       }
     } else {
       const minVal = input.attr('min') || 1;
-      newVal = val-1 >= minVal ? val-1 : minVal;
+      newVal = val - 1 >= minVal ? val - 1 : minVal;
     }
     input.val(newVal)
   })
@@ -112,5 +112,63 @@ $(document).ready(function () {
 
   $('.modal__close').on('click', function () {
     $('.dark').removeClass('active');
+  })
+
+
+  $('.file-wrap').on('change', 'input[type=file]', function () {
+    let file = this.files[0];
+    if(file.size > 10 * 1024 * 1024) {
+      alert('Превышен допустимый размер. 10MB Максимум.');
+      this.value = '';
+    } else {
+      $(this).siblings('.file-text').html(file.name)
+    }
+  })
+
+  $('.send-cv').on('submit', async function (event) {
+    event.preventDefault();
+    const errorList = []
+    $(this).find('.required').each(function () {
+      const val = $(this).find('input').val();
+      if (!val) {
+        $(this).addClass('error');
+        errorList.push($(this).attr('name'));
+      }
+    })
+
+    if (errorList.length) return;
+
+
+    const form_data = new FormData();
+    form_data.append('action', 'send_cv');
+    form_data.append('full_name', $(this).find('#full-name').val());
+    form_data.append('phone', $(this).find('#phone').val());
+    form_data.append('vacancy', $(this).find('#vacancy').val());
+    form_data.append('file_cv', $('#file-cv').prop('files')[0]);
+    $.ajax({
+      type: 'POST',
+      url: myajax.url,
+      data: form_data,
+      processData: false,
+      contentType: false,
+      cache: false,
+      success: function (res) {
+        const parsed = JSON.parse(res)
+        if (parsed.status === 200) {
+          $('.send-cv')[0].reset();
+        } else {
+          alert(parsed.info)
+          console.log(parsed.desc)
+        }
+      },
+      complete: function (res) {
+
+      },
+    })
+  })
+
+
+  $('#vacancy').select2({
+    width: '100%',
   })
 })

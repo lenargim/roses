@@ -3,3 +3,4 @@ assets/images/
 assets/.DS_Store
 node_modules/
 .DS_Store
+mail.log

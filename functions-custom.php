@@ -34,19 +34,19 @@ function lenar_enqueue_scripts()
 		wp_enqueue_script('cart-script', get_template_directory_uri() . '/assets/js/cart.js', array('jquery'));
 	}
 
-  if (is_page(229) || is_checkout()) {
-			wp_register_script('dadata', 'https://cdn.jsdelivr.net/npm/suggestions-jquery@20.3.0/dist/js/jquery.suggestions.min.js');
-			wp_enqueue_script('dadata');
-			wp_enqueue_style('dadata-style', 'https://cdn.jsdelivr.net/npm/suggestions-jquery@20.3.0/dist/css/suggestions.min.css');
-			wp_enqueue_script('dadata-style');
-			wp_enqueue_script('delivery-script', get_template_directory_uri() . '/assets/js/delivery.js', array('dadata'));
-  }
+	if (is_page(229) || is_checkout()) {
+		wp_register_script('dadata', 'https://cdn.jsdelivr.net/npm/suggestions-jquery@20.3.0/dist/js/jquery.suggestions.min.js');
+		wp_enqueue_script('dadata');
+		wp_enqueue_style('dadata-style', 'https://cdn.jsdelivr.net/npm/suggestions-jquery@20.3.0/dist/css/suggestions.min.css');
+		wp_enqueue_script('dadata-style');
+		wp_enqueue_script('delivery-script', get_template_directory_uri() . '/assets/js/delivery.js', array('dadata'));
+	}
 
-  if (is_page(304)) {
-			wp_enqueue_style('swiper-styles', 'https://unpkg.com/swiper@8/swiper-bundle.min.css');
-			wp_enqueue_script('swiper-lib', 'https://unpkg.com/swiper@8/swiper-bundle.min.js', array('jquery'));
-			wp_enqueue_script('club-script', get_template_directory_uri() . '/assets/js/club.js', array('swiper-lib'));
-  }
+	if (is_page(304)) {
+		wp_enqueue_style('swiper-styles', 'https://unpkg.com/swiper@8/swiper-bundle.min.css');
+		wp_enqueue_script('swiper-lib', 'https://unpkg.com/swiper@8/swiper-bundle.min.js', array('jquery'));
+		wp_enqueue_script('club-script', get_template_directory_uri() . '/assets/js/club.js', array('swiper-lib'));
+	}
 
 	$translation_array = array('templateUrl' => get_stylesheet_directory_uri());
 	wp_localize_script('shop-script', 'object_name', $translation_array);
@@ -103,7 +103,7 @@ function lenar_init()
 
 		),
 		'public' => true,
-    'show_in_rest' => true,
+		'show_in_rest' => true,
 		'publicly_queryable' => true,
 		'show_ui' => true,
 		'show_in_menu' => true,
@@ -126,7 +126,7 @@ function lenar_init()
 
 function trim_phone($phone)
 {
-	return str_replace(['(', ')', ' ', '-'], '', $phone);
+	return str_replace(['(', ')', ' ', '-', '+'], '', $phone);
 }
 
 function lenar_get_img($link)
@@ -313,6 +313,7 @@ function myajax_data()
 {
 	$data = [
 		'url' => admin_url('admin-ajax.php'),
+		'security' => wp_create_nonce('file_upload'),
 	];
 	?>
   <script id="myajax_data">
@@ -448,14 +449,14 @@ function get_payment_methods()
 
 	$data = [];
 	foreach ($available_gateways as $gateway):
-			$object = new stdClass();
-			$object->id = $gateway->id;
-			$object->text = $gateway->get_title();
-			$object->shortText = $gateway->get_description();
-			$data[] = $object;
+		$object = new stdClass();
+		$object->id = $gateway->id;
+		$object->text = $gateway->get_title();
+		$object->shortText = $gateway->get_description();
+		$data[] = $object;
 	endforeach;
 
-  echo json_encode($data);
+	echo json_encode($data);
 	wp_die();
 }
 
@@ -463,10 +464,10 @@ add_action('wp_ajax_get_payment_methods', 'get_payment_methods'); // If called f
 add_action('wp_ajax_nopriv_get_payment_methods', 'get_payment_methods'); // If called from elsewhere
 
 
-
-add_action( 'woocommerce_before_checkout_form', 'bbloomer_uncheck_default_payment_gateway' );
-function bbloomer_uncheck_default_payment_gateway() {
-	wc_enqueue_js( "
+add_action('woocommerce_before_checkout_form', 'bbloomer_uncheck_default_payment_gateway');
+function bbloomer_uncheck_default_payment_gateway()
+{
+	wc_enqueue_js("
  
       // ONLY RUN ON CHECKOUT PAGE LOAD
       $( document.body ).on( 'updated_checkout', function() {
@@ -481,5 +482,7 @@ function bbloomer_uncheck_default_payment_gateway() {
          $('div.payment_box').hide();
  
       });
-   " );
+   ");
 }
+
+add_filter('wpcf7_form_response_output', '__return_empty_string');

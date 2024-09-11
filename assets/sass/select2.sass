@@ -1,6 +1,8 @@
 .woocommerce-checkout, .page-template-delivery
   .select2-container
     width: 350px
+.single-vacancy .select2-container
+  width: 344px
 .select2-container
   height: 36px
   &--open
@@ -25,6 +27,7 @@
   background: $white
   cursor: pointer
   transition: none
+  box-shadow: 2px 2px 4px 0 rgba(154, 48, 148, 0.1)
   &::after
     content: ''
     width: 21px
@@ -73,3 +76,5 @@
     background: url("assets/images/order-fill.svg") center no-repeat
 .select2-selection__rendered
   white-space: nowrap
+.select2-hidden-accessible
+  display: none
