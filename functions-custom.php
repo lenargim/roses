@@ -34,6 +34,12 @@ function lenar_enqueue_scripts()
 		wp_enqueue_script('cart-script', get_template_directory_uri() . '/assets/js/cart.js', array('jquery'));
 	}
 
+	if (is_page('about')) {
+		wp_enqueue_style('swiper-styles', 'https://unpkg.com/swiper@8/swiper-bundle.min.css');
+		wp_enqueue_script('swiper-lib', 'https://unpkg.com/swiper@8/swiper-bundle.min.js', array('jquery'));
+		wp_enqueue_script('about-script', get_template_directory_uri() . '/assets/js/about.js', array('swiper-lib'));
+	}
+
 	if (is_page(229) || is_checkout()) {
 		wp_register_script('dadata', 'https://cdn.jsdelivr.net/npm/suggestions-jquery@20.3.0/dist/js/jquery.suggestions.min.js');
 		wp_enqueue_script('dadata');
