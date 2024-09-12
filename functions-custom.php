@@ -329,6 +329,12 @@ add_action('wp_ajax_nopriv_empty_cart', 'lenar_empty_cart');
 function lenar_empty_cart()
 {
 	WC()->cart->empty_cart();
+	ob_start();
+	wc_get_template('cart/cart.php');
+	$output = ob_get_contents();
+	ob_end_clean();
+	echo $output;
+	wp_die();
 }
 
 function remove_item_from_cart()
@@ -486,3 +492,8 @@ function bbloomer_uncheck_default_payment_gateway()
 }
 
 add_filter('wpcf7_form_response_output', '__return_empty_string');
+
+add_filter('woocommerce_checkout_redirect_empty_cart', '__return_false');
+add_filter('woocommerce_checkout_update_order_review_expired', '__return_false');
+
+add_filter( 'wc_add_to_cart_message_html', '__return_null');

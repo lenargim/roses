@@ -110,7 +110,7 @@ $(document).ready(function () {
   });
 
 
-  $('.modal__close').on('click', function () {
+  $('body').on('click', '.modal__close', function () {
     $('.dark').removeClass('active');
   })
 

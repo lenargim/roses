@@ -14,8 +14,10 @@ $(document).ready(function () {
       complete: function () {
         $('.loader-box').removeClass('active')
       },
-      success: function (html) {
-        location.reload();
+      success: function (form) {
+        if (form) {
+          $('.cart-block').find('.refresh-cart').html(form)
+        }
       },
     });
   });

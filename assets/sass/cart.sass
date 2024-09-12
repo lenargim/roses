@@ -59,6 +59,36 @@
       margin-top: 12px
       color: $darkViolet
       font: 500 12px / 1.2 $font-family
+  &__empty
+    max-width: 402px
+    margin: 0 auto
+    display: flex
+    gap: 24px
+    align-items: flex-start
+    img
+      width: 48px
+      aspect-ratio: 1/1
+      flex-shrink: 0
+    &-wrap
+      background: $bg
+      border-radius: 15px
+      padding: 40px 16px
+      grid-column: 1/-1
+    &-title
+      font: 600 20px $font-family
+      color: $text
+      margin-bottom: 16px
+    &-desc
+      font: 500 14px $font-family
+      margin-bottom: 24px
+      color: $text
+  &__bottom
+    position: relative
+    margin: 0 auto
+    max-width: 350px
+    display: flex
+    flex-direction: column
+    gap: 20px
 .delivery-calc
   h2
     font: 700 20px $font-family

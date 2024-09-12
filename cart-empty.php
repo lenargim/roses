@@ -1,5 +1,5 @@
 <?php
-// Template Name: Cart
+// Template Name: Cart empty
 
 defined('ABSPATH') || exit;
 get_template_part('parts/header');
@@ -8,10 +8,15 @@ $cart = WC()->cart;
   <div class="cart-block section">
     <div class="container">
       <h1 class="h1">Корзина</h1>
-     <?php echo wc_get_template('cart/cart.php'); ?>
+					<?php if (sizeof($cart->get_cart()) > 0) :
+						echo wc_get_template('cart/cart.php');
+					endif;
+					?>
     </div>
   </div>
   </div>
+
+<?php echo do_shortcode('[woocommerce_checkout]') ?>
 <?php
 get_template_part('parts/new');
 get_template_part('parts/extra-sale');
