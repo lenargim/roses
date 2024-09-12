@@ -17,6 +17,7 @@ $(document).ready(function () {
       success: function (form) {
         if (form) {
           $('.cart-block').find('.refresh-cart').html(form)
+          calcInit()
         }
       },
     });
@@ -53,11 +54,12 @@ $(document).ready(function () {
         $('.loader-box').addClass('active')
       },
       complete: function () {
-        $('.loader-box').removeClass('active')
+        $('.loader-box').removeClass('active');
       },
       success: function (form) {
         if (form) {
-          $('.cart-block').find('.refresh-cart').html(form)
+          $('.cart-block').find('.refresh-cart').html(form);
+          calcInit()
         }
       }
     })
@@ -80,13 +82,45 @@ $(document).ready(function () {
         console.log(form)
         if (form) {
           $('.cart-block').find('.refresh-cart').html(form)
+          calcInit()
         }
       }
     });
   })
 
-  $('.cart-block').on('click', '.open-order',function () {
-    $('.modal-order-overlay').addClass('active')
+  $('.cart-block').on('click', '.open-order', function () {
+    $(this).siblings().removeClass('error')
+    const isAccepted = $('#accept').is(':checked')
+    isAccepted ? $('.modal-order-overlay').addClass('active') : $(this).siblings().addClass('error')
   })
 
+
+  $(document).on("click", "#place_order", function (e) {
+    e.preventDefault();
+    const post_data = $('form.checkout').serializeArray();
+
+    $.ajax({
+      type: 'POST',
+      url: myajax.url,
+      contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+      enctype: 'multipart/form-data',
+      data: {
+        'action': 'ajax_order',
+        'fields': post_data,
+      },
+      beforeSend: function () {
+        $('.loader-box').addClass('active')
+      },
+      complete: function () {
+        $('.loader-box').removeClass('active')
+      },
+      success: function (result) {
+        $('.modal-order-overlay').removeClass('active')
+        $('.modal-order-thx-overlay').addClass('active')
+      },
+      error: function (error) {
+        alert(error)
+      }
+    });
+  });
 });

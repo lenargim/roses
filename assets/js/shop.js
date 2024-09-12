@@ -21,8 +21,9 @@ jQuery(document).ready(function () {
 
   new Swiper('.swiper-product', {
     slidesPerView: 1,
-    speed: 400,
+    speed: 500,
     loop: true,
+    spaceBetween: 20,
     navigation: {
       nextEl: '.next',
       prevEl: '.prev',

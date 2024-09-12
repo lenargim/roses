@@ -171,4 +171,8 @@ $(document).ready(function () {
   $('#vacancy').select2({
     width: '100%',
   })
+
+  $('.go-home').on('click', function () {
+    document.location.href="/";
+  })
 })

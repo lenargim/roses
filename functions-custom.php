@@ -408,37 +408,14 @@ add_filter('woocommerce_checkout_fields', 'del_checkout_fields', 9999);
 
 function del_checkout_fields($fields)
 {
-
-	// оставляем эти поля
-	// unset( $fields[ 'billing' ][ 'billing_first_name' ] ); // имя
-	// unset( $fields[ 'billing' ][ 'billing_phone' ] ); // телефон
-	// unset( $fields[ 'billing' ][ 'billing_email' ] ); // емайл
-//	unset($fields['billing']['billing_address_1']); // адрес 1
-
-	// удаляем все эти поля
-	unset($fields['billing']['billing_last_name']); // фамилия
-	unset($fields['billing']['billing_company']); // компания
-	unset($fields['billing']['billing_country']); // страна
-	unset($fields['billing']['billing_address_2']); // адрес 2
-	unset($fields['billing']['billing_city']); // город
-	unset($fields['billing']['billing_state']); // регион, штат
-	unset($fields['billing']['billing_postcode']); // почтовый индекс
-	unset($fields['order']['order_comments']); // заметки к заказу
-
-
-//		// сначала переименовываем поле Имя
-//		$fields[ 'billing' ][ 'billing_first_name' ][ 'label' ] = 'ФИО';
-//		// добавляем плейсхолдер на поле Имя
-//		$fields[ 'billing' ][ 'billing_first_name' ][ 'placeholder' ] = 'Ваше полное фамилия имя отчество';
-//		// удаляем поле фамилии
-//		unset( $fields[ 'billing' ][ 'billing_last_name' ] ); // фамилия
-
-	// также изменяем класс поля, чтобы оно стало на всю ширину
-//	$fields['billing']['billing_first_name']['class'][0] = '';
-//
-//		return $fields;
-
-
+	unset($fields['billing']['billing_last_name']);
+	unset($fields['billing']['billing_company']);
+	unset($fields['billing']['billing_country']);
+	unset($fields['billing']['billing_address_2']);
+	unset($fields['billing']['billing_city']);
+	unset($fields['billing']['billing_state']);
+	unset($fields['billing']['billing_postcode']);
+	unset($fields['order']['order_comments']);
 	return $fields;
 
 }
@@ -496,4 +473,69 @@ add_filter('wpcf7_form_response_output', '__return_empty_string');
 add_filter('woocommerce_checkout_redirect_empty_cart', '__return_false');
 add_filter('woocommerce_checkout_update_order_review_expired', '__return_false');
 
-add_filter( 'wc_add_to_cart_message_html', '__return_null');
+add_filter('wc_add_to_cart_message_html', '__return_null');
+
+
+add_action('wp_ajax_ajax_order', 'submited_ajax_order_data');
+add_action('wp_ajax_nopriv_ajax_order', 'submited_ajax_order_data');
+function submited_ajax_order_data()
+{
+	if (isset($_POST['fields']) && !empty($_POST['fields'])) {
+
+		$order = new WC_Order();
+		$cart = WC()->cart;
+		$checkout = WC()->checkout;
+		$data = [];
+
+		// Loop through posted data array transmitted via jQuery
+		foreach ($_POST['fields'] as $values) {
+			// Set each key / value pairs in an array
+			$data[$values['name']] = $values['value'];
+		}
+
+		$cart_hash = md5(json_encode(wc_clean($cart->get_cart_for_session())) . $cart->total);
+		$available_gateways = WC()->payment_gateways->get_available_payment_gateways();
+
+		// Loop through the data array
+		foreach ($data as $key => $value) {
+			// Use WC_Order setter methods if they exist
+			if (is_callable(array($order, "set_{$key}"))) {
+				$order->{"set_{$key}"}($value);
+
+				// Store custom fields prefixed with wither shipping_ or billing_
+			} elseif ((0 === stripos($key, 'billing_') || 0 === stripos($key, 'shipping_'))
+				&& !in_array($key, array('shipping_method', 'shipping_total', 'shipping_tax'))) {
+				$order->update_meta_data('_' . $key, $value);
+			}
+		}
+
+		$order->set_created_via('checkout');
+		$order->set_cart_hash($cart_hash);
+		$order->set_customer_id(apply_filters('woocommerce_checkout_customer_id', isset($_POST['user_id']) ? $_POST['user_id'] : ''));
+		$order->set_currency(get_woocommerce_currency());
+		$order->set_prices_include_tax('yes' === get_option('woocommerce_prices_include_tax'));
+		$order->set_customer_ip_address(WC_Geolocation::get_ip_address());
+		$order->set_customer_user_agent(wc_get_user_agent());
+		$order->set_customer_note(isset($data['order_comments']) ? $data['order_comments'] : '');
+		$order->set_payment_method(isset($available_gateways[$data['payment_method']]) ? $available_gateways[$data['payment_method']] : $data['payment_method']);
+		$order->set_shipping_total($cart->get_shipping_total());
+		$order->set_discount_total($cart->get_discount_total());
+		$order->set_discount_tax($cart->get_discount_tax());
+		$order->set_cart_tax($cart->get_cart_contents_tax() + $cart->get_fee_tax());
+		$order->set_shipping_tax($cart->get_shipping_tax());
+		$order->set_total($cart->get_total('edit'));
+
+		$checkout->create_order_line_items($order, $cart);
+		$checkout->create_order_fee_lines($order, $cart);
+		$checkout->create_order_shipping_lines($order, WC()->session->get('chosen_shipping_methods'), WC()->shipping->get_packages());
+		$checkout->create_order_tax_lines($order, $cart);
+		$checkout->create_order_coupon_lines($order, $cart);
+
+		do_action('woocommerce_checkout_create_order', $order, $data);
+		$order_id = $order->save();
+		do_action('woocommerce_checkout_update_order_meta', $order_id, $data);
+		WC()->cart->empty_cart();
+		echo 'New order created with order ID: #' . $order_id . '.';
+	}
+	die();
+}

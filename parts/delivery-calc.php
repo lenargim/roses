@@ -5,7 +5,7 @@
 				<h2>Калькулятор стоимости доставки</h2>
 				<div class="delivery-calc__calc">
 					<div class="delivery-calc__form">
-						<select name="delivery-type" class="button filter big" id="delivery-type">
+						<select name="delivery-type" class="button big" id="delivery-type">
 							<option></option>
 						</select>
 						<select name="pickup-address" id="pickup-address">

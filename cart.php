@@ -12,6 +12,9 @@ $cart = WC()->cart;
     </div>
   </div>
   </div>
+
+<?php echo wc_get_template('checkout/order-received.php'); ?>
+
 <?php
 get_template_part('parts/new');
 get_template_part('parts/extra-sale');

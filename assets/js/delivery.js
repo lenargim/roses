@@ -1,4 +1,8 @@
 $(document).ready(function () {
+  calcInit()
+})
+
+function calcInit () {
   const deliveryData = [
     {
       id: 1,
@@ -89,4 +93,4 @@ $(document).ready(function () {
       // $('body').trigger('update_checkout');
     },
   });
-})
+}
