@@ -592,8 +592,4 @@
     </div>
   </div>
 </header>
-<div class="header-menu background">
-  <div class="container">
-			<?php echo wp_nav_menu(['menu'=> 'main',]) ?>
-  </div>
-</div>
+<?php get_template_part('parts/header-menu'); ?>

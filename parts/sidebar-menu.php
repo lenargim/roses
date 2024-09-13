@@ -1,11 +1,6 @@
 <?php
 global $wp_query;
-$cat_obj = $wp_query->get_queried_object();
-$allParentCategories = get_terms([
-	'taxonomy' => 'product_cat',
-	'hide_empty' => false,
-	'parent' => 0
-]);
+global $allParentCategories;
 ?>
 
 <div class="sidebar">

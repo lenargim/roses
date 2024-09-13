@@ -175,4 +175,8 @@ $(document).ready(function () {
   $('.go-home').on('click', function () {
     document.location.href="/";
   })
+
+
+  $("#detach").detach().addClass('active').prependTo("#menu-main");
+
 })
