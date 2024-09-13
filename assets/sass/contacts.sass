@@ -1,0 +1,69 @@
+.contacts-page
+  padding-top: 50px
+  &__wrap
+    display: grid
+    grid-template-columns: 1fr 1fr
+    gap: 20px
+  &__left, &__right
+    display: flex
+    flex-direction: column
+    gap: 20px
+  &__banner
+    position: relative
+    border-radius: 15px
+    overflow: hidden
+    flex-shrink: 0
+    img
+      display: block
+      width: 100%
+      //aspect-ratio: 525/343
+    &-title
+      position: absolute
+      left: 32px
+      right: 32px
+      bottom: 25px
+      font: 700 40px $font-family
+      color: $white
+      max-width: 430px
+  &__item
+    background-color: $bg
+    border-radius: 15px
+    padding: 40px
+    height: 100%
+    &-title
+      color: $text
+      font: 700 20px/1.2 $font-family
+      text-transform: uppercase
+      margin-bottom: 24px
+    &-desc
+      font: 500 16px/20px $font-family
+      display: flex
+      flex-direction: column
+      gap: 18px
+    &-name
+      font: 500 16px $font-family
+      color: $text
+      margin-bottom: 24px
+    strong
+      font: 500 14px/17px $font-family
+      color: $grey
+      display: inline-block
+      padding-bottom: 8px
+  .schema
+    display: flex
+    flex-direction: column
+    gap: 32px
+    padding: 50px 0
+    .wp-block-image
+      margin: 0
+    h3
+      font: 600 20px $font-family
+      color: $darkViolet
+      margin-bottom: 16px
+    h4
+      font: 700 16px $font-family
+      color: $darkViolet
+      margin-bottom: 24px
+    strong
+      font-weight: 700
+      color: $darkViolet

@@ -7,7 +7,7 @@
       <div class="map__contacts">
         <div class="map__part"><?php echo $map['callback'] ?><button class="button orange" type="button">Заказать звонок</button></div>
         <div class="map__part"><?php echo $map['schema'] ?>
-          <a href="#" class="button orange" type="button">Посмотреть схему проезда</a></div></div>
+          <a href="<?php echo get_permalink(16); ?>#schema" class="button orange" type="button">Посмотреть схему проезда</a></div></div>
     </div>
   </div>
   </div>

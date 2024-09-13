@@ -5,7 +5,7 @@ get_template_part('parts/header'); ?>
 <main class="section">
   <div class="container">
     <div class="grid-wrap">
-      <div class="grid-3-11">
+      <div class="grid-2-12">
         <div class="vacancy-page">
           <h2 class="h2">Вакансии</h2>
           <?php if (have_posts()) : ?>

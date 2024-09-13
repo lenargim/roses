@@ -13,7 +13,7 @@ get_template_part('parts/header'); ?>
       </div>
     </div>
     <section class="section grid-wrap">
-      <div class="grid-3-11">
+      <div class="grid-2-12">
         <h1 class="h1"><?php the_title(); ?></h1>
         <div class="about-page__content">
 									<?php the_content(); ?>

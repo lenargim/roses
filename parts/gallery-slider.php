@@ -3,7 +3,7 @@
     <div class="container">
       <h2 class="h2">Галерея</h2>
       <div class="grid-wrap">
-        <div class="grid-3-11">
+        <div class="grid-2-12">
           <div class="gallery-slider">
             <div class="prev slider__prev"></div>
             <div class="next slider__next"></div>

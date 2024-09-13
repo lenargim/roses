@@ -15,7 +15,7 @@ get_template_part('parts/header'); ?>
 <main class="club">
   <div class="container">
     <div class="grid-wrap">
-      <div class="grid-3-11">
+      <div class="grid-2-12">
 							<?php the_content(); ?>
       </div>
     </div>
@@ -46,7 +46,7 @@ get_template_part('parts/header'); ?>
      </div>
 			<?php endif; ?>
     <div class="grid-wrap section">
-      <div class="grid-3-11 club__join">
+      <div class="grid-2-12 club__join">
         <div class="club__join-img">
           <img src="<?php echo IMAGES_PATH . 'club-join.jpg' ?>" alt="Записаться">
           <button type="button" class="button violet">Записаться</button>

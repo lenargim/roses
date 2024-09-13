@@ -6,7 +6,7 @@ get_template_part('parts/header'); ?>
   <div class="container">
 			<?php get_template_part('parts/yoast-breadcrumbs'); ?>
     <div class="grid-wrap single-vacancy">
-      <div class="grid-3-11">
+      <div class="grid-2-12">
         <div class="single-vacancy__wrap">
           <div class="single-vacancy__info">
             <?php $page_title = get_the_title(); ?>
