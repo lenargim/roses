@@ -7,7 +7,7 @@ $posts = get_posts([
 <?php if ($posts): ?>
   <section class="services section">
     <div class="container">
-      <h2 class="h2">Мы вам помогаем</h2>
+      <h2 class="h2">Наши услуги</h2>
       <div class="services__wrap">
 							<?php foreach ($posts as $post):
 								setup_postdata($post);
