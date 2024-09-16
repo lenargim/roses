@@ -29,7 +29,6 @@ function lenar_enqueue_scripts()
 	wp_enqueue_script('selectWoo', WC()->plugin_url() . '/assets/js/selectWoo/selectWoo.full.min.js', array('jquery'), '1.0.6');
 	wp_dequeue_style('select2');
 	wp_dequeue_style('berocket_aapf_widget-style');
-//	wp_dequeue_style( 'plugin' );
 	if (is_checkout()) {
 		wp_enqueue_script('cart-script', get_template_directory_uri() . '/assets/js/cart.js', array('jquery'));
 	}
@@ -52,6 +51,10 @@ function lenar_enqueue_scripts()
 		wp_enqueue_style('swiper-styles', 'https://unpkg.com/swiper@8/swiper-bundle.min.css');
 		wp_enqueue_script('swiper-lib', 'https://unpkg.com/swiper@8/swiper-bundle.min.js', array('jquery'));
 		wp_enqueue_script('club-script', get_template_directory_uri() . '/assets/js/club.js', array('swiper-lib'));
+	}
+
+	if (is_page('sign-in')) {
+			wp_enqueue_script('sign-in-script', get_template_directory_uri() . '/assets/js/sign-in.js', array('jquery'));
 	}
 
 	$translation_array = array('templateUrl' => get_stylesheet_directory_uri());
@@ -387,6 +390,22 @@ add_action('wp_ajax_update_item_amount_in_cart', 'update_item_amount_in_cart'); 
 add_action('wp_ajax_nopriv_update_item_amount_in_cart', 'update_item_amount_in_cart'); // If called from elsewhere
 
 
+
+add_action('wp_ajax_get_login_modal', 'lenar_get_login_modal');
+add_action('wp_ajax_nopriv_get_login_modal', 'lenar_get_login_modal');
+
+function lenar_get_login_modal()
+{
+	ob_start();
+	wc_get_template('auth/form-login.php');
+	$output = ob_get_contents();
+	ob_end_clean();
+	echo $output;
+	wp_die();
+}
+
+
+
 function get_total_products_discount()
 {
 	$discount_total = 0;
@@ -544,4 +563,31 @@ function submited_ajax_order_data()
 		echo 'New order created with order ID: #' . $order_id . '.';
 	}
 	die();
+}
+
+
+add_action( 'wp_logout', 'misha_logout_redirect', 5 );
+
+function misha_logout_redirect(){
+	wp_safe_redirect(get_home_url() );
+	exit;
+}
+
+add_filter( 'authenticate', 'misha_redirect_at_authenticate', 101, 3 );
+
+function misha_redirect_at_authenticate( $user, $username, $password ) {
+
+	if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
+		if ( is_wp_error( $user ) ) {
+			$error_codes = join( ',', $user->get_error_codes() );
+
+			$login_url = home_url( '/401/' );
+			$login_url = add_query_arg( 'errno', $error_codes, $login_url );
+
+			wp_redirect( $login_url );
+			exit;
+		}
+	}
+
+	return $user;
 }

@@ -1,8 +1,10 @@
 .woocommerce-checkout, .page-template-delivery
   .select2-container
     width: 350px
-.single-vacancy .select2-container
-  width: 344px
+.single-vacancy, .page-template-register
+  .select2-container
+    width: 344px
+
 .select2-container
   height: 36px
   &--open
@@ -34,6 +36,8 @@
     height: 21px
     display: block
     background: url("assets/images/order-arrow.svg") center no-repeat
+  &__placeholder
+    font-weight: 500
 .select2-search
   display: none
 .select2-dropdown--above .select2-results__options

@@ -172,11 +172,37 @@ $(document).ready(function () {
     width: '100%',
   })
 
+  $('#billing_country').select2({
+    width: '100%',
+  })
+
   $('.go-home').on('click', function () {
     document.location.href="/";
   })
 
-
   $("#detach").detach().addClass('active').prependTo("#menu-main");
 
+  $('.open-login').on('click', function () {
+    const block = $('body').find('.form-login');
+    if (block.length) {
+      block.addClass('active')
+    } else {
+      $.ajax({
+        type: 'GET',
+        url: myajax.url,
+        data: {action: 'get_login_modal'},
+        beforeSend: function () {
+          $('.loader-box').addClass('active')
+        },
+        complete: function () {
+          $('.loader-box').removeClass('active');
+        },
+        success: function (res) {
+          if (res) {
+            $('header').append(res);
+          }
+        }
+      })
+    }
+  })
 })

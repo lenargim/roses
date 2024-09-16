@@ -23,13 +23,13 @@
 							<input type="text" id="order_price" placeholder="0₽">
 							<label for="order_price">Сумма заказа</label>
 						</div>
-						<div class="input-wrap">
+						<div class="accept-wrap">
 							<input type="checkbox" id="is_from_cart" class="checkbox">
 							<label for="is_from_cart">
 								<span>Расчитать сумму товаров из текущей корзины</span>
 							</label>
 						</div>
-						<div class="input-wrap">
+						<div class="accept-wrap">
 							<input type="checkbox" id="is_action" class="checkbox">
 							<label for="is_action">
 								<span>Акционные товары</span>

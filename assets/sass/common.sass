@@ -345,35 +345,38 @@ svg
   75%, 100%
     clip-path: polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)
 
-.input-wrap
+.accept-wrap
   position: relative
-.checkbox
-  position: absolute
-  z-index: -1
-  width: 0
-  & + label
-    font: 500 12px / 1.2 $font-family
-    color: $text
-    display: flex
-    align-items: center
-    justify-content: flex-start
-    gap: 5px
-    a
-      text-decoration: underline
-      text-decoration-skip-ink: none
+  .checkbox
+    position: absolute
+    z-index: -1
+    width: 0
+    & + label
       font: 500 12px / 1.2 $font-family
-      color: $orange
-    &::before
-      content: ''
-      width: 18px
-      height: 18px
-      display: block
-      background-size: cover
-      background-position: center
-      background-repeat: no-repeat
-      background-image: url("assets/images/checkbox-empty.svg")
-      flex-shrink: 0
-  &:checked + label:before
-    background-image: url("assets/images/checkbox-filled.svg")
+      color: $text
+      display: flex
+      align-items: center
+      justify-content: flex-start
+      gap: 5px
+      a
+        text-decoration: underline
+        text-decoration-skip-ink: none
+        font: 500 12px / 1.2 $font-family
+        color: $orange
+      &::before
+        content: ''
+        width: 18px
+        height: 18px
+        display: block
+        background-size: cover
+        background-position: center
+        background-repeat: no-repeat
+        background-image: url("assets/images/checkbox-empty.svg")
+        flex-shrink: 0
+    &:checked + label:before
+      background-image: url("assets/images/checkbox-filled.svg")
+  &.error
+    label, label a
+      color: red
 .wpcf7-spinner
   display: none
