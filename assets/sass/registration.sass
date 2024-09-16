@@ -12,9 +12,19 @@
     display: flex
     flex-direction: column
     gap: 16px
+    position: relative
   &__row
     display: flex
     gap: 10px
   &__accept
+    margin-bottom: 32px
     a
       white-space: nowrap
+  &__reset
+    color: $orange
+    font: 500 14px $font-family
+    text-decoration: underline
+    text-decoration-skip-ink: none
+    position: absolute
+    left: 0
+    bottom: 0
