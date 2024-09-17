@@ -25,7 +25,7 @@
               $current_user = wp_get_current_user();
             $name = $current_user->user_firstname ?? $current_user->user_login;
              ?>
-              <a href="<?php echo get_permalink( wc_get_page_id( 'myaccount' ) ) ?>" class="header__link"><?php echo $name;?></a>
+              <a href="<?php echo get_permalink( get_option('woocommerce_myaccount_page_id')) ?>" class="header__link"><?php echo $name;?></a>
             <?php else: ?>
               <button type="button" class="header__link admin open-login">Войти</button>
             <?php endif; ?>

@@ -1,0 +1,114 @@
+.account
+  padding-bottom: 24px
+  &__top
+    display: flex
+    align-items: center
+    justify-content: space-between
+    gap: 1em
+    padding: 25px 0 25px 60px
+    &-img
+      width: 128px
+      height: 128px
+      border-radius: 50%
+      border: 1px solid #bd7dc1
+      background-color: $bg
+      position: relative
+      cursor: pointer
+      img
+        width: 100%
+        height: 100%
+        object-fit: cover
+        border-radius: 50%
+        z-index: 1
+        position: relative
+      &::before, .no-img
+        content: ''
+        position: absolute
+      &::before
+        width: 40px
+        height: 40px
+        background: url("assets/images/account-camera.svg") center no-repeat
+        left: -7px
+        bottom: -4px
+        z-index: 2
+      .no-img
+        width: 100px
+        height: 50px
+        background: url("assets/images/rose.png") center no-repeat
+        left: 10px
+        top: 40px
+        transform: rotate(-130deg)
+      &-input
+        width: 0
+        height: 0
+        position: absolute
+        z-index: -1
+    &-name
+      font: 700 28px $font-family
+      color: $orange
+    &-app
+      width: 160px
+      height: 130px
+      display: flex
+      flex-direction: column
+      align-items: center
+      font: 700 16px $font-family
+      text-transform: uppercase
+      color: $darkViolet
+      img
+        width: 90px
+        aspect-ratio: 1/1
+  &__wrap
+    display: flex
+    gap: 48px
+  &__sidebar
+    width: 277px
+    display: flex
+    flex-direction: column
+    gap: 32px
+  &__nav
+    border: 1px solid #bd7dc1
+    border-radius: 22px
+    padding: 32px 24px 40px 24px
+    width: 100%
+    li
+      border-bottom: 1.00px solid rgba(189, 125, 193, 0.2)
+      padding: 11px 0
+      a
+        white-space: nowrap
+        font: 500 14px $font-family
+        color: $text
+        display: flex
+        align-items: center
+        justify-content: space-between
+        &.active
+          color: $lightViolet
+        & span:nth-child(2)
+          display: inline-block
+          width: 92px
+          font: 700 10px / 2 $font-family
+          text-transform: uppercase
+          text-align: center
+          color: $white
+          border-radius: 15px
+          padding: 5px 0
+          background-color: $orange
+  &__slider
+    border: 1px solid #bd7dc1
+    border-radius: 22px
+    padding: 24px 34px
+    overflow: hidden
+    position: relative
+    .swiper-wrapper
+      height: fit-content
+    &-arrow
+      width: 30px
+      height: 30px
+      background: url("assets/images/sidebar-arrow.svg") center no-repeat
+      cursor: pointer
+      &.next
+        transform: rotate(180deg)
+      &-wrap
+        margin-top: 24px
+        display: flex
+        gap: 8px

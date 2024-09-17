@@ -55,12 +55,18 @@ function lenar_enqueue_scripts()
 	}
 
 	if (is_page('sign-in')) {
-			wp_enqueue_script('sign-in-script', get_template_directory_uri() . '/assets/js/sign-in.js', array('jquery'));
+		wp_enqueue_script('sign-in-script', get_template_directory_uri() . '/assets/js/sign-in.js', array('jquery'));
 	}
 
 	$translation_array = array('templateUrl' => get_stylesheet_directory_uri());
 	wp_localize_script('shop-script', 'object_name', $translation_array);
 
+
+	if (is_account_page()) {
+		wp_enqueue_style('swiper-styles', 'https://unpkg.com/swiper@8/swiper-bundle.min.css');
+		wp_enqueue_script('swiper-lib', 'https://unpkg.com/swiper@8/swiper-bundle.min.js', array('jquery'));
+		wp_enqueue_script('account-script', get_template_directory_uri() . '/assets/js/account.js', array('swiper-lib'));
+	}
 }
 
 add_action('init', 'lenar_init');
@@ -391,7 +397,6 @@ add_action('wp_ajax_update_item_amount_in_cart', 'update_item_amount_in_cart'); 
 add_action('wp_ajax_nopriv_update_item_amount_in_cart', 'update_item_amount_in_cart'); // If called from elsewhere
 
 
-
 add_action('wp_ajax_get_login_modal', 'lenar_get_login_modal');
 add_action('wp_ajax_nopriv_get_login_modal', 'lenar_get_login_modal');
 
@@ -404,7 +409,6 @@ function lenar_get_login_modal()
 	echo $output;
 	wp_die();
 }
-
 
 
 function get_total_products_discount()
@@ -566,28 +570,51 @@ function submited_ajax_order_data()
 	die();
 }
 
-add_action( 'wp_logout', 'misha_logout_redirect', 5 );
+add_action('wp_logout', 'misha_logout_redirect', 5);
 
-function misha_logout_redirect(){
-	wp_safe_redirect(get_home_url() );
+function misha_logout_redirect()
+{
+	wp_safe_redirect(get_home_url());
 	exit;
 }
 
-add_filter( 'authenticate', 'misha_redirect_at_authenticate', 101, 3 );
+add_filter('authenticate', 'misha_redirect_at_authenticate', 101, 3);
 
-function misha_redirect_at_authenticate( $user, $username, $password ) {
+function misha_redirect_at_authenticate($user, $username, $password)
+{
 
-	if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
-		if ( is_wp_error( $user ) ) {
-			$error_codes = join( ',', $user->get_error_codes() );
+	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+		if (is_wp_error($user)) {
+			$error_codes = join(',', $user->get_error_codes());
 
-			$login_url = home_url( '/401/' );
-			$login_url = add_query_arg( 'errno', $error_codes, $login_url );
+			$login_url = home_url('/401/');
+			$login_url = add_query_arg('errno', $error_codes, $login_url);
 
-			wp_redirect( $login_url );
+			wp_redirect($login_url);
 			exit;
 		}
 	}
 
 	return $user;
+}
+
+
+add_action('wp_ajax_update_account_img', 'update_account_img');
+add_action('wp_ajax_nopriv_update_account_img', 'update_account_img');
+
+function update_account_img()
+{
+	$file = $_FILES['image'];
+	$user_id = get_current_user_id();
+	$attachment_id = media_handle_upload('image', 0);
+	if (is_wp_error($attachment_id)) {
+		update_user_meta($user_id, 'image', $file . ": " . $attachment_id->get_error_message());
+		echo $attachment_id->get_error_message();
+	} else {
+		$old_attachment_id = get_user_meta($user_id, 'image', true);
+		wp_delete_attachment($old_attachment_id);
+		update_user_meta($user_id, 'image', $attachment_id);
+		echo wp_get_attachment_image_url($attachment_id, 'product-new');
+	}
+	wp_die();
 }

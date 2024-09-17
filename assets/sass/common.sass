@@ -239,6 +239,24 @@ svg
     height: 8px
     transform: rotate(45deg)
     background-color: $darkViolet
+
+.h3
+  text-align: center
+  display: flex
+  align-items: center
+  justify-content: center
+  gap: 16px
+  font: 600 20px/1.2 $font-family
+  color: $darkViolet
+  white-space: nowrap
+  margin-bottom: 24px
+  &::before, &::after
+    flex-shrink: 0
+    content: ''
+    width: 8px
+    height: 8px
+    transform: rotate(45deg)
+    background-color: $darkViolet
 .grid-wrap
   display: grid
   grid-template-columns: repeat(12, 1fr)

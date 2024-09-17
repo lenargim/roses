@@ -29,8 +29,6 @@ $(document).ready(function () {
       errorList.push(accept.attr('name'));
       accept.parent().addClass('error');
     }
-    console.log(errorList)
-
 
     if (errorList.length) return;
 
@@ -69,7 +67,6 @@ $(document).ready(function () {
       billing_apartment
     };
 
-    // Do AJAX request
     $.ajax({
       type: 'POST',
       url: myajax.url,
