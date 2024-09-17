@@ -48,10 +48,8 @@ if (empty($product) || !$product->is_visible()) {
       <div class="products__item-name"><?php echo $title; ?></div>
     </a>
     <div class="products__item-bottom">
-
-      <!--      <div class="products__item-price">--><?php //echo $price . '₽'; ?><!--</div>-->
       <div class="products__item-price"><?php echo $product->get_price_html(); ?></div>
-      <a href="<?php echo $product->add_to_cart_url() ?>" class="button white product-button">купить</a>
+      <a href="<?php echo $product->add_to_cart_url() ?>" data-id="<?php echo $product->get_id(); ?>" class="button white product-button add-single-product">купить</a>
     </div>
   </div>
 </div>

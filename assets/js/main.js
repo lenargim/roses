@@ -207,4 +207,29 @@ $(document).ready(function () {
       })
     }
   })
+
+  $('body').on('click', '.add-single-product', function (e) {
+    e.preventDefault();
+    const id = $(this).data('id')
+
+    $.ajax({
+      type: 'POST',
+      url: myajax.url,
+      data: {
+        action: 'add_single_product',
+        id
+      },
+      beforeSend: function () {
+        $('.loader-box').addClass('active')
+      },
+      complete: function () {
+        $('.loader-box').removeClass('active');
+      },
+      success: function (res) {
+        if (res) {
+          console.log(res)
+        }
+      }
+    })
+  })
 })

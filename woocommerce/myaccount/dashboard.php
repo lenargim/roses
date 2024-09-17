@@ -6,31 +6,40 @@ if (!defined('ABSPATH')) {
 global $user;
 
 //var_dump($user);
+$name = '';
+if (isset($user['last_name'][0]) && $user['last_name'][0] !== '') {
+	$name .= $user['last_name'][0];
+}
+if (isset($user['first_name'][0]) && $user['first_name'][0] !== '') {
+	$name .= ' ' . $user['first_name'][0];
+}
+if (isset($user['billing_patronymic_name'][0]) && $user['billing_patronymic_name'][0] !== '') {
+	$name .= ' ' . $user['billing_patronymic_name'][0];
+}
 
-$name = $user['last_name'][0] . ' ' . $user['first_name'][0] . ' ' . $user['billing_patronymic_name'][0];
 $address = '';
-if (isset($user['billing_postcode'][0])) {
+if (isset($user['billing_postcode'][0]) && $user['billing_postcode'][0] !== '') {
 	$address .= $user['billing_postcode'][0] . '.';
 }
-if (isset($user['billing_country'][0])) {
+if (isset($user['billing_country'][0]) && $user['billing_country'][0] !== '') {
 	$address .= ' ' . $user['billing_country'][0];
 }
-if (isset($user['billing_state'][0])) {
+if (isset($user['billing_state'][0]) && $user['billing_state'][0] !== '') {
 	$address .= ' ' . $user['billing_state'][0];
 }
-if (isset($user['billing_city'][0])) {
+if (isset($user['billing_city'][0]) && $user['billing_city'][0] !== '') {
 	$address .= ' г. ' . $user['billing_city'][0];
 }
-if (isset($user['billing_address_1'][0])) {
+if (isset($user['billing_address_1'][0]) && $user['billing_address_1'][0] !== '') {
 	$address .= ' ул. ' . $user['billing_address_1'][0];
 }
-if (isset($user['billing_home'][0])) {
+if (isset($user['billing_home'][0]) && $user['billing_home'][0] !== '') {
 	$address .= ' дом ' . $user['billing_home'][0];
 }
-if (isset($user['billing_body'][0])) {
+if (isset($user['billing_body'][0]) && $user['billing_body'][0] !== '') {
 	$address .= ' корпус ' . $user['billing_body'][0];
 }
-if (isset($user['billing_apartment'][0])) {
+if (isset($user['billing_apartment'][0]) && $user['billing_apartment'][0] !== '') {
 	$address .= ' ' . $user['billing_apartment'][0] . ' кв.';
 }
 

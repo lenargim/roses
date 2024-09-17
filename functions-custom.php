@@ -655,3 +655,23 @@ function update_orders_year()
 	echo $output;
 	wp_die();
 }
+
+
+add_action('wp_ajax_add_single_product', 'add_single_product');
+add_action('wp_ajax_nopriv_add_single_product', 'add_single_product');
+
+function add_single_product()
+{
+	$id = $_POST['id'];
+//	ob_start();
+
+//	$output = ob_get_contents();
+//	ob_end_clean();
+
+	global $woocommerce;
+	if ($id) {
+		$woocommerce->cart->add_to_cart($id, $quantity = 1, $variation_id = 0);
+		echo '1';
+	}
+	wp_die();
+}
