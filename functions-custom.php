@@ -539,9 +539,11 @@ function submited_ajax_order_data()
 			}
 		}
 
+		$user_id = get_current_user_id();
+
 		$order->set_created_via('checkout');
 		$order->set_cart_hash($cart_hash);
-		$order->set_customer_id(apply_filters('woocommerce_checkout_customer_id', isset($_POST['user_id']) ? $_POST['user_id'] : ''));
+		$order->set_customer_id($user_id ?? '');
 		$order->set_currency(get_woocommerce_currency());
 		$order->set_prices_include_tax('yes' === get_option('woocommerce_prices_include_tax'));
 		$order->set_customer_ip_address(WC_Geolocation::get_ip_address());
@@ -616,5 +618,40 @@ function update_account_img()
 		update_user_meta($user_id, 'image', $attachment_id);
 		echo wp_get_attachment_image_url($attachment_id, 'product-new');
 	}
+	wp_die();
+}
+
+function get_ru_order_status($status)
+{
+	switch ($status) {
+		case 'pending':
+			return 'На рассмотрении';
+		case 'processing':
+			return 'Заказ подтвержден';
+		case 'on-hold':
+			return 'На удержании';
+		case 'completed':
+			return 'Получено';
+		case 'cancelled':
+			return 'Отменен';
+		case 'refunded':
+			return 'Возвращен';
+		case 'failed':
+			return 'Неудача';
+	}
+}
+
+
+add_action('wp_ajax_update_orders_year', 'update_orders_year');
+add_action('wp_ajax_nopriv_update_orders_year', 'update_orders_year');
+
+function update_orders_year()
+{
+	$year = $_POST['year'];
+	ob_start();
+	wc_get_template('myaccount/order-table.php', array('search_year' => $year));
+	$output = ob_get_contents();
+	ob_end_clean();
+	echo $output;
 	wp_die();
 }

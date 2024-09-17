@@ -1,7 +1,7 @@
 <div class="dark modal-order-overlay">
   <div class="modal modal-order">
 			<?php $checkout = new WC_Checkout(); ?>
-			<?php $fields = $checkout->get_checkout_fields('billing'); ?>
+<!--			--><?php //$fields = $checkout->get_checkout_fields('billing'); ?>
     <button type="button" class="modal__close"></button>
     <h4 class="modal__title">Оформить заказ</h4>
     <div class="modal__desc">Оставьте свои контактные данные, наш менеджер свяжется с вами для подтверждения и уточнение

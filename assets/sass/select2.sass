@@ -5,6 +5,9 @@
   .select2-container
     width: 344px
 
+.woocommerce-account .select2-container
+  width: 120px !important
+
 .select2-container
   height: 36px
   &--open
@@ -57,7 +60,8 @@
   display: flex
   flex-direction: column
   gap: 7px
-  overflow: hidden
+  overflow-x: hidden
+  overflow-y: auto
 .select2-results__option
   font: 600 12px/20px $font-family
   color: $darkViolet

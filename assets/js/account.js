@@ -52,4 +52,32 @@ $(document).ready(function () {
     watchSlidesProgress: true,
     allowTouchMove: false
   });
+
+
+  $('#order-years').selectWoo();
+
+  $('.woocommerce-account').on('select2:select', function (e) {
+    const year = e.params.data.id;
+    $.ajax({
+      type: 'POST',
+      url: myajax.url,
+      data: {
+        action: 'update_orders_year',
+        year
+      },
+      beforeSend: function () {
+        $('.loader-box').addClass('active')
+      },
+      complete: function () {
+        $('.loader-box').removeClass('active');
+      },
+      success: function (res) {
+        if (res) {
+          $('.account__table-wrap').replaceWith(res)
+          $('#order-years').selectWoo();
+          console.log(res)
+        }
+      }
+    });
+  });
 })

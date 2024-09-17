@@ -1,63 +1,65 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly.
 }
 
-$allowed_html = array(
-	'a' => array(
-		'href' => array(),
-	),
-);
+global $user;
+
+//var_dump($user);
+
+$name = $user['last_name'][0] . ' ' . $user['first_name'][0] . ' ' . $user['billing_patronymic_name'][0];
+$address = '';
+if (isset($user['billing_postcode'][0])) {
+	$address .= $user['billing_postcode'][0] . '.';
+}
+if (isset($user['billing_country'][0])) {
+	$address .= ' ' . $user['billing_country'][0];
+}
+if (isset($user['billing_state'][0])) {
+	$address .= ' ' . $user['billing_state'][0];
+}
+if (isset($user['billing_city'][0])) {
+	$address .= ' г. ' . $user['billing_city'][0];
+}
+if (isset($user['billing_address_1'][0])) {
+	$address .= ' ул. ' . $user['billing_address_1'][0];
+}
+if (isset($user['billing_home'][0])) {
+	$address .= ' дом ' . $user['billing_home'][0];
+}
+if (isset($user['billing_body'][0])) {
+	$address .= ' корпус ' . $user['billing_body'][0];
+}
+if (isset($user['billing_apartment'][0])) {
+	$address .= ' ' . $user['billing_apartment'][0] . ' кв.';
+}
+
+$name = preg_replace('/\s\s+/', ' ', $name);
+$address = preg_replace('/\s\s+/', ' ', $address);
 ?>
 
-<p>
-	<?php
-	printf(
-		/* translators: 1: user display name 2: logout url */
-		wp_kses( __( 'Hello %1$s (not %1$s? <a href="%2$s">Log out</a>)', 'woocommerce' ), $allowed_html ),
-		'<strong>' . esc_html( $current_user->display_name ) . '</strong>',
-		esc_url( wc_logout_url() )
-	);
-	?>
-</p>
-
-<p>
-	<?php
-	/* translators: 1: Orders URL 2: Address URL 3: Account URL. */
-	$dashboard_desc = __( 'From your account dashboard you can view your <a href="%1$s">recent orders</a>, manage your <a href="%2$s">billing address</a>, and <a href="%3$s">edit your password and account details</a>.', 'woocommerce' );
-	if ( wc_shipping_enabled() ) {
-		/* translators: 1: Orders URL 2: Addresses URL 3: Account URL. */
-		$dashboard_desc = __( 'From your account dashboard you can view your <a href="%1$s">recent orders</a>, manage your <a href="%2$s">shipping and billing addresses</a>, and <a href="%3$s">edit your password and account details</a>.', 'woocommerce' );
-	}
-	printf(
-		wp_kses( $dashboard_desc, $allowed_html ),
-		esc_url( wc_get_endpoint_url( 'orders' ) ),
-		esc_url( wc_get_endpoint_url( 'edit-address' ) ),
-		esc_url( wc_get_endpoint_url( 'edit-account' ) )
-	);
-	?>
-</p>
+  <div class="account__personal">
+    <div class="account__personal-data">
+      <div class="account__personal-title">Личные данные</div>
+      <div class="account__personal-table">
+        <span>Логин:</span><span><?php echo $user['nickname'][0] ?></span>
+        <span>ФИО:</span><span><?php echo $name; ?></span>
+        <span>Email</span><span><?php echo $user['billing_email'][0]; ?></span>
+        <span>Телефон:</span><span><?php echo $user['billing_phone'][0]; ?></span>
+        <span>Адрес:</span><span><?php echo $address; ?></span>
+      </div>
+      <div class="account__personal-button-box">
+        <button type="button" class="account__personal-button">Редактировать данные</button>
+      </div>
+    </div>
+    <div class="account__personal-sale"></div>
+  </div>
 
 <?php
-	/**
-	 * My Account dashboard.
-	 *
-	 * @since 2.6.0
-	 */
-	do_action( 'woocommerce_account_dashboard' );
+$customer_orders = wc_get_orders(apply_filters('woocommerce_my_account_my_orders_query', array(
+	'customer' => get_current_user_id(),
+	'page' => 1,
+	'paginate' => true,
+)));
 
-	/**
-	 * Deprecated woocommerce_before_my_account action.
-	 *
-	 * @deprecated 2.6.0
-	 */
-	do_action( 'woocommerce_before_my_account' );
-
-	/**
-	 * Deprecated woocommerce_after_my_account action.
-	 *
-	 * @deprecated 2.6.0
-	 */
-	do_action( 'woocommerce_after_my_account' );
-
-/* Omit closing PHP tag at the end of PHP files to avoid "headers already sent" issues. */
+wc_get_template('myaccount/order-table.php', array('search_year' => $current_year = date("Y"))); ?>

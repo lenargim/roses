@@ -61,6 +61,7 @@
   &__wrap
     display: flex
     gap: 48px
+    width: 100%
   &__sidebar
     width: 277px
     display: flex
@@ -112,3 +113,88 @@
         margin-top: 24px
         display: flex
         gap: 8px
+  &__main
+    width: 100%
+    display: flex
+    flex-direction: column
+    gap: 32px
+  &__personal
+    border-radius: 22px
+    padding: 40px 48px
+    background: $bg
+    &-data
+      max-width: 385px
+      width: 100%
+    &-title
+      font: 700 16px $font-family
+      color: $text
+      margin-bottom: 32px
+    &-table
+      display: grid
+      grid-template-columns: 60px 1fr
+      gap: 12px 8px
+      span:nth-child(odd)
+        font: 500 12px $font-family
+        color: $grey
+      span:nth-child(even)
+        font: 500 14px $font-family
+    &-button
+      font: 500 14px $font-family
+      text-decoration: underline
+      text-decoration-skip-ink: none
+      color: $orange
+      text-align: left
+      width: fit-content
+      padding: 0
+      &-box
+        padding: 32px 0 0 66px
+  .woocommerce-notices-wrapper
+    position: absolute
+  &__table
+    font: 500 12px $font-family
+    display: flex
+    flex-direction: column
+    border-radius: 15px
+    border: 1px solid $lightViolet
+    overflow: hidden
+    .tr
+      display: grid
+      grid-template-columns: repeat(5, 1fr) 80px
+      &:not(:last-of-type)
+        border-bottom: 1px solid $lightViolet
+    .td, .th
+      display: flex
+      justify-content: flex-start
+      align-items: center
+      padding: 4px 8px
+      min-height: 40px
+      text-align: left
+      &:not(:last-of-type)
+        border-right: 1px solid $lightViolet
+    .th
+      color: $white
+      background-color: $darkViolet
+    .td.bold
+      font-weight: 700
+      color: $lightViolet
+    &-wrap
+      border-radius: 22px
+      padding: 40px 47px
+      background-color: $bg
+      h3
+        font: 600 20px $font-family
+        color: $text
+        white-space: nowrap
+    &-before
+      display: flex
+      align-items: flex-start
+      justify-content: space-between
+      gap: 1em
+      margin-bottom: 16px
+    &-after
+      display: flex
+      justify-content: space-between
+      gap: 1em
+      font: 600 20px $font-family
+      color: $darkViolet
+      margin-top: 24px
