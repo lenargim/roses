@@ -29,7 +29,7 @@
             <?php else: ?>
               <button type="button" class="header__link admin open-login">Войти</button>
             <?php endif; ?>
-            <a href="<?php echo wc_get_checkout_url() ?>" class="header__link cart">Корзина</a>
+            <a href="<?php echo wc_get_cart_url() ?>" class="header__link cart">Корзина</a>
           </div>
         </div>
       </div>

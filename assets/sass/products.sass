@@ -48,6 +48,27 @@
       display: flex
       justify-content: space-between
       align-items: flex-end
+      .added_to_cart.wc-forward
+        display: flex
+        align-items: center
+        justify-content: center
+        cursor: pointer
+        white-space: nowrap
+        user-select: none
+        box-shadow: 2px 2px 4px 0 rgba(154, 48, 148, 0.1)
+        font: 700 10px / 2 $font-family
+        text-transform: uppercase
+        text-align: center
+        border-radius: 20px
+        width: fit-content
+        box-sizing: border-box
+        min-width: 125px
+        padding: 8px
+        background: $orange
+        color: $white
+      .add_to_cart_button
+        &.added
+          display: none
     &-price
       font: 700 15px / 1.59502 $font-family
       display: flex
@@ -260,10 +281,30 @@
     gap: 8px
     margin-top: 65px
     position: relative
+    .single_add_to_cart_button.added
+      display: none
     .added_to_cart
-      position: absolute
-      bottom: -2em
-      right: 0
+      display: flex
+      align-items: center
+      justify-content: center
+      cursor: pointer
+      white-space: nowrap
+      user-select: none
+      box-shadow: 2px 2px 4px 0 rgba(154, 48, 148, 0.1)
+      padding: 8px 22px
+      font: 700 10px / 2 $font-family
+      text-transform: uppercase
+      text-align: center
+      border-radius: 20px
+      width: fit-content
+      min-width: 181px
+      box-sizing: border-box
+      background: $white
+      border: 1px solid $orange
+      color: $orange
+      &:hover
+        background: $orange
+        color: $white
   &__desc
     border-radius: 22px
     padding: 40px 24px 82px

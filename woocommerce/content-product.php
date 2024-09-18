@@ -15,6 +15,7 @@ if (empty($product) || !$product->is_visible()) {
 	$title = $product->get_title();
 	$price = $product->get_price();
 	$image_id = $product->get_image_id();
+  $sku = $product->get_sku();
 	$image_url = lenar_get_img(wp_get_attachment_image_url($image_id, 'thumbnail'));
 	$tags = wc_get_product_terms($product->get_id(), 'product_tag', ['fields' => 'slugs']);
 	?>
@@ -49,7 +50,10 @@ if (empty($product) || !$product->is_visible()) {
     </a>
     <div class="products__item-bottom">
       <div class="products__item-price"><?php echo $product->get_price_html(); ?></div>
-      <a href="<?php echo $product->add_to_cart_url() ?>" data-id="<?php echo $product->get_id(); ?>" class="button white product-button add-single-product">купить</a>
+      <a href="<?php echo $product->add_to_cart_url() ?>"
+         data-id="<?php echo $product->get_id(); ?>"
+         data-product_id="<?php echo get_the_ID(); ?>" data-product_sku="<?php echo esc_attr($sku) ?>"
+         class="button white product-button ajax_add_to_cart add_to_cart_button">купить</a>
     </div>
   </div>
 </div>

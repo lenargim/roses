@@ -31,7 +31,7 @@ function lenar_enqueue_scripts()
 	wp_enqueue_script('selectWoo', WC()->plugin_url() . '/assets/js/selectWoo/selectWoo.full.min.js', array('jquery'), '1.0.6');
 	wp_dequeue_style('select2');
 	wp_dequeue_style('berocket_aapf_widget-style');
-	if (is_checkout()) {
+	if (is_cart()) {
 		wp_enqueue_script('cart-script', get_template_directory_uri() . '/assets/js/cart.js', array('jquery'));
 	}
 
@@ -41,7 +41,7 @@ function lenar_enqueue_scripts()
 		wp_enqueue_script('about-script', get_template_directory_uri() . '/assets/js/about.js', array('swiper-lib'));
 	}
 
-	if (is_page(229) || is_checkout()) {
+	if (is_page(229) || is_cart()) {
 		wp_register_script('dadata', 'https://cdn.jsdelivr.net/npm/suggestions-jquery@20.3.0/dist/js/jquery.suggestions.min.js');
 		wp_enqueue_script('dadata');
 		wp_enqueue_style('dadata-style', 'https://cdn.jsdelivr.net/npm/suggestions-jquery@20.3.0/dist/css/suggestions.min.css');
@@ -693,22 +693,6 @@ function wp_kama_woocommerce_product_add_to_cart_text_filter($__, $that)
 	return 'купить';
 }
 
-add_action('wp_ajax_wishlist_remove_product', 'wishlist_remove_product');
-add_action('wp_ajax_nopriv_wishlist_remove_product', 'wishlist_remove_product');
-
-function wishlist_remove_product()
-{
-//	$id = $_POST['id'];
-
-//	ob_start();
-
-//	$output = ob_get_contents();
-//	ob_end_clean();
-
-	wp_die();
-}
-
-
 add_action('wp_ajax_remove_wishlist_items', 'remove_wishlist_items');
 add_action('wp_ajax_nopriv_remove_wishlist_items', 'remove_wishlist_items');
 
@@ -731,27 +715,3 @@ function remove_wishlist_items()
 	wp_send_json_success($response);
 	die();
 }
-
-//public static function remove_guest_old_wishlist_items () {
-//	global $wpdb;
-//	$delete_guest_user_wishlist_days = wishsuite_get_option( 'delete_guest_user_wishlist_days', 'wishsuite_general_tabs' );
-//	$result = $wpdb->get_results(
-//		$wpdb->prepare(
-//			"SELECT user_id, id
-//                FROM {$wpdb->prefix}wishsuite_list
-//                WHERE date_added < DATE_SUB(CURDATE(), INTERVAL %d DAY)",
-//			(int) $delete_guest_user_wishlist_days
-//		)
-//	);
-//	if($result) {
-//		foreach ($result as $item) {
-//			if(!get_userdata($item->user_id)) {
-//				$wpdb->delete(
-//					$wpdb->prefix . 'wishsuite_list',
-//					['id' => (int) $item->id],
-//					['%d']
-//				);
-//			}
-//		}
-//	}
-//}
