@@ -29,8 +29,8 @@
 	$terms = get_terms([
 		'taxonomy' => 'product_cat',
 		'hide_empty' => false,
-   'parent' => 0,
-			'exclude' => [36, 37, 38],
+		'parent' => 0,
+		'exclude' => [36, 37, 38],
 	]);
 	if ($terms): ?>
    <section class="section">
@@ -51,21 +51,38 @@
    </section>
 	<?php endif; ?>
 
-	<?php get_template_part('parts/recommended'); ?>
+	<?php get_template_part('parts/new'); ?>
 
-	<?php if ($terms): ?>
+
+	<?php
+	$args = array(
+		'post_type' => 'product',
+		'posts_per_page' => 12,
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'product_visibility',
+				'field' => 'name',
+				'terms' => 'featured',
+			),
+		),
+	);
+	$featured = new WP_Query($args);
+	if ($featured->have_posts()): ?>
    <section class="section">
      <div class="container">
        <h2 class="h2">Русроза рекоментует</h2>
        <div class="grid grid-5">
-								<?php foreach ($terms as $term):
-									$thumb_id = get_term_meta($term->term_id, 'thumbnail_id', true);
-									$term_img = lenar_get_img(wp_get_attachment_url($thumb_id, 'product-category')); ?>
-          <a href="<?php echo get_term_link($term) ?>"
-             class="grid__item"
-             style="background-image: url(<?php echo $term_img; ?>)">
-            <span><?php echo $term->name; ?></span>
-          </a><?php endforeach; ?>
+								<?php while ($featured->have_posts()) :
+									$featured->the_post();
+									$image_url = lenar_get_img(get_the_post_thumbnail_url(get_the_id(), 'product-category'));
+
+									?>
+        <a href="<?php the_permalink(); ?>"
+           class="grid__item"
+           style="background-image: url(<?php echo $image_url; ?>)">
+          <span><?php the_title(); ?></span>
+          </a><?php endwhile;
+								wp_reset_postdata(); ?>
        </div>
      </div>
    </section>

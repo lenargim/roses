@@ -3,7 +3,7 @@ $args = array(
 	'post_type' => 'product',
 	'orderby' => 'date',
 	'posts_per_page' => 4,
-	'post_status' => 'publish'
+	'post_status' => array('draft', 'publish')
 );
 $loop = new WP_Query($args);
 ?>
