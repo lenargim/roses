@@ -20,6 +20,19 @@
     height: 100%
     display: flex
     flex-direction: column
+    .wishsuite-button
+      position: absolute
+      z-index: 1
+      line-height: 1
+      right: 8px
+      top: 105px
+      svg
+        width: 24px
+        height: 24px
+        stroke: $white
+      &.added svg, &.wishsuite-btn-exist svg
+        stroke: $orange
+        fill: $orange
     &-img
       display: block
       border-radius: 15px

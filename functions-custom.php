@@ -13,6 +13,7 @@ function lenar_enqueue_scripts()
 	wp_deregister_style('gutenberg-blocks');
 	wp_deregister_style('main-styles-css');
 	wp_deregister_style('tablepress-default-css');
+	wp_deregister_style('wishsuite-frontend');
 	remove_theme_support('wc-product-gallery-zoom');
 
 	if (is_front_page()) {
@@ -62,7 +63,7 @@ function lenar_enqueue_scripts()
 	wp_localize_script('shop-script', 'object_name', $translation_array);
 
 
-	if (is_account_page()) {
+	if (is_account_page() || is_page('wishsuite')) {
 		wp_enqueue_style('swiper-styles', 'https://unpkg.com/swiper@8/swiper-bundle.min.css');
 		wp_enqueue_script('swiper-lib', 'https://unpkg.com/swiper@8/swiper-bundle.min.js', array('jquery'));
 		wp_enqueue_script('account-script', get_template_directory_uri() . '/assets/js/account.js', array('swiper-lib'));
@@ -675,3 +676,82 @@ function add_single_product()
 	}
 	wp_die();
 }
+
+
+add_filter('woocommerce_product_add_to_cart_text', 'wp_kama_woocommerce_product_add_to_cart_text_filter', 10, 2);
+
+/**
+	* Function for `woocommerce_product_add_to_cart_text` filter-hook.
+	*
+	* @param  $__
+	* @param  $that
+	*
+	* @return
+	*/
+function wp_kama_woocommerce_product_add_to_cart_text_filter($__, $that)
+{
+	return 'купить';
+}
+
+add_action('wp_ajax_wishlist_remove_product', 'wishlist_remove_product');
+add_action('wp_ajax_nopriv_wishlist_remove_product', 'wishlist_remove_product');
+
+function wishlist_remove_product()
+{
+//	$id = $_POST['id'];
+
+//	ob_start();
+
+//	$output = ob_get_contents();
+//	ob_end_clean();
+
+	wp_die();
+}
+
+
+add_action('wp_ajax_remove_wishlist_items', 'remove_wishlist_items');
+add_action('wp_ajax_nopriv_remove_wishlist_items', 'remove_wishlist_items');
+
+function remove_wishlist_items()
+{
+	global $wpdb;
+	$user_id = $_POST['user_id'];
+	if ($user_id) {
+		$wpdb->get_results($wpdb->prepare(
+			"DELETE FROM {$wpdb->prefix}wishsuite_list WHERE user_id = $user_id"
+		));
+	}
+	$response = [
+		'item_count' => (int) 0,
+		'message' => '',
+		'html' => do_shortcode('[wishsuite_table]'),
+		'total_pages' => (int) 1,
+		'current_page' => 1,
+	];
+	wp_send_json_success($response);
+	die();
+}
+
+//public static function remove_guest_old_wishlist_items () {
+//	global $wpdb;
+//	$delete_guest_user_wishlist_days = wishsuite_get_option( 'delete_guest_user_wishlist_days', 'wishsuite_general_tabs' );
+//	$result = $wpdb->get_results(
+//		$wpdb->prepare(
+//			"SELECT user_id, id
+//                FROM {$wpdb->prefix}wishsuite_list
+//                WHERE date_added < DATE_SUB(CURDATE(), INTERVAL %d DAY)",
+//			(int) $delete_guest_user_wishlist_days
+//		)
+//	);
+//	if($result) {
+//		foreach ($result as $item) {
+//			if(!get_userdata($item->user_id)) {
+//				$wpdb->delete(
+//					$wpdb->prefix . 'wishsuite_list',
+//					['id' => (int) $item->id],
+//					['%d']
+//				);
+//			}
+//		}
+//	}
+//}

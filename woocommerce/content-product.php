@@ -10,6 +10,7 @@ if (empty($product) || !$product->is_visible()) {
 }
 ?>
 <div class="products__item">
+	<?php echo do_shortcode('[wishsuite_button]'); ?>
 	<?php
 	$title = $product->get_title();
 	$price = $product->get_price();
@@ -37,7 +38,6 @@ if (empty($product) || !$product->is_visible()) {
 			<?php endif; ?>
   </a>
   <div class="products__item-data">
-    <!--			--><?php //echo do_shortcode('[yith_wcwl_add_to_wishlist]') ?>
     <a href="<?php the_permalink() ?>" class="products__item-info">
      <span class="products__item-attr">
       <?php $height = $product->get_attribute('pa_height'); ?>

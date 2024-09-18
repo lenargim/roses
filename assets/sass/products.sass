@@ -11,6 +11,18 @@
     height: 100%
     flex-direction: column
     transition: all .2s ease
+    .wishsuite-button
+      position: absolute
+      z-index: 1
+      right: 12px
+      top: 167px
+      svg
+        width: 30px
+        height: 30px
+        stroke: $white
+      &.added svg, &.wishsuite-btn-exist svg
+        stroke: $orange
+        fill: $orange
     &-img
       display: block
       border-radius: 15px
@@ -285,3 +297,10 @@
       a
         pointer-events: none
         cursor: default
+  .wishsuite-button
+    svg
+      width: 37px
+      height: 37px
+      stroke: $orange
+    &.added svg, &.wishsuite-btn-exist svg
+      fill: $orange

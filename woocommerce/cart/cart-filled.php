@@ -1,7 +1,7 @@
 <?php $cart = WC()->cart; ?>
 <div class="cart-block__table-wrap">
   <div class="cart-block__table">
-    <!--			--><?php //do_action('woocommerce_before_cart_table'); ?>
+    			<?php do_action('woocommerce_before_cart_table'); ?>
     <div class="cart-block__table-top">
       <span>Товары в корзине:  <?php echo $cart->get_cart_contents_count() ?></span>
       <button class="button white empty-cart" type="button">Очистить корзину</button>
@@ -10,20 +10,21 @@
 					<?php do_action('woocommerce_before_cart_contents'); ?>
 					<?php
 					foreach ($cart->get_cart() as $cart_item_key => $cart_item) {
-						$_product = apply_filters('woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key);
+            global $product;
+						$product = apply_filters('woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key);
 						$product_id = apply_filters('woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key);
-						$product_name = apply_filters('woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key);
-						if ($_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters('woocommerce_cart_item_visible', true, $cart_item, $cart_item_key)) {
-							$product_permalink = apply_filters('woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink($cart_item) : '', $cart_item, $cart_item_key);
+						$product_name = apply_filters('woocommerce_cart_item_name', $product->get_name(), $cart_item, $cart_item_key);
+						if ($product && $product->exists() && $cart_item['quantity'] > 0 && apply_filters('woocommerce_cart_item_visible', true, $cart_item, $cart_item_key)) {
+							$product_permalink = apply_filters('woocommerce_cart_item_permalink', $product->is_visible() ? $product->get_permalink($cart_item) : '', $cart_item, $cart_item_key);
 							?>
         <div
             class="woocommerce-cart-form__cart-item <?php echo esc_attr(apply_filters('woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key)); ?>">
           <div class="product-thumbnail">
 											<?php
-											$img_src_arr = wp_get_attachment_image_src($_product->get_image_id(), 'product-thumb');
+											$img_src_arr = wp_get_attachment_image_src($product->get_image_id(), 'product-thumb');
 											$product_img = lenar_get_img($img_src_arr ? $img_src_arr[0] : '');
 											?>
-            <img src="<?php echo $product_img; ?>" alt="">
+            <img src="<?php echo $product_img; ?>" alt="<?php echo $product_name?>">
             <div class="product-data">
               <div class="product-name"><?php echo $product_name; ?></div>
             </div>
@@ -32,12 +33,12 @@
             <button type="button" class="change-cart-product-qty minus" data-type="minus"
                     data-key="<?php echo $cart_item_key; ?>"></button>
 											<?php
-											if ($_product->is_sold_individually()) {
+											if ($product->is_sold_individually()) {
 												$min_quantity = 1;
 												$max_quantity = 1;
 											} else {
 												$min_quantity = 1;
-												$max_quantity = $_product->get_max_purchase_quantity();
+												$max_quantity = $product->get_max_purchase_quantity();
 											}
 											$product_quantity = woocommerce_quantity_input(
 												array(
@@ -48,7 +49,7 @@
 													'product_name' => $product_name,
 													'readonly' => 'readonly'
 												),
-												$_product,
+												$product,
 												false
 											);
 											echo apply_filters('woocommerce_cart_item_quantity', $product_quantity, $cart_item_key, $cart_item);
@@ -58,8 +59,8 @@
           </div>
           <div class="product-price" data-title="<?php esc_attr_e('Price', 'woocommerce'); ?>">
 											<?php
-											$price = $_product->get_price();
-											$reg_price = $_product->get_regular_price();
+											$price = $product->get_price();
+											$reg_price = $product->get_regular_price();
 
 											if ($price !== $reg_price): ?>
              <div class="price regular">
@@ -72,9 +73,10 @@
                 class="price <?php if ($price !== $reg_price) echo 'sale'; ?>"><?php echo $price * intval($cart_item['quantity']) . '₽' ?></div>
           </div>
           <div class="product-remove">
+											<?php echo do_shortcode('[wishsuite_button]') ?>
             <button type="button" class="cart-remove-product" data-id="<?php echo $product_id; ?>">
               <img src="<?php echo IMAGES_PATH . 'remove.svg'; ?>"
-                   alt="Удалить <?php echo $_product->name ?> из корзины">
+                   alt="Удалить <?php echo $product->name ?> из корзины">
             </button>
           </div>
         </div>

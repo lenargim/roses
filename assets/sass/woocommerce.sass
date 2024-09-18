@@ -138,7 +138,7 @@
   &__cart-item
     display: flex
     align-items: center
-    gap: 44px
+    gap: 40px
     background: $white
     border-radius: 15px
     padding: 12px 24px 12px 8px
@@ -164,13 +164,13 @@
       margin-left: auto
       .price
         white-space: nowrap
-        width: 55px
+        width: 53px
         &::before
           display: block
           font: 400 9px / 1.55556 $font-family
           text-align: center
           color: #868695
-          max-width: 55px
+          max-width: 53px
           content: 'Цена'
           white-space: initial
       .regular::before
@@ -182,7 +182,24 @@
       .empty::before
         content: 'Скидка'
     .product-remove
+      display: flex
+      align-items: center
+      justify-content: flex-end
+      gap: 10px
+      .cart-remove-product
+        flex-shrink: 0
+        line-height: 1
+        padding: 0
+      .wishsuite-button
+        svg
+          width: 25px
+          height: 25px
+          stroke: $text
+        &.added svg, &.wishsuite-btn-exist svg
+          stroke: $text
+          fill: $text
       img
+        display: block
         width: 25px
         height: 25px
     img

@@ -198,3 +198,35 @@
       font: 600 20px $font-family
       color: $darkViolet
       margin-top: 24px
+
+.wishlist
+  background-color: $bg
+  border-radius: 22px
+  padding: 40px 48px
+  &__top
+    display: flex
+    align-items: center
+    justify-content: space-between
+    margin-bottom: 16px
+  &__title
+    color: $text
+    font: 600 20px $font-family
+  &__list
+    display: flex
+    flex-direction: column
+    gap: 16px
+  &__item
+    gap: 14px
+    .wishsuite-addtocart
+      color: $orange
+      border: 1px solid $orange
+      font: 700 10px / 2 $font-family
+      text-transform: uppercase
+      padding: 8px 26px
+      min-width: unset
+      width: 98px
+    .product-price
+      gap: 14px
+    .product-remove
+      a
+        cursor: pointer

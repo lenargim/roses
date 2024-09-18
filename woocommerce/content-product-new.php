@@ -33,6 +33,7 @@ if (empty($product) || !$product->is_visible()) {
 	$image_url = lenar_get_img(wp_get_attachment_image_url($image_id, 'product-new'));
 	?>
   <div class="new__item">
+			<?php echo do_shortcode('[wishsuite_button]'); ?>
     <a href="<?php the_permalink() ?>">
       <img src="<?php echo $image_url ?>" alt="<?php echo $title; ?>" class="new__item-img">
     </a>
