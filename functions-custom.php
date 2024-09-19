@@ -9,6 +9,7 @@ function lenar_enqueue_scripts()
 	wp_enqueue_script('mask-scripts', get_template_directory_uri() . '/assets/js/jquery.mask.min.js', array('jquery'));
 
 	wp_deregister_style('storefront-woocommerce-style');
+	wp_deregister_style('berocket_aapf_widget-style');
 	wp_deregister_style('storefront-style');
 	wp_deregister_style('gutenberg-blocks');
 	wp_deregister_style('main-styles-css');

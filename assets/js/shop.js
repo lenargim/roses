@@ -113,6 +113,7 @@ jQuery(document).ready(function () {
 
   $('.orderby').select2({
     width: '100%',
+    minimumResultsForSearch: -1,
     placeholder: "Сортировать",
     templateResult: formatTemplate,
     templateSelection: formatState,
