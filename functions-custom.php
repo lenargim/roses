@@ -411,6 +411,19 @@ function lenar_get_login_modal()
 	wp_die();
 }
 
+add_action('wp_ajax_get_questions_modal', 'lenar_get_questions_modal');
+add_action('wp_ajax_nopriv_get_questions_modal', 'lenar_get_questions_modal');
+
+function lenar_get_questions_modal()
+{
+	ob_start();
+	wc_get_template('auth/form-questions.php');
+	$output = ob_get_contents();
+	ob_end_clean();
+	echo $output;
+	wp_die();
+}
+
 
 function get_total_products_discount()
 {
@@ -706,12 +719,164 @@ function remove_wishlist_items()
 		));
 	}
 	$response = [
-		'item_count' => (int) 0,
+		'item_count' => (int)0,
 		'message' => '',
 		'html' => do_shortcode('[wishsuite_table]'),
-		'total_pages' => (int) 1,
+		'total_pages' => (int)1,
 		'current_page' => 1,
 	];
 	wp_send_json_success($response);
 	die();
+}
+
+
+add_action('wp_ajax_send_advise', 'send_advise');
+add_action('wp_ajax_nopriv_send_advise', 'send_advise');
+
+function send_advise()
+{
+	$name = sanitize_text_field($_POST['name']);
+	$phone = sanitize_text_field($_POST['phone']);
+	$textarea = sanitize_text_field($_POST['textarea']);
+
+	// Sent email registration automatic
+	$to = SMTP_TO;
+	$subject = 'Новое предложение';
+	$body = 'Имя: ' . $name . '<br>Телефон: ' . $phone . '<br>Сообщение: ' . $textarea;
+	$headers = array('Content-Type: text/html; charset=UTF-8');
+	$mailResult = false;
+	$mailResult = wp_mail($to, $subject, $body, $headers);
+	echo $mailResult;
+	die();
+}
+
+add_action('wp_ajax_send_question', 'send_question');
+add_action('wp_ajax_nopriv_send_question', 'send_question');
+
+function send_question()
+{
+	$name = sanitize_text_field($_POST['name']);
+	$phone = sanitize_text_field($_POST['phone']);
+	$email = sanitize_text_field($_POST['email']);
+
+	// Sent email registration automatic
+	$to = SMTP_TO;
+	$subject = 'Заказ звонка';
+	$body = 'Имя: ' . $name . '<br>Телефон: ' . $phone . '<br>Email: ' . $email;
+	$headers = array('Content-Type: text/html; charset=UTF-8');
+	$mailResult = false;
+	$mailResult = wp_mail($to, $subject, $body, $headers);
+	echo $mailResult;
+	die();
+}
+
+add_action('wp_ajax_lost_password', 'lost_password');
+add_action('wp_ajax_nopriv_lost_password', 'lost_password');
+
+function lost_password()
+{
+	check_ajax_referer('ajax-login-nonce', 'nonce');
+	$result = pcw_retrieve_password();
+	$result_msg = is_wp_error($result) ? $result->get_error_message() : __('Проверьте свою электронную почту, чтобы найти ссылку для подтверждения');
+	$result_status = is_wp_error($result) ? 'alert' : 'success';
+	wp_send_json(array('sent' => !is_wp_error($result), 'status' => $result_status, 'msg' => $result_msg));
+	die();
+}
+
+
+add_action('wp_ajax_new_password', 'new_password');
+add_action('wp_ajax_nopriv_new_password', 'new_password');
+
+function new_password()
+{
+	$user_name = sanitize_text_field($_POST['user_name']);
+	$key = sanitize_text_field($_POST['key']);
+	$password = $_POST['password'];
+
+	$result = false;
+	if (isset($user_name) && isset($password) && !empty($user_name) && !empty($password) && isset($key) && !empty($key)) {
+		$user = check_password_reset_key($key, $user_name);
+		if (!is_wp_error($user)) {
+			reset_password($user, $password);
+			$result = true;
+		}
+	}
+	echo $result;
+
+	die();
+}
+
+
+function pcw_retrieve_password()
+{
+	$errors = new WP_Error();
+
+	if (empty($_POST['user_login']) || !is_string($_POST['user_login'])) {
+		$errors->add('empty_username', __('<strong>ERROR</strong>: Enter a username or email address.'));
+	} elseif (strpos($_POST['user_login'], '@')) {
+		$user_data = get_user_by('email', trim(wp_unslash($_POST['user_login'])));
+		if (empty($user_data)) {
+			$errors->add('invalid_email', __('<strong>ERROR</strong>: There is no account with that username or email address.'));
+		}
+	} else {
+		$login = trim($_POST['user_login']);
+		$user_data = get_user_by('login', $login);
+	}
+
+	/**
+		* Fires before errors are returned from a password reset request.
+		*
+		* @param WP_Error $errors A WP_Error object containing any errors generated
+		*                         by using invalid credentials.
+		* @since 4.4.0 Added the `$errors` parameter.
+		*
+		* @since 2.1.0
+		*/
+	do_action('lostpassword_post', $errors);
+
+	if ($errors->has_errors()) {
+		return $errors;
+	}
+
+	if (!$user_data) {
+		$errors->add('invalidcombo', __('<strong>ERROR</strong>: There is no account with that username or email address.'));
+		return $errors;
+	}
+
+	// Redefining user_login ensures we return the right case in the email.
+	$user_login = $user_data->user_login;
+	$user_email = $user_data->user_email;
+	$key = get_password_reset_key($user_data);
+
+	if (is_wp_error($key)) {
+		return $key;
+	}
+
+	if (is_multisite()) {
+		$site_name = get_network()->site_name;
+	} else {
+		/*
+		 * The blogname option is escaped with esc_html on the way into the database
+		 * in sanitize_option we want to reverse this for the plain text arena of emails.
+		 */
+		$site_name = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
+	}
+
+	$message = "Получен запрос на сброс пароля для следующей учётной записи: \r\n\r\n";
+	$message .= sprintf(__('Site Name: %s'), $site_name) . "\r\n\r\n";
+	$message .= sprintf(__('Username: %s'), $user_login) . "\r\n\r\n";
+	$message .= "Если Вы этого не делали, то просто проигнорируйте это письмо\r\n\r\n";
+	$message .= "Или перейдите по ссылке для восстановления пароля: \r\n\r\n";
+	$message .= '' . network_site_url("/new-password?action=rp&key=$key&login=" . rawurlencode($user_login), 'login') . "\r\n";
+
+	$title = sprintf(__('[%s] Password Reset'), $site_name);
+
+	$title = apply_filters('retrieve_password_title', $title, $user_login, $user_data);
+	$message = apply_filters('retrieve_password_message', $message, $key, $user_login, $user_data);
+
+	if ($message && !wp_mail($user_email, wp_specialchars_decode($title), $message)) {
+		wp_die(__('The email could not be sent.') . "<br />\n" . __('Possible reason: your host may have disabled the mail() function.'));
+	}
+
+	return true;
 }

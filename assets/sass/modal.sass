@@ -18,7 +18,7 @@
     border-radius: 25px
     max-width: 440px
     position: relative
-    &__close
+    &__close, &__close-login
       width: 24px
       height: 24px
       position: absolute
@@ -48,7 +48,7 @@
       text-decoration-skip-ink: none
 
 
-  .modal-order-thx
+  .modal-order-thx, .modal-reset-sent, .modal-questions-thx
     width: 100%
     max-width: 605px
     padding: 72px 40px
@@ -72,6 +72,12 @@
       display: flex
       flex-direction: column
       gap: 16px
+    &__forgot
+      font: 500 14px $font-family
+      text-decoration: underline
+      text-decoration-skip-ink: none
+      color: $orange
+      text-align: left
   .modal-user-thx
     img
       width: 52px
@@ -82,3 +88,18 @@
       display: flex
       align-items: flex-start
       gap: 16px
+
+  .modal-advise
+    &__form
+      margin-top: 16px
+      display: flex
+      flex-direction: column
+      gap: 16px
+  .form-reset__form
+    margin-top: 24px
+
+  .modal-questions
+    &__form
+      display: flex
+      flex-direction: column
+      gap: 12px

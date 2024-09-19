@@ -130,4 +130,44 @@ $(document).ready(function () {
       })
     }
   })
+
+  $('.open-advise').on('click', function () {
+    $('.advise-overlay').addClass('active');
+  })
+
+  $('.modal-advise__form').on('submit', function (e) {
+    e.preventDefault();
+    const data = {
+      action: 'send_advise',
+      name: $(this).find('input[name=name]').val(),
+      phone: $(this).find('input[name=phone]').val(),
+      textarea: $(this).find('textarea').val(),
+    }
+    $.ajax({
+      type: 'POST',
+      url: myajax.url,
+      data,
+      beforeSend: function () {
+        $('.loader-box').addClass('active')
+      },
+      complete: function () {
+        $('.loader-box').removeClass('active');
+      },
+      success: function (res) {
+        if (res) {
+          console.log(res)
+          $('.modal-advise__form')[0].reset();
+          $('.dark').removeClass('active');
+        } else {
+          alert('Ошибка отправки')
+        }
+      }
+    })
+  })
+
+  $('.modal-advise__form').on('input change', function () {
+    const submit = $(this).find('[type=submit]');
+    submit.prop('disabled', is_form_disabled($(this)));
+  })
 })
+

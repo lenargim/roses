@@ -138,14 +138,14 @@ function vb_reg_new_user()
 			update_user_meta( $user_id, 'billing_body', $billing_body );
 			update_user_meta( $user_id, 'billing_apartment', $billing_apartment );
 
-
-
-			echo '1'; // Success registration
 			// Sent email registration automatic
 			$to = $email;
 			$subject = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES) . ' - Вы зарегистрированы!';
 			$body = 'Ваш временный пароль: ' . $userdata['user_pass'];
 			$headers = array('Content-Type: text/html; charset=UTF-8');
+			$mailResult = false;
+			$mailResult = wp_mail($to, $subject, $body, $headers);
+			echo $mailResult;
 			wp_mail($to, $subject, $body, $headers);
 		else :
 			echo $user_id->get_error_message();

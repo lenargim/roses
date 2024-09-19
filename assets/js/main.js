@@ -1,7 +1,7 @@
 const $ = jQuery
 
 $(document).ready(function () {
-  $('.phone').mask('+7(Z00) 000-00-00', { translation: { 'Z': { pattern: /[0-79]/ } } });
+  $('.phone').mask('+7(Z00) 000-00-00', {translation: {'Z': {pattern: /[0-79]/}}});
 
   $('.sidebar__button').on('click', function () {
     $(this).parent('.sidebar__toggle').toggleClass('open')
@@ -118,7 +118,7 @@ $(document).ready(function () {
 
   $('.file-wrap').on('change', 'input[type=file]', function () {
     let file = this.files[0];
-    if(file.size > 10 * 1024 * 1024) {
+    if (file.size > 10 * 1024 * 1024) {
       alert('Превышен допустимый размер. 10MB Максимум.');
       this.value = '';
     } else {
@@ -178,7 +178,7 @@ $(document).ready(function () {
   })
 
   $('.go-home').on('click', function () {
-    document.location.href="/";
+    document.location.href = "/";
   })
 
   $("#detach").detach().addClass('active').prependTo("#menu-main");
@@ -207,28 +207,185 @@ $(document).ready(function () {
     }
   })
 
-  // $('body').on('click', '.add-single-product', function (e) {
-  //   e.preventDefault();
-  //   const id = $(this).data('id')
-  //
-  //   $.ajax({
-  //     type: 'POST',
-  //     url: myajax.url,
-  //     data: {
-  //       action: 'add_single_product',
-  //       id
-  //     },
-  //     beforeSend: function () {
-  //       $('.loader-box').addClass('active')
-  //     },
-  //     complete: function () {
-  //       $('.loader-box').removeClass('active');
-  //     },
-  //     success: function (res) {
-  //       if (res) {
-  //         console.log(res)
-  //       }
-  //     }
-  //   })
-  // })
+  $('body').on('click', '.modal-login__forgot', function () {
+    $('.dark').removeClass('active');
+    $('.form-reset').addClass('active');
+  });
+
+
+  $('.modal-advise__form').on('input change', function () {
+    const submit = $(this).find('[type=submit]');
+    submit.prop('disabled', is_form_disabled($(this)));
+  })
+
+  $('body').on('input change', '#lost-password', function () {
+    const submit = $(this).find('[type=submit]');
+    submit.prop('disabled', is_form_disabled($(this)));
+  })
+
+
+  $('body').on('submit', '#lost-password', function (e) {
+    e.preventDefault();
+
+    const email = $(this).find('#user_login').val();
+    const data = {
+      'action': 'lost_password',
+      'user_login': email,
+      'nonce': $(this).find('#_wpnonce').val(),
+    };
+
+    $.ajax({
+      type: 'POST',
+      url: myajax.url,
+      data,
+      beforeSend: function () {
+        $('.loader-box').addClass('active')
+      },
+      complete: function () {
+        $('.loader-box').removeClass('active');
+      },
+      success: function (res) {
+        if (res) {
+          if (res.sent) {
+            $(this).trigger("reset");
+            const partialEmail = email.replace(/(\w{2})[\w.-]+@([\w.]+\w)/, "$1***@$2");
+            $('.user-new-email').text(partialEmail);
+            $('.form-reset').removeClass('active')
+            $('.overlay-reset-sent').addClass('active')
+          }else {
+            alert(res.msg)
+          }
+        }
+      }
+    })
+  })
+
+  $('body').on('submit', '#new_password', function (e) {
+    e.preventDefault();
+
+    const data = {
+      'action': 'new_password',
+      'user_name': $(this).find('#user_name').val(),
+      'key': $(this).find('#key').val(),
+      'password': $(this).find('#password').val(),
+    };
+
+    $.ajax({
+      type: 'POST',
+      url: myajax.url,
+      data,
+      beforeSend: function () {
+        $('.loader-box').addClass('active')
+      },
+      complete: function () {
+        $('.loader-box').removeClass('active');
+      },
+      success: function (res) {
+        if (res) {
+          $(this).trigger("reset");
+          $('.form-new-password-thx').addClass('active')
+        } else {
+          alert('Ошибка. Пароль не задан');
+        }
+      }
+    })
+  })
+
+  $('body').on('input change', '#new_password', function () {
+    const submit = $(this).find('[type=submit]');
+    submit.prop('disabled', is_form_disabled($(this)));
+  })
+
+  $('body').on('input change', '#questions-form', function () {
+    const submit = $(this).find('[type=submit]');
+    submit.prop('disabled', is_form_disabled($(this)));
+  })
+
+  $('body').on('submit', '#questions-form', function (e) {
+    e.preventDefault();
+    const data = {
+      action: 'send_question',
+      name: $(this).find('input[name=name]').val(),
+      phone: $(this).find('input[name=phone]').val(),
+      email: $(this).find('input[name=email]').val(),
+    }
+    $.ajax({
+      type: 'POST',
+      url: myajax.url,
+      data,
+      beforeSend: function () {
+        $('.loader-box').addClass('active')
+      },
+      complete: function () {
+        $('.loader-box').removeClass('active');
+      },
+      success: function (res) {
+        if (res) {
+          console.log(res)
+          $(this).trigger("reset");
+          $('.form-questions').removeClass('active');
+          $('.overlay-questions-thx').addClass('active');
+        } else {
+          alert('Ошибка отправки')
+        }
+      }
+    })
+  })
+
+
+  $('body').on('click', '.modal__close-login', function () {
+    $('.dark').removeClass('active');
+    $.ajax({
+      type: 'GET',
+      url: myajax.url,
+      data: {action: 'get_login_modal'},
+      beforeSend: function () {
+        $('.loader-box').addClass('active')
+      },
+      complete: function () {
+        $('.loader-box').removeClass('active');
+      },
+      success: function (res) {
+        if (res) {
+          $('header').append(res);
+        }
+      }
+    })
+  })
+
+
+  $('body').on('click', '.open-questions', function () {
+    $.ajax({
+      type: 'GET',
+      url: myajax.url,
+      data: {action: 'get_questions_modal'},
+      beforeSend: function () {
+        $('.loader-box').addClass('active')
+      },
+      complete: function () {
+        $('.loader-box').removeClass('active');
+      },
+      success: function (res) {
+        if (res) {
+          $('header').append(res);
+          $('.phone').mask('+7(Z00) 000-00-00', {translation: {'Z': {pattern: /[0-79]/}}});
+        }
+      }
+    })
+  })
 })
+
+function is_form_disabled(form) {
+  const errorList = [];
+  form.find('.required').each(function () {
+    const input = $(this).find('input, textarea');
+    const val = input.val();
+    if (!val) {
+      $(this).addClass('error');
+      errorList.push(input.attr('name'));
+    } else {
+      $(this).removeClass('error');
+    }
+  })
+  return !!errorList.length
+}

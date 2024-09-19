@@ -11,6 +11,7 @@ get_template_part('parts/header');
 
 global $current_user;
 $user = get_user_meta($current_user->ID);
+$phone = get_user_meta($current_user->billing_phone);
 $name = '';
 if (in_array('administrator', (array)$current_user->roles)) {
 	$name = 'Администратор';
@@ -48,6 +49,7 @@ if (in_array('administrator', (array)$current_user->roles)) {
 							<?php do_action('woocommerce_account_navigation'); ?>
         <?php wc_get_template('myaccount/sidebar-actions.php') ?>
         <?php wc_get_template('myaccount/sidebar-new.php') ?>
+        <?php wc_get_template('myaccount/sidebar-advise.php', array('name' => $name, 'phone' => $phone)) ?>
       </aside>
       <main class="account__main">
 							<?php do_action('woocommerce_account_content'); ?>
