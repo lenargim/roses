@@ -51,6 +51,9 @@ if (in_array('administrator', (array)$current_user->roles)) {
       <main class="account__main">
         <div class="entry-content">
 									<?php echo do_shortcode('[wishsuite_table]'); ?>
+									<?php echo do_shortcode('[ddwcwl_waiting_list_template_shortcode]'); ?>
+
+
         </div>
       </main>
     </div>

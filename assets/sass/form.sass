@@ -59,3 +59,78 @@ textarea
   display: flex
   flex-direction: column
   gap: 24px
+
+
+.header .header__row
+  .dgwt-wcas-sf-wrapp
+    border: 0.50px solid $white
+  .dgwt-wcas-search-input
+    color: $white
+    &::placeholder
+      color: $white
+
+
+
+.dgwt-wcas-sf-wrapp
+  border-radius: 20px
+  width: 181px
+  height: 37px
+  position: relative
+  background: rgba(255, 255, 255, 0.31)
+  .dgwt-wcas-search-form
+    padding: 0
+    margin: 0
+    width: 100%
+  .screen-reader-text
+    clip: rect(1px, 1px, 1px, 1px)
+    border: 0
+    clip-path: inset(50%)
+    height: 1px
+    margin: -1px
+    overflow: hidden
+    overflow-wrap: normal !important
+    padding: 0
+    position: absolute !important
+    width: 1px
+
+  .dgwt-wcas-search-input
+    font: 700 10px $font-family
+    text-transform: uppercase
+    padding: 13px 40px 13px 18px
+    background-color: transparent
+    border-radius: 20px
+  .dgwt-wcas-search-submit
+    &::after
+      position: absolute
+      right: 20px
+      top: calc(50% - 7px)
+      content: ''
+      width: 23px
+      height: 14px
+      background: url("assets/images/search.svg") center no-repeat
+
+.dgwt-wcas-suggestions-wrapp
+  display: flex
+  flex-direction: column
+  gap: 5px
+  width: 300px !important
+  background: $bg
+  padding: 15px
+  border-radius: 15px
+  border: 1.5px solid $lightViolet
+  .dgwt-wcas-suggestion
+    display: grid
+    grid-template-columns: 80px 1fr
+    gap: 10px
+    font: 500 14px/1.2 $font-family
+    padding: 10px 0
+    &:first-of-type
+      padding-top: 0
+    &:last-of-type
+      padding-bottom: 0
+    &:not(:last-of-type)
+      border-bottom: 1.5px solid $lightViolet
+  img
+    width: 100%
+    aspect-ratio: 1/1
+    border-radius: 12px

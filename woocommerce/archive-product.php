@@ -4,7 +4,10 @@ if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly.
 }
 
-get_template_part('parts/header'); ?>
+get_template_part('parts/header');
+if (is_search()):
+	get_template_part('search');
+else: ?>
   <section class="catalog section">
     <div class="container">
       <div class="catalog__wrap">
@@ -13,7 +16,7 @@ get_template_part('parts/header'); ?>
         </div>
         <div class="catalog__main">
 									<?php get_template_part('parts/new-slider'); ?>
-          									<?php get_template_part('parts/filters'); ?>
+									<?php get_template_part('parts/filters'); ?>
 									<?php if (woocommerce_product_loop()): ?>
            <div class="catalog__loop">
 												<?php while (have_posts()):
@@ -28,9 +31,10 @@ get_template_part('parts/header'); ?>
       </div>
     </div>
   </section>
-<?php
-get_template_part('parts/new');
-get_template_part('parts/extra-sale');
-get_template_part('parts/map'); ?>
+	<?php
+	get_template_part('parts/new');
+	get_template_part('parts/extra-sale');
+	get_template_part('parts/map');
+endif;
 
-<?php get_template_part('parts/footer');
+get_template_part('parts/footer');

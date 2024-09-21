@@ -13,7 +13,7 @@ $items = $woocommerce->cart->get_cart();
   <ul>
     <li><a class="account__nav-link" href="<?php echo esc_url(wc_get_account_endpoint_url('dashboard')) ?>"><span>Мой профиль</span></a>
     </li>
-    <li><a class="account__nav-link" href="<?php echo wc_get_checkout_url(); ?>">
+    <li><a class="account__nav-link" href="<?php echo wc_get_cart_url(); ?>">
         <span>Корзина</span>
         <span>товаров <?php echo count($items); ?></span>
       </a></li>

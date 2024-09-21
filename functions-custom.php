@@ -16,6 +16,7 @@ function lenar_enqueue_scripts()
 	wp_deregister_style('tablepress-default-css');
 	wp_deregister_style('wishsuite-frontend');
 	remove_theme_support('wc-product-gallery-zoom');
+	wp_deregister_style('dgwt-wcas-style');
 
 	if (is_front_page()) {
 		wp_enqueue_style('swiper-styles', 'https://unpkg.com/swiper@8/swiper-bundle.min.css');
@@ -807,7 +808,6 @@ function new_password()
 	die();
 }
 
-
 function pcw_retrieve_password()
 {
 	$errors = new WP_Error();
@@ -881,3 +881,30 @@ function pcw_retrieve_password()
 
 	return true;
 }
+
+
+remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_title', 5);
+remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_price', 10);
+remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20);
+remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
+
+
+// Redirect FiboSearch search to shop page
+add_action('template_redirect', function () {
+	if (is_search() && isset($_GET['dgwt_wcas']) && isset($_GET['post_type']) && sanitize_text_field($_GET['post_type']) === 'product') {
+		global $wp_query;
+//			$total_results = $wp_query->found_posts;
+
+		$dgwt_wcas = sanitize_text_field($_GET['dgwt_wcas']);
+		$post_type = 'product';
+		$redirect_url = home_url('/');
+		$redirect_url .= '?s=' . urlencode(get_query_var('s'));
+		$redirect_url .= '&post_type=' . urlencode($post_type);
+		$redirect_url .= '&dgwt_wcas=' . urlencode($dgwt_wcas);
+
+		if ($redirect_url !== home_url($_SERVER['REQUEST_URI'])) {
+			wp_redirect($redirect_url);
+			exit;
+		}
+	}
+});

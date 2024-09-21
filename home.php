@@ -36,6 +36,9 @@
    <section class="section">
      <div class="container">
        <h2 class="h2">Саженцы питомника</h2>
+       <div style="margin-bottom: 24px;">
+								<?php get_template_part('parts/abc'); ?>
+       </div>
        <div class="grid grid-5">
 								<?php foreach ($terms as $term):
 									$thumb_id = get_term_meta($term->term_id, 'thumbnail_id', true);

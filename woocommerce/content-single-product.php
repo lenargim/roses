@@ -50,7 +50,6 @@ endif; ?>
 					<?php endif; ?>
     </div>
 			<?php
-			woocommerce_template_single_add_to_cart();
 			/**
 				* @hooked woocommerce_template_single_title - 5
 				* @hooked woocommerce_template_single_rating - 10
@@ -61,7 +60,7 @@ endif; ?>
 				* @hooked woocommerce_template_single_sharing - 50
 				* @hooked WC_Sdivuctured_Data::generate_product_data() - 60
 				*/
-			//			do_action('woocommerce_single_product_summary');
+						do_action('woocommerce_single_product_summary');
 			?>
   </div>
   <div class="product-single__desc">

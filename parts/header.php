@@ -6,11 +6,10 @@
       <div class="header__wrap">
 							<?php echo get_custom_logo(); ?>
         <div class="header__row">
-          <a href="<?php echo get_permalink(wc_get_page_id('shop')); ?>?orderby=date" class="button violet">Новые поступления</a>
+          <a href="<?php echo get_permalink(wc_get_page_id('shop')); ?>?orderby=date" class="button violet">Новые
+            поступления</a>
           <a href="<?php echo get_page_link(229); ?>" class="button orange">Бесплатная доставка</a>
-          <div class="header__search button search">
-            <input type="search" placeholder="я ищу...">
-          </div>
+									<?php echo do_shortcode('[fibosearch]'); ?>
         </div>
         <div class="header__admin">
           <div class="header__phone">
@@ -21,14 +20,15 @@
             </div>
           </div>
           <div class="header__links">
-            <?php if(is_user_logged_in()):
-              $current_user = wp_get_current_user();
-            $name = $current_user->user_firstname ?? $current_user->user_login;
-             ?>
-              <a href="<?php echo get_permalink( get_option('woocommerce_myaccount_page_id')) ?>" class="header__link"><?php echo $name;?></a>
-            <?php else: ?>
-              <button type="button" class="header__link admin open-login">Войти</button>
-            <?php endif; ?>
+											<?php if (is_user_logged_in()):
+												$current_user = wp_get_current_user();
+												$name = $current_user->user_firstname ?? $current_user->user_login;
+												?>
+             <a href="<?php echo get_permalink(get_option('woocommerce_myaccount_page_id')) ?>"
+                class="header__link"><?php echo $name; ?></a>
+											<?php else: ?>
+             <button type="button" class="header__link admin open-login">Войти</button>
+											<?php endif; ?>
             <a href="<?php echo wc_get_cart_url() ?>" class="header__link cart">Корзина</a>
           </div>
         </div>

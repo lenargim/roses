@@ -1,0 +1,47 @@
+.search
+  &__title
+    font: 700 28px $font-family
+    span
+      color: $orange
+  background-color: $bg
+  &__loop
+    display: grid
+    grid-template-columns: repeat(4, 1fr)
+    gap: 30px
+  &__nothing
+    display: flex
+    flex-direction: column
+    justify-content: center
+    min-height: 66vh
+    &-bottom
+      display: flex
+      align-items: center
+      gap: 15.5px
+    &-text
+      display: flex
+      flex-direction: column
+      gap: 24px
+      color: $text
+      margin-bottom: 56px
+    &-title
+      font: 700 28px $font-family
+      span
+        color: $orange
+    &-desc
+      font: 500 14px $font-family
+      li:before
+        content: '• '
+  &__loop
+    display: grid
+    grid-template-columns: repeat(4, 210px)
+    gap: 24px 32px
+  &__back
+    width: 100%
+    max-width: 382px
+    margin: 32px auto 0
+  .dgwt-wcas-sf-wrapp
+    border: 0.50px solid $lightViolet
+  .dgwt-wcas-search-input
+    color: $lightViolet
+    &::placeholder
+      color: $lightViolet

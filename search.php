@@ -1,39 +1,48 @@
 <?php
-/**
- * The template for displaying search results pages.
- *
- * @package storefront
- */
+$squery = trim(get_search_query());
 
-get_header(); ?>
+?>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+<div id="primary" class="content-area search">
+  <div class="container">
+			<?php if (have_posts()) : ?>
+     <section class="section">
+       <h1 class="search__title h1">Поиск по запросу: <span><?php echo $squery ?></span></h1>
+       <div class="search__loop">
+								<?php while (have_posts()): the_post();
+									wc_get_template_part('content', 'product');
+								endwhile; ?>
+       </div>
+     </section>
+			<?php else : ?>
+     <div class="search__nothing">
+       <div class="grid-wrap">
+         <div class="grid-3-11">
+           <div class="search__nothing-text">
+             <div class="search__nothing-title">По запросу <span><?php echo $squery; ?></span> ничего не найдено</div>
+             <div class="search__nothing-desc">
+               <span>Рекомендации:</span>
+               <ul>
+                 <li>Убедитесь, что слова написаны без ошибок.</li>
+                 <li>Попробуйте использовать другие ключевые слова.</li>
+                 <li>Попробуйте использовать меньшее количество букв (не менее 3-х букв).</li>
+                 <li>Используйте алфавитный указатель</li>
+               </ul>
+             </div>
+             <div class="search__nothing-bottom">
+               <a href="<?php echo get_permalink(woocommerce_get_page_id('shop')); ?>" class="button orange">Перейти в
+                 каталог</a>
+														<?php echo do_shortcode('[fibosearch]'); ?>
+             </div>
+           </div>
+         </div>
+       </div>
+       <h2 class="h2">Алфавитный поиск</h2>
+						<?php get_template_part('parts/abc'); ?>
+       <a href="<?php echo home_url('/'); ?>" class="button orange search__back">Вернуться на главную</a>
+     </div>
 
-		<?php if ( have_posts() ) : ?>
+			<?php endif; ?>
+  </div>
 
-			<header class="page-header">
-				<h1 class="page-title">
-					<?php
-						/* translators: %s: search term */
-						printf( esc_attr__( 'Search Results for: %s', 'storefront' ), '<span>' . get_search_query() . '</span>' );
-					?>
-				</h1>
-			</header><!-- .page-header -->
-
-			<?php
-			get_template_part( 'loop' );
-
-		else :
-
-			get_template_part( 'content', 'none' );
-
-		endif;
-		?>
-
-		</main><!-- #main -->
-	</div><!-- #primary -->
-
-<?php
-do_action( 'storefront_sidebar' );
-get_footer();
+</div>

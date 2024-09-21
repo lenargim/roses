@@ -10,7 +10,7 @@ $loop = new WP_Query($args);
 
 ?>
 
-<?php if ($loop): ?>
+<?php if ($loop->have_posts()): ?>
   <div class="account__slider account__slider-actions">
     <h3 class="h3">Акции</h3>
     <div class="swiper-wrapper">

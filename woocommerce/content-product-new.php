@@ -44,14 +44,17 @@ if (empty($product) || !$product->is_visible()) {
         <span class="new__item-attr">
            <?php if ($height): ?>
              <span class="new__item-height">Высота: <?php echo $height; ?></span>
-            <?php endif; ?>
+											<?php endif; ?>
          </span>
 
         <div class="new__item-name"><?php echo $title; ?></div>
       </a>
       <div class="new__item-bottom">
         <div class="new__item-price"><?php echo $price . '₽'; ?></div>
-        <a href="<?php echo $product->add_to_cart_url() ?>" class="button white buy">купить</a>
+							<?php if ($product->is_in_stock()): ?>
+         <a href="<?php echo $product->add_to_cart_url() ?>" class="button white buy">купить</a>
+              <?php else: ?><span class="new__item-out">Нет<br>в наличии</span>
+							<?php endif; ?>
       </div>
     </div>
   </div>

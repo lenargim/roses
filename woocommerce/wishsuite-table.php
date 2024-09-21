@@ -1,7 +1,9 @@
 <div class="wishsuite-table-content wishlist">
   <div class="wishlist__top">
     <h2 class="wishlist__title">Избранные товары</h2>
-    <button class="wishlist__reset button white" type="button" data-user-id="<?php echo get_current_user_id(); ?>">Очистить избранное</button>
+    <button class="wishlist__reset button white" type="button" data-user-id="<?php echo get_current_user_id(); ?>">
+      Очистить избранное
+    </button>
   </div>
   <div class="wishsuite_table wishlist__list">
 			<?php
@@ -38,9 +40,13 @@
           <div
               class="price <?php if ($price !== $reg_price) echo 'sale'; ?>"><?php echo $price . '₽' ?></div>
         </div>
-							<?php echo $product['add_to_cart']; ?>
+							<?php if ($_product->is_in_stock()): ?>
+								<?php echo $product['add_to_cart']; ?>
+              <?php else:  ?><span class="out" disabled>Нет<br>в наличии</span>
+							<?php endif; ?>
         <div class="product-remove ">
-          <a type="button" class="wishlist-remove-product wishsuite-remove" data-product_id="<?php echo $product_id; ?>">
+          <a type="button" class="wishlist-remove-product wishsuite-remove"
+             data-product_id="<?php echo $product_id; ?>">
             <img src="<?php echo IMAGES_PATH . 'remove.svg'; ?>"
                  alt="Удалить <?php echo $product['title']; ?> из корзины">
           </a>
