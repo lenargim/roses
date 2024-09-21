@@ -1,0 +1,187 @@
+.promotions
+  padding: 40px 0
+  &__wrap
+    display: flex
+    flex-direction: column
+    gap: 24px
+  &__item
+    border: 1px solid #bd7dc1
+    border-radius: 22px
+    padding: 16px 32px 16px 16px
+    display: grid
+    gap: 0 32px
+    grid-template-columns: 280px 1fr
+    grid-template-rows: repeat(4, auto)
+    &-img
+      width: 100%
+      aspect-ratio: 1/1
+      border-radius: 53px
+      object-fit: cover
+      grid-column: 1/2
+      grid-row: 1/-1
+    &-top
+      display: flex
+      align-items: center
+      justify-content: space-between
+      gap: 1em
+      margin-bottom: 24px
+      span
+        font: 500 14px $font-family
+        color: $grey
+    &-timer
+      span
+        color: $darkViolet
+    &-title
+      font: 700 20px $font-family
+      text-transform: uppercase
+      color: $text
+      margin-bottom: 20px
+    &-desc
+      margin-bottom: 32px
+    &-bottom
+      display: flex
+      align-items: center
+      justify-content: space-between
+      gap: 1em
+      span
+        font: 500 12px $font-family
+        color: $grey
+        max-width: 466px
+    &-timer
+      display: flex
+      align-items: center
+      justify-content: flex-end
+      gap: 12px
+.sales
+  &__wrap
+    display: grid
+    grid-template-columns: repeat(12, 1fr)
+    gap: 20px
+  &__text
+    grid-column: 1/9
+    &-title
+      margin-bottom: 24px
+      font: 700 16px $font-family
+      color: $text
+    &-types
+      display: flex
+      flex-direction: column
+      gap: 32px
+      margin-bottom: 40px
+    &-type
+      display: grid
+      grid-template-columns: 100px 1fr
+      gap: 15px
+      max-width: 393px
+      span
+        font: 700 16px $font-family
+        color: $text
+      p
+        margin-top: 10px
+        font: 400 16px $font-family
+        color: $grey
+    &-percent
+      font: 700 39px $font-family
+      color: rgba(111, 20, 144, 0.29)
+      &:after
+        content: '%'
+  &__personal
+    grid-column: 10/13
+    border: 2.50px solid #bd7dc1
+    border-radius: 22px
+    padding: 32px 24px
+    height: fit-content
+    &-title
+      font: 600 20px $font-family
+      color: $text
+      margin-bottom: 18px
+    &-center
+      display: flex
+      justify-content: space-between
+      gap: 1em
+      margin-bottom: 24px
+    &-left
+      color: $darkViolet
+      font: 700 28px $font-family
+    &-right
+      p
+        font: 500 14px $font-family
+        color: $text
+        padding-bottom: 8px
+      span
+        font: 700 15px / 1.59502 $font-family
+        color: $darkViolet
+    &-bottom
+      display: flex
+      flex-direction: column
+      align-items: center
+      gap: 12px
+      &>span
+        font: 500 14px/17px $font-family
+  &__desc
+    grid-column: 1/10
+    font: 500 14px $font-family
+    p:not(:last-of-type)
+      margin-bottom: 1em
+  &__cards
+    display: grid
+    grid-template-columns: repeat(3, 1fr)
+    gap: 45px
+    padding: 128px 0 48px
+    img
+      width: 100%
+    img:nth-child(2)
+      position: relative
+      transform: translateY(-45px) scale(1.175)
+  &__design
+    background-color: $bg
+    border-radius: 22px
+    padding: 16px
+    display: flex
+    align-items: center
+    gap: 40px
+    &-img
+      border-radius: 22px
+      max-width: 280px
+    &-text
+      max-width: 662px
+    &-title
+      border-radius: 22px
+      font: 700 20px $font-family
+      color: $text
+      margin-bottom: 20px
+.timer
+  display: flex
+  align-items: center
+  justify-content: space-between
+  gap: 19px
+  border-radius: 20px
+  padding: 4px 16px
+  width: 163px
+  height: 37px
+  background-color: $darkViolet
+  cursor: default
+  span
+    display: block
+    color: $white
+    position: relative
+    text-align: center
+    line-height: 1
+    &:after
+      display: block
+      font: 400 10px / 1 $font-family
+    &:first-of-type:after
+      content: 'дней'
+    &:nth-of-type(2):after
+      content: 'часов'
+    &:nth-of-type(3):after
+      content: 'минут'
+    &:first-of-type::before, &:last-of-type::before
+      content: ':'
+      position: absolute
+      font: 500 14px/16px $font-family
+      top: calc(50% - 8px)
+    &:first-of-type::before
+      left: calc(100% + 10px)
+    &:last-of-type::before
+      right: calc(100% + 10px)

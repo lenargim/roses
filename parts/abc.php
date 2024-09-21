@@ -10,12 +10,12 @@ $eng = range('A', 'Z');
   <div class="abc__wrap">
     <div class="abc__line rus">
 					<?php foreach ($rus as $letter): ?>
-       <a href="?s=<?php echo $letter; ?>&post_type=product"><?php echo $letter; ?></a>
+       <a href="?s=<?php echo $letter; ?>&post_type=product&first_letter=<?php echo $letter; ?>"><?php echo $letter; ?></a>
 					<?php endforeach; ?>
     </div>
     <div class="abc__line eng">
 					<?php foreach ($eng as $letter): ?>
-       <a href="?s=<?php echo $letter; ?>&post_type=product"><?php echo $letter; ?></a>
+       <a href="?s=<?php echo $letter; ?>&post_type=product&first_letter=<?php echo $letter; ?>"><?php echo $letter; ?></a>
 					<?php endforeach; ?>
     </div>
   </div>

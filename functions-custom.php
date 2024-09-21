@@ -908,3 +908,28 @@ add_action('template_redirect', function () {
 		}
 	}
 });
+
+
+add_action('pre_get_posts', 'search_first_letter', 10);
+function search_first_letter($query)
+{
+	if (!is_admin() && $query->is_main_query() && $query->is_search && isset($_GET['first_letter'])) :
+		$query->set('starts_with', $_GET['first_letter']);
+		$query->set('posts_per_page', 50);
+	endif;
+}
+
+function wpse_298888_posts_where($where, $query)
+{
+	global $wpdb;
+
+	$starts_with = esc_sql($query->get('starts_with'));
+
+	if ($starts_with) {
+		$where .= " AND $wpdb->posts.post_title LIKE '$starts_with%'";
+	}
+
+	return $where;
+}
+
+add_filter('posts_where', 'wpse_298888_posts_where', 10, 2);
