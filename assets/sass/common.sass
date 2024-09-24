@@ -1,7 +1,6 @@
 *
   box-sizing: border-box
   outline: none
-  //transition: all 0.2s ease
   &::selection
     background: $darkViolet
     color: $white
@@ -14,6 +13,8 @@ html
 body, input, textarea, table, button, a
   font: 400 16px/1.5 $font-family
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+  @include max($maxMobile)
+    font-size: 12px
 
 body
   margin: 0
@@ -51,6 +52,8 @@ button
   max-width: 1100px
   @include between($minTablet, $maxTablet)
     padding: 0 20px
+  @include max($maxMobile)
+    padding: 0 16px
 
 
 input:-webkit-autofill,
@@ -208,6 +211,9 @@ svg
   &.small
     padding: 8px 18px
     min-width: 148px
+    @include max($maxMobile)
+      padding: 6px 18px
+      min-width: 110px
   &.big
     width: 100%
   &.search
@@ -228,7 +234,7 @@ svg
   &.product-button
     min-width: 125px
     padding: 8px 40px
-    @include between($minTablet, $maxTablet)
+    @include max($maxTablet)
       min-width: 85px
       padding: 8px 18px
 .section
@@ -248,6 +254,10 @@ svg
     height: 8px
     transform: rotate(45deg)
     background-color: $darkViolet
+  @include max($maxMobile)
+    font-size: 20px
+    gap: 10px
+    margin-bottom: 32px
 
 .h3
   text-align: center
@@ -286,6 +296,9 @@ svg
     @include between($minTablet, $maxTablet)
       grid-template-columns: repeat(2, 1fr)
       gap: 16px
+    @include max($maxMobile)
+      grid-template-columns: 1fr
+      gap: 16px
     .grid__item
       aspect-ratio: 345/200
   &.grid-4
@@ -300,16 +313,22 @@ svg
       gap: 12px
     @include between($minTablet, $maxTablet)
       grid-template-columns: repeat(4, 1fr)
+    @include max($maxMobile)
+      grid-template-columns: repeat(2, 1fr)
+      gap: 16px
     .grid__item
       aspect-ratio: 1/1
-  &.grid-space
-    grid-template-columns: repeat(4,1fr)
-    gap: 78px
-    @include between($minLaptop, $maxLaptop)
-      gap: 40px
-    @include between($minTablet, $maxTablet)
-      grid-template-columns: repeat(3, 1fr)
-      gap: 50px
+  //&.grid-space
+  //  grid-template-columns: repeat(4,1fr)
+  //  gap: 78px
+  //  @include between($minLaptop, $maxLaptop)
+  //    gap: 40px
+  //  @include between($minTablet, $maxTablet)
+  //    grid-template-columns: repeat(3, 1fr)
+  //    gap: 50px
+  //  @include max($maxMobile)
+  //    grid-template-columns: repeat(2, 1fr)
+  //    gap: 32px 16px
   &__item
     width: 100%
     border-radius: 22px
@@ -335,6 +354,8 @@ svg
       z-index: 2
       @include between($minTablet, $maxLaptop)
         font-size: 14px
+      @include max($maxMobile)
+        font-size: 12px
     &::after
       content: ''
       filter: blur(50px)
@@ -435,7 +456,14 @@ svg
 
 .laptop-hidden
   @include max($maxLaptop)
-    display: none
+    display: none !important
+
+.mobile-hidden
+  @include max($maxMobile)
+    display: none !important
+.mobile-only
+  @include min($minTablet)
+    display: none !important
 
 .banner-img
   width: 100%
@@ -443,5 +471,10 @@ svg
   aspect-ratio: 107/40
   overflow: hidden
   border-radius: 53px
+  max-height: 80vh
+  object-fit: cover
   @include between($minTablet, $maxTablet)
     border-radius: 22px
+  @include max($maxMobile)
+    border-radius: 40px
+    aspect-ratio: 288/425

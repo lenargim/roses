@@ -5,6 +5,9 @@
     gap: 23px
     @include between($minTablet, $maxTablet)
       grid-template-columns: repeat(2, 1fr)
+    @include max($maxMobile)
+      grid-template-columns: 1fr
+      gap: 32px
   &__item
     border-radius: 15px
     background: rgba(244, 230, 244, 0.58)

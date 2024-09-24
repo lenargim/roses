@@ -1,9 +1,10 @@
 .club
   padding-top: 40px
   color: $textBlack
+  @include max($maxMobile)
+    padding-top: 0
   .banner
     position: relative
-    border-radius: 53px
     overflow: hidden
     margin-bottom: 50px
     h1
@@ -14,14 +15,26 @@
       right: 32px
       bottom: 55px
       text-align: center
+      @include max($maxMobile)
+        left: 20px
+        right: 20px
+        bottom: 32px
+        font-size: 32px
   h2
     font: 700 28px $font-family
     color: $darkViolet
     text-align: center
     margin-bottom: 40px
+    @include max($maxMobile)
+      margin-bottom: 24px
   strong
     font: 700 16px $font-family
     color: $darkViolet
+    @include max($maxMobile)
+      font-size: 12px
+  .school
+    @include max($maxMobile)
+      margin-top: 24px
   .programm
     padding-top: 40px
     ol
@@ -29,6 +42,8 @@
       flex-direction: column
       gap: 32px
       margin-bottom: 50px
+      @include max($maxMobile)
+        gap: 24px
     li
       font: 600 16px $font-family
       text-transform: uppercase
@@ -37,14 +52,22 @@
       justify-content: flex-start
       gap: 34px
       counter-increment: num
+      @include max($maxMobile)
+        font-size: 14px
+        gap: 24px
       &::before
         content: "0" counter(num)
         font: 700 39px $font-family
         color: rgba(111, 20, 144, 0.29)
+        @include max($maxMobile)
+          font-size: 32px
   &__tariffs
     display: grid
     grid-template-columns: repeat(3, 1fr)
     gap: 23.5px
+    @include max($maxMobile)
+      grid-template-columns: 1fr
+      gap: 24px
     &-wrap
       padding-top: 50px
   &__item
@@ -104,6 +127,9 @@
     display: flex
     justify-content: space-between
     gap: 20px
+    @include max($maxMobile)
+      flex-direction: column
+      gap: 24px
     &-img
       max-width: 360px
       position: relative
@@ -128,10 +154,17 @@
       justify-content: space-between
       font: 400 16px $font-family
       color: $textBlack
+      @include max($maxMobile)
+        max-width: unset
+        font-size: 14px
+        gap: 24px
       h4
-        margin-bottom: 16px
         font: 600 20px/1.2 $font-family
         color: $text
+        margin-bottom: 16px
+        @include max($maxMobile)
+          font-size: 16px
+          margin-bottom: 12px
       a
         color: $darkViolet
         font-weight: 700

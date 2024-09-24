@@ -2,6 +2,8 @@
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25)
   background: linear-gradient(180deg, #660d8b 0%, #bb4fb5 64.06%, #d8a6d7 99.48%)
   padding: 17px
+  @include max($maxMobile)
+    padding: 8px 0
   &__wrap
     display: flex
     align-items: center
@@ -13,8 +15,11 @@
     line-height: 1
     img
       width: 100%
+      height: 100%
       max-width: 253px
       aspect-ratio: 253/65
+      @include max($maxMobile)
+        max-width: 155px
 
   &__row
     display: flex
@@ -78,6 +83,34 @@
       width: 23px
       height: 14px
       background: url("assets/images/search.svg") center no-repeat
+  &__mobile
+    display: flex
+    flex-direction: column
+    gap: 12px
+    align-items: stretch
+    &-top
+      display: flex
+      align-items: center
+      gap: 24px
+    &-links
+      margin-left: auto
+      display: flex
+      align-items: center
+      justify-content: flex-end
+      gap: 16px
+      .header__link::before
+        width: 22px
+        height: 19px
+    &-bottom
+      display: grid
+      grid-template-columns: 24px 1fr 24px
+      gap: 12px
+      align-items: center
+    &-phone
+      width: 24px
+      height: 24px
+      flex-shrink: 0
+      background: url("assets/images/phone.png") center no-repeat
 
 .header-menu
   .menu
@@ -168,7 +201,89 @@
       &>a::after
         transform: rotate(180deg)
 
+
 #detach
   display: none
   &.active
     display: block
+
+.burger
+  width: 25px
+  height: 30px
+  background: url("assets/images/burger.svg") center no-repeat
+  &-block
+    position: fixed
+    left: calc(-100vw - 20px)
+    width: 100vw
+    bottom: 0
+    top: 0
+    z-index: 10
+    background-color: $bg
+    padding: 24px 16px
+    overflow-y: auto
+    display: flex
+    flex-direction: column
+    gap: 24px
+    transition: left .3s ease
+    &.active
+      left: 0
+    &__close
+      width: 24px
+      height: 24px
+      position: absolute
+      top: 24px
+      right: 16px
+      background: url("assets/images/close.svg") center no-repeat
+    .dgwt-wcas-sf-wrapp
+      margin-right: 64px
+      background-color: transparent
+      border: 0.50px solid $darkViolet
+    .dgwt-wcas-search-input
+      color: $lightViolet
+      &::placeholder
+        color: $lightViolet
+    .dgwt-wcas-search-submit::after
+      background: url("assets/images/search-burger.svg") center no-repeat
+    .sub-menu
+      display: none
+    .menu-item
+      border-bottom: 1px solid $white
+      &>a
+        display: flex
+        align-items: center
+        justify-content: flex-start
+        gap: 6px
+        position: relative
+        padding: 14px 0
+        font: 600 16px $font-family
+        text-transform: uppercase
+        color: $text
+    .menu-item-has-children
+      &>a
+        &::after
+          content: ''
+          display: block
+          width: 20px
+          height: 20px
+          background: url("assets/images/arrow-down.svg") center no-repeat
+          transition: transform .3s ease
+      &.open
+        &>a:after
+          transform: rotate(180deg)
+        .sub-menu
+          display: block
+
+    &__auth
+      display: flex
+      flex-direction: column
+      gap: 12px
+      &-desc
+        font: 500 12px $font-family
+        color: $grey
+    .footer__qr
+      text-align: left
+      max-width: 167px
+      align-items: flex-start
+      h4
+        font: 700 20px $font-family
+        color: $orange

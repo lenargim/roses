@@ -2,11 +2,8 @@
   padding-bottom: 0
   .banner
     position: relative
-    border-radius: 53px
     overflow: hidden
     margin-bottom: 50px
-    @include between($minTablet, $maxTablet)
-      border-radius: 24px
     h1
       font: 700 48px $font-family
       color: #fff
@@ -14,10 +11,11 @@
       left: 32px
       bottom: 55px
       max-width: 500px
-    img
-      width: 100%
-      height: 100%
-      aspect-ratio: 107/40
+      @include max($maxMobile)
+        font-size: 32px
+        left: 21px
+        bottom: 32px
+
   strong, h4
     font: 700 16px $font-family
     color: $darkViolet
@@ -31,7 +29,7 @@
     gap: 20px
     &>*
       grid-column: 3/11
-      @include between($minTablet, $maxTablet)
+      @include max( $maxTablet)
         grid-column: 1/-1
   .wp-block-media-text
     font: 400 16px $font-family
@@ -39,19 +37,30 @@
     display: flex
     gap: 32px
     align-items: flex-start
+    @include max($maxMobile)
+      flex-direction: column
+      gap: 16px
     &:not(:last-child)
       margin-bottom: 32px
+      @include max($maxMobile)
+        margin-bottom: 16px
     &__content
       padding: 0
   figure
     max-width: 90px
     flex-shrink: 0
     align-self: initial !important
+    @include max($maxMobile)
+      max-width: 66px
   h2
     text-align: center
     color: $darkViolet
     font: 700 28px $font-family
     margin-bottom: 40px
+    @include max($maxMobile)
+      font-size: 16px
+      margin-bottom: 1em
+      text-align: left
   section.table
     padding-top: 40px
     width: 100%
@@ -71,10 +80,11 @@
       font: 500 14px $font-family
       text-align: center
       vertical-align: middle
-      padding: 0
       border-top: 1px solid $lightViolet
       border-left: 1px solid $lightViolet
-      min-width: 100px
+      min-width: 117px
+      padding: 15px 10px
+      box-sizing: border-box
       &:last-child
         border-right: 1px solid $lightViolet
     tr:first-child
@@ -96,15 +106,21 @@
     tr td:first-child
       border-left-style: solid
   &__table .wp-block-group__inner-container
+    position: relative
+    overflow-x: auto
+    &::-webkit-scrollbar
+      display: none
+
     @include between($minTablet, $maxTablet)
-      position: relative
       width: calc(100% + 40px)
       margin-left: -20px
       margin-right: -20px
       padding: 0 20px
-      overflow-x: auto
-      &::-webkit-scrollbar
-        display: none
+    @include max($maxMobile)
+      width: calc(100% + 36px)
+      margin-left: -16px
+      margin-right: -16px
+      padding: 0 16px
 .delivery-calc
   display: grid
   grid-template-columns: repeat(12, 1fr)
@@ -114,6 +130,8 @@
     text-transform: uppercase
     color: $darkViolet
     margin-bottom: 32px
+    @include max($maxMobile)
+      font-size: 16px
   &__box
     grid-column: 3/11
     padding: 40px
@@ -121,10 +139,15 @@
     background: $bg
     @include max($maxTablet)
       grid-column: 1/-1
+    @include max($maxMobile)
+      padding: 24px 16px
   &__calc
     display: flex
     align-items: flex-start
     justify-content: space-between
+    @include max($maxMobile)
+      flex-direction: column
+      gap: 32px
   &__form
     width: 350px
     position: relative
@@ -133,6 +156,8 @@
     gap: 12px
     @include between($minLaptop, $maxLaptop)
       width: 300px
+    @include max($maxMobile)
+      width: 100%
     select
       display: none
   &__total
@@ -142,6 +167,9 @@
     padding: 24px
     background: $white
     flex-shrink: 0
+    @include max($maxMobile)
+      width: 100%
+      padding: 24px 16px
     p
       font: 500 16px $font-family
       color: $text

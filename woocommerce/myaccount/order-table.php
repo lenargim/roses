@@ -56,12 +56,12 @@ $orders = wc_get_orders($args);
 				<?php endforeach; ?>
    </div>
    <div class="account__table-after">
-     <span>Сумма покупок за сезон</span>
+     <span>Сумма покупок за сезон:</span>
      <span><?php echo $season_total; ?> ₽</span>
    </div>
 	<?php else: ?>
    <div class="account__table-before">
-     <h3>История ваших заказов пуста  <?php echo $search_year?></h3>
+     <h3>История ваших заказов пуста</h3>
      <select name="order-years" id="order-years">
 						<?php foreach ($select_years_array as $value):
 							$is_checked = $value === intval($search_year);

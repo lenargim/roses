@@ -21,20 +21,22 @@
 													<?php endwhile; ?>
             </div>
           </div>
-          <div class="gallery-thumbs">
-            <div class="prev slider__prev"></div>
-            <div class="next slider__next"></div>
-            <div class="swiper-wrapper">
-													<?php while (have_rows('gallery', 88)): the_row();
-														$img = get_sub_field('slide');
-														$desc = get_sub_field('desc');
-														?>
-               <div class="swiper-slide">
-                   <img src="<?php echo $img; ?>" alt="<?php echo $desc; ?>">
-               </div>
-													<?php endwhile; ?>
-            </div>
-          </div>
+									<?php if (!wp_is_mobile()): ?>
+           <div class="gallery-thumbs">
+             <div class="prev slider__prev"></div>
+             <div class="next slider__next"></div>
+             <div class="swiper-wrapper">
+														<?php while (have_rows('gallery', 88)): the_row();
+															$img = get_sub_field('slide');
+															$desc = get_sub_field('desc');
+															?>
+                <div class="swiper-slide">
+                  <img src="<?php echo $img; ?>" alt="<?php echo $desc; ?>">
+                </div>
+														<?php endwhile; ?>
+             </div>
+           </div>
+									<?php endif; ?>
         </div>
       </div>
     </div>

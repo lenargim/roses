@@ -1,8 +1,12 @@
 .products
   display: grid
-  grid-template-columns: repeat(3,210px)
+  grid-template-columns: repeat(4,210px)
   gap: 24px 32px
   align-self: flex-end
+  @include max($maxMobile)
+    width: 100%
+    grid-template-columns: repeat(2, 1fr)
+    gap: 32px 16px
   &__item
     position: relative
     border-radius: 15px
@@ -39,13 +43,18 @@
       position: relative
       display: flex
       flex-direction: column
-      gap: 11px
+      gap: 10px
     &-info
       flex: 1 0 auto
     &-height
       font: 400 12px / 1.66667 $font-family
+      margin-bottom: 10px
+      @include max($maxMobile)
+        font-size: 10px
     &-name
       font: 500 14px /1.42857 $font-family
+      @include max($maxMobile)
+        font-size: 12px
     &-bottom
       display: flex
       justify-content: space-between
@@ -121,6 +130,8 @@
     &-out
       font-size: 14px
       padding: 5px
+      @include max($maxMobile)
+        font-size: 12px
 
 
 .yith-wcwl-add-to-wishlist
@@ -135,7 +146,9 @@
 .product-single
   padding: 32px 0
   h1
-    font: 600 30px/37px $font-family
+    font: 600 30px/1.2 $font-family
+    @include max($maxMobile)
+      font-size: 20px
   h3
     font: 600 20px/1.2 $font-family
     color: $text
@@ -146,8 +159,10 @@
     margin-top: 40px
     gap: 40px
     flex-wrap: wrap
-    @include between($minTablet, $maxTablet)
+    @include max( $maxTablet)
       gap: 16px
+    @include max($maxMobile)
+      margin-top: 16px
 
     .sku
       font: 600 20px/1.2 $font-family
@@ -161,11 +176,16 @@
     @include between($minTablet, $maxTablet)
       grid-template-columns: 340px 1fr
       gap: 24px 12px
+    @include max($maxMobile)
+      grid-template-columns: 1fr
+      gap: 24px
   &__gallery
     @include min($minLaptop)
       display: grid
       grid-template-columns: 71px 1fr
       gap: 24px
+    @include max($maxMobile)
+      width: calc(100vw - 32px)
   &__thumbs
     width: 100%
     position: relative
@@ -213,16 +233,18 @@
     top: 17px
     left: 16px
     z-index: 2
-    @include between($minTablet, $maxTablet)
+    @include max( $maxTablet)
       gap: 8px
   &__tag
     border-radius: 20px
     padding: 8px 16px
     font: 600 12px / 1.16667 $font-family
     color: $white
-    @include between($minTablet, $maxTablet)
-      padding: 5px 12px
     cursor: default
+    @include max($maxTablet)
+      padding: 5px 12px
+    @include max($maxMobile)
+      font-size: 9px
     &.bestseller
       background: $darkViolet
     &.new
@@ -235,11 +257,18 @@
     z-index: 2
     top: calc(50% - 20px)
     cursor: pointer
+    @include max($maxMobile)
+      width: 33px
+      height: 33px
   &__prev
     left: 16px
+    @include max($maxMobile)
+      left: 0
   &__next
     right: 16px
     transform: rotate(180deg)
+    @include max($maxMobile)
+      right: 0
   &__summary
     border: 2px solid #bd7dc1
     border-radius: 15px
@@ -249,6 +278,8 @@
     flex-direction: column
     @include between($minTablet, $maxTablet)
       padding: 32px 16px
+    @include max($maxMobile)
+      padding: 24px 16px
     input[name="ddwcwl_join_waiting_list"]
       display: block
       margin-top: 24px
@@ -336,23 +367,34 @@
     @include max($maxTablet)
       padding: 32px 32px 40px
       grid-column: 1/-1
+    @include max($maxMobile)
+      padding: 24px 16px
     h3
       padding-bottom: 32px
+      @include max($maxMobile)
+        font-size: 18px
+        padding-bottom: 16px
     h4
       padding-bottom: 4px
       color: $lightViolet
+      @include max($maxMobile)
+        font-size: 14px
     p
       font: 400 16px/20px $font-family
       &:not(:last-child)
         padding-bottom: 32px
         @include between($minTablet, $maxTablet)
           padding-bottom: 16px
+        @include max($maxMobile)
+          font-size: 14px
   &__feature
     border-radius: 22px
     padding: 24px 35px 40px
     background-color: $bg
     @include max($maxTablet)
       grid-column: 1/-1
+    @include max($maxMobile)
+      padding: 24px 16px
     h3
       text-align: center
       padding-bottom: 24px
@@ -362,6 +404,12 @@
     overflow: hidden
     @include between($minTablet, $maxTablet)
       padding: 0 60px
+    @include max($maxMobile)
+      height: calc(552/288 * 100vw)
+      width: calc(100vw - 32px)
+      background-color: transparent
+      padding: 0 0 50px
+      border-radius: 0
     .swiper-slide
       opacity: 1
       visibility: visible

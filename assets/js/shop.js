@@ -1,19 +1,28 @@
 jQuery(document).ready(function () {
   new Swiper('.new__slider', {
-    slidesPerView: 4,
-    speed: 400,
     loop: true,
-    spaceBetween: 21,
+    speed: 400,
     navigation: {
       nextEl: '.next',
       prevEl: '.prev',
     },
+    slidesPerView: 2,
+    grid: {
+      rows: 2,
+    },
+    spaceBetween: 16,
     watchSlidesProgress: true,
     allowTouchMove: false,
     breakpoints: {
+      767: {
+        slidesPerView: 4,
+        spaceBetween: 21,
+        grid: false,
+      },
       1025: {
         slidesPerView: 5,
         spaceBetween: 16,
+        grid: false,
       }
     }
   });
@@ -40,7 +49,10 @@ jQuery(document).ready(function () {
   });
 
   new Swiper('.product-single__related', {
-    slidesPerView: 4,
+    slidesPerView: 2,
+    grid: {
+      rows: 2,
+    },
     speed: 400,
     loop: true,
     spaceBetween: 20,
@@ -52,6 +64,8 @@ jQuery(document).ready(function () {
     allowTouchMove: false,
     breakpoints: {
       1025: {
+        grid: false,
+        slidesPerView: 4,
         spaceBetween: 31,
       }
     }

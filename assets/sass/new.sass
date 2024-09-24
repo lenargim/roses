@@ -5,6 +5,7 @@
     overflow: hidden
     position: relative
     width: 837px
+    //height: 300px
     background-color: $bg
     @include between($minLaptop,$maxLaptop)
       margin: 0 auto
@@ -12,9 +13,17 @@
       padding: 0 60px
       width: calc(100vw - 40px)
       background: transparent
+    @include max($maxMobile)
+      height: calc(552/288 * 100vw)
+      width: calc(100vw - 32px)
+      background-color: transparent
+      padding: 0 0 50px
+      border-radius: 0
     .swiper-slide
       opacity: 1
       transition: opacity .2s ease
+      @include max($maxMobile)
+        height: calc((100% - 32px) / 2) !important
     .swiper-slide:not(.swiper-slide-visible)
       opacity: 0
       a
@@ -90,12 +99,23 @@
       width: 40px
       height: 40px
       background: url("assets/images/slider-arrow.svg") center no-repeat
+    @include max($maxMobile)
+      top: unset
+      bottom: 0
+      background: url("assets/images/sidebar-arrow.svg") center no-repeat
+      width: 36px
+      height: 36px
     &.prev
       left: 15px
       @include between($minTablet, $maxTablet)
         left: 0
+      @include max($maxMobile)
+        left: unset
+        right: 48px
     &.next
       right: 15px
       transform: rotate(180deg)
       @include between($minTablet, $maxTablet)
+        right: 0
+      @include max($maxMobile)
         right: 0

@@ -13,7 +13,6 @@ if(is_user_logged_in()){
 
 global $woocommerce;
 get_template_part('parts/header'); ?>
-
   <div class="registration">
     <div class="container">
       <div class="grid-wrap">
@@ -46,11 +45,13 @@ get_template_part('parts/header'); ?>
                 <input class="phone" type="text" id="billing_phone" name="billing_phone" placeholder="+7...">
                 <label for="billing_phone">Телефон</label>
               </div>
-              <button type="button" class="registration__reset">Очистить форму</button>
+              <?php if (!wp_is_mobile()): ?>
+                <button type="button" class="registration__reset">Очистить форму</button>
+              <?php endif; ?>
             </div>
             <div class="registration__half">
               <div class="text-wrap">
-															<?php woocommerce_form_field('billing_country', array('type' => 'country', 'placeholder' => '...')); ?>
+                <?php woocommerce_form_field('billing_country', array('type' => 'country', 'placeholder' => '...')); ?>
                 <label for="billing_country">Страна</label>
               </div>
               <div class="text-wrap">
@@ -95,6 +96,9 @@ get_template_part('parts/header'); ?>
               </div>
             </div>
           </div>
+											<?php if (wp_is_mobile()): ?>
+             <button type="button" class="registration__reset">Очистить форму</button>
+											<?php endif; ?>
           </form>
         </div>
       </div>

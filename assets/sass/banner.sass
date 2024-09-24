@@ -1,6 +1,7 @@
 .banner
+  @include max($maxMobile)
+    padding: 16px 0
   &__wrap
-
     position: relative
     .swiper-slide
       opacity: 0
@@ -13,35 +14,51 @@
     background-position: center
     position: relative
   &__text
-    position: absolute
-    width: 327px
-    left: 115px
-    top: 57px
-    bottom: 57px
     display: flex
     flex-direction: column
+    @include min($minTablet)
+      position: absolute
+      width: 327px
+      left: 115px
+      top: 57px
+      bottom: 57px
+    @include max($maxMobile)
+      justify-content: flex-end
+      height: 100%
+      gap: 46px
+      padding: 12px 12px 37px
+
     h3
       font: 700 40px/1 $font-family
       color: $white
       @include between($minTablet, $maxTablet)
         font-size: 30px
+      @include max($maxMobile)
+        font-size: 32px
     h2
       font: 700 115px/1.2 $font-family
       color: $darkViolet
       @include between($minTablet, $maxTablet)
         font-size: 80px
+      @include max($maxMobile)
+        font-size: 86px
   &__title
-    flex: 1 0 auto
+    @include min($minTablet)
+      flex: 1 0 auto
   .button
     flex-shrink: 0
+    @include max($maxMobile)
+      margin: 0 auto
   &__arrow
     position: absolute
     top: calc(50% - 22px)
     width: 44px
     height: 44px
     background: url("assets/images/banner-arrow.svg") center no-repeat
-    z-index: 300
+    z-index: 3
     cursor: pointer
+    @include max($maxMobile)
+      display: none
     &.prev
       left: 29px
     &.next

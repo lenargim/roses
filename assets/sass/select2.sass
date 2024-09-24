@@ -3,12 +3,16 @@
     width: 350px
     @include between($minLaptop,$maxLaptop)
       width: 300px
+    @include max($maxMobile)
+      width: calc(100vw - 64px)
 .single-vacancy, .page-template-register
   .select2-container
     width: 344px
 
 .woocommerce-account .select2-container
   width: 120px !important
+  @include max($maxMobile)
+    width: calc(100vw - 56px) !important
 
 .select2-container
   height: 36px

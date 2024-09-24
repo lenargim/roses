@@ -34,6 +34,7 @@
   justify-content: flex-start
   align-items: center
   gap: 16px
+  flex-wrap: wrap
   .back
     width: 24px
     height: 24px
@@ -106,6 +107,7 @@
     left: 5.5px
     top: 0
 .woocommerce-product-attributes
+  border-collapse: collapse
   width: 100%
   th, td
     padding: 6px 0
@@ -142,12 +144,18 @@
     background: $white
     border-radius: 15px
     padding: 12px 24px 12px 8px
+    @include max($maxMobile)
+      padding: 6px
     .product-thumbnail
       display: flex
       align-items: flex-start
       gap: 8px
       max-width: 230px
       width: 100%
+      @include max($maxMobile)
+        max-width: 100%
+        gap: 4px 6px
+        order: 1
     .product-data
       display: flex
       flex-direction: column
@@ -162,30 +170,50 @@
       font: 700 15px / 1.59502 $font-family
       text-align: center
       margin-left: auto
+      @include max($maxMobile)
+        order: 2
+        margin: 0
+        flex-direction: column
+        gap: 0
+        .price
+          &::before
+            content: unset !important
       .price
         white-space: nowrap
         width: 53px
         &::before
           display: block
-          font: 400 9px / 1.55556 $font-family
+          font: 400 9px /1 $font-family
           text-align: center
           color: #868695
           max-width: 53px
           content: 'Цена'
           white-space: initial
-      .regular::before
-        content: 'Цена без скидки'
+      .regular
+        @include max($maxMobile)
+          font: 400 9px /1 $font-family
+          color: $grey
+          text-decoration: line-through
+        &::before
+          content: 'Цена без скидки'
       .sale
         color: $darkViolet
         &::before
           content: 'Цена со скидкой'
       .empty::before
         content: 'Скидка'
+    .product-quantity
+      @include max($maxMobile)
+        order: 3
+
     .product-remove
       display: flex
       align-items: center
       justify-content: flex-end
       gap: 10px
+      @include max($maxMobile)
+        margin-left: auto
+        order: 4
       .cart-remove-product
         flex-shrink: 0
         line-height: 1
@@ -208,5 +236,11 @@
       height: 73px
       overflow: hidden
       flex-shrink: 0
+      @include max($maxMobile)
+        width: 62px
+        height: 62px
+    & .button
+      @include max($maxMobile)
+        order: 5
 .woocommerce-checkout-payment
   display: none

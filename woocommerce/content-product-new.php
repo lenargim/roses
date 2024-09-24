@@ -53,7 +53,7 @@ if (empty($product) || !$product->is_visible()) {
         <div class="new__item-price"><?php echo $price . '₽'; ?></div>
 							<?php if ($product->is_in_stock()): ?>
          <a href="<?php echo $product->add_to_cart_url() ?>" class="button white buy">купить</a>
-              <?php else: ?><span class="new__item-out">Нет<br>в наличии</span>
+							<?php else: ?><span class="new__item-out">Нет<br>в наличии</span>
 							<?php endif; ?>
       </div>
     </div>

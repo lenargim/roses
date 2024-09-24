@@ -20,15 +20,25 @@ $(document).ready(function () {
   });
 
   new Swiper('.gallery-slider', {
+    watchSlidesProgress: true,
+    grid: {
+      rows: 3
+    },
     slidesPerView: 1,
-    spaceBetween: 50,
     speed: 400,
     navigation: {
       nextEl: '.next',
       prevEl: '.prev',
     },
-    thumbs: {
+    thumbs: $('.gallery-thumbs').length ? {
       swiper: gallery_thumbnail,
+    } : null,
+    breakpoints: {
+      767: {
+        spaceBetween: 50,
+        grid: false,
+        slidesPerView: 1,
+      }
     }
   });
 })

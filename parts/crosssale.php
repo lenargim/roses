@@ -15,7 +15,7 @@ if (!empty ($crosssell_ids)):
     <section class="section background">
       <div class="container">
         <h2 class="h2">Необходимые товары</h2>
-        <div class="grid grid-space">
+        <div class="products">
 									<?php while ($products->have_posts()) : $products->the_post(); ?>
 										<?php wc_get_template_part('content', 'product'); ?>
 									<?php endwhile; // end of the loop. ?>

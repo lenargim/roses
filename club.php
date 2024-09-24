@@ -6,7 +6,7 @@ get_template_part('parts/header'); ?>
 <div class="club">
   <div class="container">
     <div class="banner">
-					<?php the_post_thumbnail(); ?>
+					<?php the_post_thumbnail('', array('class' => 'banner-img')); ?>
       <h1><?php the_title(); ?></h1>
     </div>
   </div>

@@ -22,18 +22,24 @@
     grid-template-columns: 1fr 1fr
     @include between($minTablet, $maxTablet)
       grid-template-columns: 7fr 5fr
+    @include max($maxMobile)
+      grid-template-columns: 1fr
   &__img
     width: 100%
+    height: 100%
     object-fit: cover
     aspect-ratio: 5/4
-    @include between($minTablet, $maxTablet)
-      height: 100%
+    @include max($maxMobile)
+      aspect-ratio: 16/13
+
   &__content
     position: relative
     padding: 23px 66px
     display: flex
     align-items: center
     justify-content: center
+    @include max($maxMobile)
+      padding: 80px 16px 90px
   &__text
     position: relative
     display: flex
@@ -46,6 +52,9 @@
     aspect-ratio: 1/1
     border: 2px solid #6f1490
     padding: 20px
+    @include max($maxMobile)
+      width: 66%
+      gap: 18px
 
     &>*
       transform: translate(0,0)
@@ -60,16 +69,22 @@
       transform: translate(-50%,-50%) rotate(45deg)
       left: 50%
       top: 50%
+      @include max($maxMobile)
+        width: 100%
 
     .date
       font: 700 14px / 1 $font-family
       color: $orange
+      @include max($maxMobile)
+        font-size: 11px
     .title
       font: 700 20px $font-family
       display: flex
       align-items: center
       justify-content: center
       gap: 13px
+      @include max($maxMobile)
+        font-size: 14px
       &::before, &::after
         content: ''
         width: 8px
@@ -79,9 +94,13 @@
         transform: rotate(45deg)
     .name
       font: 700 20px $font-family
+      @include max($maxMobile)
+        font-size: 12px
     .text
       margin-top: 18px
       font: 400 16px $font-family
+      @include max($maxMobile)
+        font-size: 10px
   &__prev, &__next
     position: absolute
     width: 40px
@@ -91,9 +110,18 @@
     top: calc(50% - 20px)
     cursor: pointer
     &.swiper-button-disabled
-      background: url("assets/images/slider-arrow-disabled.svg") center no-repeat
+      opacity: .5
+    @include max($maxMobile)
+      top: unset
+      bottom: 0
+      background: url("assets/images/sidebar-arrow.svg") center no-repeat
+      width: 36px
+      height: 36px
   &__prev
     left: 0
+    @include max($maxMobile)
+      left: unset
+      right: 50px
   &__next
     right: 0
     transform: rotate(180deg)

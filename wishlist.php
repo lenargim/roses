@@ -11,6 +11,8 @@ get_template_part('parts/header');
 
 global $current_user;
 $user = get_user_meta($current_user->ID);
+$phone = get_user_meta($current_user->billing_phone);
+$name = '';
 if (in_array('administrator', (array)$current_user->roles)) {
 	$name = 'Администратор';
 } elseif ($user['first_name'][0] && $user['billing_patronymic_name'][0]) {
@@ -36,26 +38,38 @@ if (in_array('administrator', (array)$current_user->roles)) {
 							<?php endif ?>
       </label>
       <div class="account__top-name">С возвращением, <?php echo $name; ?>!</div>
-      <div class="account__top-app">
-        <span>приложение</span>
-        <img src="<?php the_field('app_qr', 16) ?>" alt="приложение rusroza">
-        <span>rusroza</span>
-      </div>
+					<?php if (!wp_is_mobile()): ?>
+       <div class="account__top-app">
+         <span>приложение</span>
+         <img src="<?php the_field('app_qr', 16) ?>" alt="приложение rusroza">
+         <span>rusroza</span>
+       </div>
+					<?php endif; ?>
     </form>
     <div class="account__wrap">
-      <aside class="account__sidebar">
-							<?php do_action('woocommerce_account_navigation'); ?>
-							<?php wc_get_template('myaccount/sidebar-actions.php') ?>
-							<?php wc_get_template('myaccount/sidebar-new.php') ?>
-      </aside>
+					<?php if (!wp_is_mobile()): ?>
+       <aside class="account__sidebar">
+								<?php do_action('woocommerce_account_navigation'); ?>
+								<?php wc_get_template('myaccount/sidebar-actions.php') ?>
+								<?php wc_get_template('myaccount/sidebar-new.php') ?>
+								<?php wc_get_template('myaccount/sidebar-advise.php', array('name' => $name, 'phone' => $phone)) ?>
+       </aside>
+					<?php else: ?>
+						<?php do_action('woocommerce_account_navigation'); ?>
+					<?php endif; ?>
       <main class="account__main">
         <div class="entry-content">
 									<?php echo do_shortcode('[wishsuite_table]'); ?>
 									<?php echo do_shortcode('[ddwcwl_waiting_list_template_shortcode]'); ?>
-
-
         </div>
       </main>
+					<?php if (wp_is_mobile()): ?>
+       <div class="account__bottom">
+								<?php wc_get_template('myaccount/sidebar-actions.php') ?>
+								<?php wc_get_template('myaccount/sidebar-new.php') ?>
+       </div>
+						<?php wc_get_template('myaccount/sidebar-advise.php', array('name' => $name, 'phone' => $phone)) ?>
+					<?php endif; ?>
     </div>
   </div>
 </div>

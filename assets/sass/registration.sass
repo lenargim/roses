@@ -1,13 +1,22 @@
 .registration
   padding: 32px 0
+  @include max($maxMobile)
+    background-color: $bg
   &__form
     background-color: $bg
     border-radius: 25px
     padding: 48px 60px
+    position: relative
+    @include max($maxMobile)
+      padding: 0
+      background-color: transparent
   &__wrap
     display: grid
     grid-template-columns: 1fr 1fr
     gap: 80px
+    @include max($maxMobile)
+      grid-template-columns: 1fr
+      gap: 16px
   &__half
     display: flex
     flex-direction: column
@@ -25,6 +34,9 @@
     font: 500 14px $font-family
     text-decoration: underline
     text-decoration-skip-ink: none
-    position: absolute
-    left: 0
-    bottom: 0
+    @include min($minLaptop)
+      position: absolute
+      left: 0
+      bottom: 0
+    @include max($maxMobile)
+      margin-top: 32px

@@ -38,11 +38,13 @@ if (in_array('administrator', (array)$current_user->roles)) {
 							<?php endif ?>
       </label>
       <div class="account__top-name">С возвращением, <?php echo $name; ?>!</div>
-      <div class="account__top-app">
-        <span>приложение</span>
-        <img src="<?php the_field('app_qr', 16) ?>" alt="приложение rusroza">
-        <span>rusroza</span>
-      </div>
+					<?php if (!wp_is_mobile()): ?>
+       <div class="account__top-app">
+         <span>приложение</span>
+         <img src="<?php the_field('app_qr', 16) ?>" alt="приложение rusroza">
+         <span>rusroza</span>
+       </div>
+					<?php endif; ?>
     </form>
     <div class="account__wrap">
 					<?php if (!wp_is_mobile()): ?>
