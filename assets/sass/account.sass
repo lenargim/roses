@@ -6,6 +6,8 @@
     justify-content: space-between
     gap: 1em
     padding: 25px 0 25px 60px
+    @include between($minTablet, $maxTablet)
+      padding: 25px 0
     &-img
       width: 128px
       height: 128px
@@ -14,6 +16,7 @@
       background-color: $bg
       position: relative
       cursor: pointer
+      flex-shrink: 0
       img
         width: 100%
         height: 100%
@@ -62,20 +65,39 @@
     display: flex
     gap: 48px
     width: 100%
+    @include between($minLaptop,$maxLaptop)
+      gap: 30px
+    @include between($minTablet, $maxTablet)
+      gap: 32px
+      flex-direction: column
   &__sidebar
     width: 277px
     display: flex
     flex-direction: column
     gap: 32px
   &__nav
-    border: 1px solid #bd7dc1
-    border-radius: 22px
-    padding: 32px 24px 40px 24px
-    width: 100%
+    @include min($minLaptop)
+      border: 1px solid #bd7dc1
+      border-radius: 22px
+      padding: 32px 24px 40px 24px
+      width: 100%
+    ul
+      @include max($maxTablet)
+        display: flex
+        align-items: center
+        width: calc(100% + 40px)
+        margin-left: -20px
+        margin-right: -20px
+        padding: 0 20px
+        overflow-x: auto
+        &::-webkit-scrollbar
+          display: none
     li
-      border-bottom: 1.00px solid rgba(189, 125, 193, 0.2)
-      padding: 11px 0
-      a
+      @include min($minLaptop)
+        border-bottom: 1.00px solid rgba(189, 125, 193, 0.2)
+        padding: 11px 0
+    a
+      @include min($minLaptop)
         white-space: nowrap
         font: 500 14px $font-family
         color: $text
@@ -94,6 +116,17 @@
           border-radius: 15px
           padding: 5px 0
           background-color: $orange
+      @include max($maxTablet)
+        display: block
+        padding: 16px
+        white-space: nowrap
+        border-bottom: 1px solid rgba(189, 125, 193, 0.2)
+        &.active
+          color: $lightViolet
+          border-bottom: 1px solid rgba(189, 125, 193, 0.7)
+        & span:nth-child(2)
+          display: none
+
   &__slider
     border: 1px solid #bd7dc1
     border-radius: 22px
@@ -122,6 +155,8 @@
     border-radius: 22px
     padding: 40px 48px
     background: $bg
+    @include between($minTablet, $maxTablet)
+      padding: 40px
     &-data
       max-width: 385px
       width: 100%
@@ -181,6 +216,8 @@
       border-radius: 22px
       padding: 40px 47px
       background-color: $bg
+      @include between($minTablet, $maxTablet)
+        padding: 40px
       h3
         font: 600 20px $font-family
         color: $text
@@ -206,6 +243,10 @@
     display: flex
     flex-direction: column
     gap: 16px
+    @include between($minTablet, $maxTablet)
+      align-items: center
+      .button
+        max-width: 230px
     &-title
       font: 600 20px $font-family
       color: $darkViolet
@@ -214,12 +255,18 @@
       color: $text
   .woocommerce-notices-wrapper
     display: none
+  &__bottom
+    display: grid
+    grid-template-columns: repeat(2, 288px)
+    gap: 32px
 
 
 .wishlist
   background-color: $bg
   border-radius: 22px
   padding: 40px 48px
+  @include between($minLaptop,$maxLaptop)
+    padding: 30px
   &__top
     display: flex
     align-items: center

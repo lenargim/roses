@@ -10,6 +10,8 @@
     background: $bg
     &-wrap
       grid-column: 1/9
+      @include max($maxLaptop)
+        grid-column: 1/-1
     &-top
       display: flex
       align-items: center
@@ -30,6 +32,8 @@
     gap: 32px
     &-wrap
       grid-column: 9/13
+      @include max($maxLaptop)
+        grid-column: 1/7
     &-block
       padding-bottom: 24px
       border-bottom: 1px solid $lightViolet
@@ -89,45 +93,3 @@
     display: flex
     flex-direction: column
     gap: 20px
-.delivery-calc
-  h2
-    font: 700 20px $font-family
-    text-transform: uppercase
-    color: $darkViolet
-    margin-bottom: 32px
-  &__wrap
-    display: grid
-    grid-template-columns: repeat(12, 1fr)
-    gap: 20px
-  &__box
-    grid-column: 3/11
-    padding: 40px
-    border-radius: 22px
-    background: $bg
-  &__calc
-    display: flex
-    align-items: flex-start
-    justify-content: space-between
-  &__form
-    width: 350px
-    position: relative
-    display: flex
-    flex-direction: column
-    gap: 12px
-    select
-      display: none
-  &__total
-    width: 240px
-    border: 1px solid #bd7dc1
-    border-radius: 20px
-    padding: 24px
-    background: $white
-    flex-shrink: 0
-    p
-      font: 500 16px $font-family
-      color: $text
-      padding-bottom: 16px
-    span
-      font: 700 20px $font-family
-      text-transform: uppercase
-      color: $darkViolet

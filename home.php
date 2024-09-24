@@ -11,7 +11,7 @@
          <div class="swiper-wrapper">
 										<?php while (have_rows('slide')) : the_row(); ?>
             <div class="swiper-slide">
-              <div class="banner__item" style="background-image: url(<?php echo get_sub_field('banner'); ?>)">
+              <div class="banner__item banner-img" style="background-image: url(<?php echo get_sub_field('banner'); ?>)">
                 <div class="banner__text">
                   <div class="banner__title"><?php echo get_sub_field('text'); ?></div>
                   <a href="<?php echo get_sub_field('link'); ?>" class="button orange">Подробнее</a>

@@ -12,6 +12,9 @@
     gap: 0 32px
     grid-template-columns: 280px 1fr
     grid-template-rows: repeat(4, auto)
+    @include between($minTablet, $maxTablet)
+      gap: 0 24px
+      grid-template-columns: 120px 1fr
     &-img
       width: 100%
       aspect-ratio: 1/1
@@ -19,6 +22,8 @@
       object-fit: cover
       grid-column: 1/2
       grid-row: 1/-1
+      @include between($minTablet, $maxTablet)
+        border-radius: 22px
     &-top
       display: flex
       align-items: center
@@ -91,6 +96,8 @@
     border-radius: 22px
     padding: 32px 24px
     height: fit-content
+    @include between($minTablet, $maxTablet)
+      grid-column: 9/13
     &-title
       font: 600 20px $font-family
       color: $text
@@ -128,6 +135,8 @@
     grid-template-columns: repeat(3, 1fr)
     gap: 45px
     padding: 128px 0 48px
+    @include between($minTablet, $maxTablet)
+      gap: 30px
     img
       width: 100%
     img:nth-child(2)
@@ -140,9 +149,13 @@
     display: flex
     align-items: center
     gap: 40px
+    @include between($minTablet, $maxTablet)
+      gap: 20px
     &-img
       border-radius: 22px
       max-width: 280px
+      @include between($minTablet, $maxTablet)
+        max-width: 200px
     &-text
       max-width: 662px
     &-title

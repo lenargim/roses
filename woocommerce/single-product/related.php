@@ -8,7 +8,7 @@ $uppsels = $product->get_upsell_ids();
 
 if ($uppsels) : ?>
 
-  <section class="related section background">
+  <section class="related section">
     <div class="container">
       <div class="product-single__related">
         <h2 class="h2">Похожие сорта</h2>

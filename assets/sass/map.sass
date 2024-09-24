@@ -8,23 +8,35 @@
   &__wrap
     display: grid
     grid-template-columns: 1fr 1fr
+    @include max($maxTablet)
+      grid-template-columns: 1fr
+      gap: 32px
   &__img
-    display: block
     overflow: hidden
     border-radius: 22px
     width: 100%
     aspect-ratio: 555/468
+    @include between($minTablet, $maxTablet)
+      max-width: 600px
+      margin: 0 auto
   &__contacts
-    margin-left: 65px
     display: flex
     flex-direction: column
     gap: 50px
+    @include min($maxLaptop+1)
+      margin-left: 65px
+    @include between($minLaptop, $maxLaptop)
+      margin-left: 50px
+    @include between($minTablet, $maxTablet)
+      flex-direction: row
   &__part
     max-width: 450px
     font: 400 14px $font-family
     white-space: pre-wrap
     display: flex
     flex-direction: column
+    @include between($minTablet, $maxTablet)
+      max-width: 50%
     h3
       font: 600 14px $font-family
       padding-bottom: 1em

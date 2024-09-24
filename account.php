@@ -31,10 +31,10 @@ if (in_array('administrator', (array)$current_user->roles)) {
         <input type="file" class="account__top-img-input" id="account-img" name="image"
                accept="image/x-png,image/gif,image/jpeg">
 							<?php if (isset($user['image'][0])): ?>
-                <img src="<?php echo wp_get_attachment_image_url($user['image'][0],'product-new'); ?>"
-                     alt="<?php echo $name; ?>">
-              <?php else:  ?>
-                <img class="no-img" src="<?php echo IMAGES_PATH . 'rose.png' ?>" alt="<?php echo $name; ?>">
+         <img src="<?php echo wp_get_attachment_image_url($user['image'][0], 'product-new'); ?>"
+              alt="<?php echo $name; ?>">
+							<?php else: ?>
+         <img class="no-img" src="<?php echo IMAGES_PATH . 'rose.png' ?>" alt="<?php echo $name; ?>">
 							<?php endif ?>
       </label>
       <div class="account__top-name">С возвращением, <?php echo $name; ?>!</div>
@@ -45,15 +45,26 @@ if (in_array('administrator', (array)$current_user->roles)) {
       </div>
     </form>
     <div class="account__wrap">
-      <aside class="account__sidebar">
-							<?php do_action('woocommerce_account_navigation'); ?>
-        <?php wc_get_template('myaccount/sidebar-actions.php') ?>
-        <?php wc_get_template('myaccount/sidebar-new.php') ?>
-        <?php wc_get_template('myaccount/sidebar-advise.php', array('name' => $name, 'phone' => $phone)) ?>
-      </aside>
+					<?php if (!wp_is_mobile()): ?>
+       <aside class="account__sidebar">
+								<?php do_action('woocommerce_account_navigation'); ?>
+								<?php wc_get_template('myaccount/sidebar-actions.php') ?>
+								<?php wc_get_template('myaccount/sidebar-new.php') ?>
+								<?php wc_get_template('myaccount/sidebar-advise.php', array('name' => $name, 'phone' => $phone)) ?>
+       </aside>
+					<?php else: ?>
+						<?php do_action('woocommerce_account_navigation'); ?>
+					<?php endif; ?>
       <main class="account__main">
 							<?php do_action('woocommerce_account_content'); ?>
       </main>
+					<?php if (wp_is_mobile()): ?>
+       <div class="account__bottom">
+								<?php wc_get_template('myaccount/sidebar-actions.php') ?>
+								<?php wc_get_template('myaccount/sidebar-new.php') ?>
+       </div>
+						<?php wc_get_template('myaccount/sidebar-advise.php', array('name' => $name, 'phone' => $phone)) ?>
+					<?php endif; ?>
     </div>
   </div>
 </div>

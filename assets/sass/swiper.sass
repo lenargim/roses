@@ -20,17 +20,20 @@
   &__item
     display: grid
     grid-template-columns: 1fr 1fr
+    @include between($minTablet, $maxTablet)
+      grid-template-columns: 7fr 5fr
   &__img
     width: 100%
     object-fit: cover
     aspect-ratio: 5/4
+    @include between($minTablet, $maxTablet)
+      height: 100%
   &__content
     position: relative
     padding: 23px 66px
     display: flex
     align-items: center
     justify-content: center
-    //margin-left: -10%
   &__text
     position: relative
     display: flex
@@ -43,6 +46,7 @@
     aspect-ratio: 1/1
     border: 2px solid #6f1490
     padding: 20px
+
     &>*
       transform: translate(0,0)
       max-width: 230px
@@ -56,6 +60,7 @@
       transform: translate(-50%,-50%) rotate(45deg)
       left: 50%
       top: 50%
+
     .date
       font: 700 14px / 1 $font-family
       color: $orange

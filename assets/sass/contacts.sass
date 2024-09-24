@@ -4,19 +4,23 @@
     display: grid
     grid-template-columns: 1fr 1fr
     gap: 20px
+    @include max($maxTablet)
+      grid-template-columns: 1fr
   &__left, &__right
     display: flex
     flex-direction: column
     gap: 20px
   &__banner
     position: relative
-    border-radius: 15px
     overflow: hidden
     flex-shrink: 0
+    max-width: 525px
+    margin: 0 auto
     img
-      display: block
-      width: 100%
-      //aspect-ratio: 525/343
+      border-radius: 15px
+      aspect-ratio: 525/343
+      @include between($minTablet, $maxTablet)
+        margin: 0 auto
     &-title
       position: absolute
       left: 32px
@@ -56,6 +60,8 @@
     padding: 50px 0
     .wp-block-image
       margin: 0
+      img
+        margin: 0 auto
     h3
       font: 600 20px $font-family
       color: $darkViolet

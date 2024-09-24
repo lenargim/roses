@@ -5,6 +5,13 @@
     overflow: hidden
     position: relative
     width: 837px
+    background-color: $bg
+    @include between($minLaptop,$maxLaptop)
+      margin: 0 auto
+    @include between($minTablet, $maxTablet)
+      padding: 0 60px
+      width: calc(100vw - 40px)
+      background: transparent
     .swiper-slide
       opacity: 1
       transition: opacity .2s ease
@@ -25,7 +32,7 @@
       z-index: 1
       line-height: 1
       right: 8px
-      top: 105px
+      bottom: calc(100% + 20px)
       svg
         width: 24px
         height: 24px
@@ -73,13 +80,22 @@
   &__arrow
     width: 14px
     height: 28px
-    fill: $lightViolet
     position: absolute
     cursor: pointer
     top: calc(50% - 14px)
     z-index: 2
+    background: url("assets/images/new-arrow.svg") center no-repeat
+    @include between($minTablet, $maxTablet)
+      top: calc(50% - 20px)
+      width: 40px
+      height: 40px
+      background: url("assets/images/slider-arrow.svg") center no-repeat
     &.prev
       left: 15px
+      @include between($minTablet, $maxTablet)
+        left: 0
     &.next
       right: 15px
       transform: rotate(180deg)
+      @include between($minTablet, $maxTablet)
+        right: 0

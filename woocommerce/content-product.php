@@ -10,7 +10,6 @@ if (empty($product) || !$product->is_visible()) {
 }
 ?>
 <div class="products__item">
-	<?php echo do_shortcode('[wishsuite_button]'); ?>
 	<?php
 	$title = $product->get_title();
 	$price = $product->get_price();
@@ -29,7 +28,6 @@ if (empty($product) || !$product->is_visible()) {
        <div class="products__item-tag bestseller">Хит продаж</div>
 					<?php endif; ?>
     </div>
-
 			<?php
 			if ($product->is_on_sale()):
 				$sale_percentage = round((($product->get_regular_price() - $product->get_sale_price()) / $product->get_regular_price()) * 100); ?>
@@ -39,6 +37,7 @@ if (empty($product) || !$product->is_visible()) {
 			<?php endif; ?>
   </a>
   <div class="products__item-data">
+			<?php echo do_shortcode('[wishsuite_button]'); ?>
     <a href="<?php the_permalink() ?>" class="products__item-info">
      <span class="products__item-attr">
       <?php $height = $product->get_attribute('pa_height'); ?>

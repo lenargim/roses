@@ -1,15 +1,21 @@
 jQuery(document).ready(function () {
   new Swiper('.new__slider', {
-    slidesPerView: 5,
+    slidesPerView: 4,
     speed: 400,
     loop: true,
-    spaceBetween: 16,
+    spaceBetween: 21,
     navigation: {
       nextEl: '.next',
       prevEl: '.prev',
     },
     watchSlidesProgress: true,
-    allowTouchMove: false
+    allowTouchMove: false,
+    breakpoints: {
+      1025: {
+        slidesPerView: 5,
+        spaceBetween: 16,
+      }
+    }
   });
 
 
@@ -28,22 +34,27 @@ jQuery(document).ready(function () {
       nextEl: '.next',
       prevEl: '.prev',
     },
-    thumbs: {
+    thumbs: $('.swiper-thumbs').length ? {
       swiper: swiper_thumbnail,
-    }
+    } : null
   });
 
   new Swiper('.product-single__related', {
     slidesPerView: 4,
     speed: 400,
     loop: true,
-    spaceBetween: 31,
+    spaceBetween: 20,
     navigation: {
       nextEl: '.next',
       prevEl: '.prev',
     },
     watchSlidesProgress: true,
-    allowTouchMove: false
+    allowTouchMove: false,
+    breakpoints: {
+      1025: {
+        spaceBetween: 31,
+      }
+    }
   });
 
 

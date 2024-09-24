@@ -6,7 +6,7 @@ get_template_part('parts/header'); ?>
 <main class="about-page">
   <div class="container">
     <div class="banner">
-					<?php the_post_thumbnail(); ?>
+					<?php the_post_thumbnail('', array('class' => 'banner-img')); ?>
       <div class="banner__title">
         <span>РУСРОЗА</span>
         <p>Питомник саженцев №1</p>

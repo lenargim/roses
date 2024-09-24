@@ -8,14 +8,10 @@
       &-active
         opacity: 1
   &__item
-    width: 100%
-    aspect-ratio: 107/40
     background-size: cover
     background-repeat: no-repeat
     background-position: center
     position: relative
-    border-radius: 53px
-    overflow: hidden
   &__text
     position: absolute
     width: 327px
@@ -27,16 +23,20 @@
     h3
       font: 700 40px/1 $font-family
       color: $white
+      @include between($minTablet, $maxTablet)
+        font-size: 30px
     h2
       font: 700 115px/1.2 $font-family
       color: $darkViolet
+      @include between($minTablet, $maxTablet)
+        font-size: 80px
   &__title
     flex: 1 0 auto
   .button
     flex-shrink: 0
   &__arrow
     position: absolute
-    top: 200px
+    top: calc(50% - 22px)
     width: 44px
     height: 44px
     background: url("assets/images/banner-arrow.svg") center no-repeat

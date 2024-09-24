@@ -9,7 +9,7 @@ get_template_part('parts/header'); ?>
     <div class="contacts-page__wrap">
       <div class="contacts-page__left">
         <div class="contacts-page__banner">
-									<?php the_post_thumbnail(); ?>
+									<?php the_post_thumbnail('', array('class' => 'banner-img')); ?>
           <div class="contacts-page__banner-title">Питомник саженцев №1</div>
         </div>
 							<?php if (have_rows('offices')):

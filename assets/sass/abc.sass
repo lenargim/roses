@@ -9,6 +9,8 @@
     align-items: center
     justify-content: center
     gap: 0.77em
+    @include between($minTablet, $maxTablet)
+      gap: .55em
     &.rus a
       color: $lightViolet
     &.eng a

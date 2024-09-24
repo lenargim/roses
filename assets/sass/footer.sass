@@ -6,9 +6,13 @@
     grid-template-columns: repeat(4, 1fr)
     color: #fff
     gap: 106px
+    @include between($minTablet, $maxTablet)
+      gap: 1em
   h4
     font: 700 24px $font-family
     color: $orange
+    @include between($minTablet, $maxTablet)
+      font-size: 18px
   &__col
     padding-bottom: 1em
     h4
@@ -54,3 +58,5 @@
     margin-top: -1em
     font: 400 14px $font-family
     color: #d1d1d1
+    @include between($minTablet, $maxTablet)
+      margin-top: .5em

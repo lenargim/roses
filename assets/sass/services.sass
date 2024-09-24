@@ -3,13 +3,16 @@
     display: grid
     grid-template-columns: repeat(3, 1fr)
     gap: 23px
+    @include between($minTablet, $maxTablet)
+      grid-template-columns: repeat(2, 1fr)
   &__item
     border-radius: 15px
     background: rgba(244, 230, 244, 0.58)
     overflow: hidden
   &__img
-    height: 154px
-    display: block
+    width: 100%
+    aspect-ratio: 340/155
+
   &__info
     padding: 17px 46px
     text-align: center

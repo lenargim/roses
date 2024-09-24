@@ -2,7 +2,6 @@
 if (!defined('ABSPATH')) {
 	exit;
 }
-
 do_action('woocommerce_before_account_navigation');
 global $woocommerce;
 $items = $woocommerce->cart->get_cart();
@@ -28,8 +27,10 @@ $items = $woocommerce->cart->get_cart();
     <li><a class="account__nav-link" href="#">Подписки</a></li>
     <li><a class="account__nav-link" href="<?php echo get_permalink(wc_get_page_id('shop')); ?>">Вернуться в каталог</a>
     </li>
-    <li><a class="account__nav-link"
-           href="<?php echo esc_url(wc_get_account_endpoint_url('customer-logout')) ?>">Выйти</a></li>
+    <li>
+      <a class="account__nav-link"
+         href="<?php echo esc_url(wc_get_account_endpoint_url('customer-logout')) ?>">Выйти</a>
+    </li>
 
   </ul>
 </nav>

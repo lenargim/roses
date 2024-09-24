@@ -1,6 +1,8 @@
-.woocommerce-checkout, .page-template-delivery
+.woocommerce-cart, .page-template-delivery
   .select2-container
     width: 350px
+    @include between($minLaptop,$maxLaptop)
+      width: 300px
 .single-vacancy, .page-template-register
   .select2-container
     width: 344px

@@ -6,9 +6,9 @@
       <div class="header__wrap">
 							<?php echo get_custom_logo(); ?>
         <div class="header__row">
-          <a href="<?php echo get_permalink(wc_get_page_id('shop')); ?>?orderby=date" class="button violet">Новые
+          <a href="<?php echo get_permalink(wc_get_page_id('shop')); ?>?orderby=date" class="button violet laptop-hidden">Новые
             поступления</a>
-          <a href="<?php echo get_page_link(229); ?>" class="button orange">Бесплатная доставка</a>
+          <a href="<?php echo get_page_link(229); ?>" class="button orange laptop-hidden">Бесплатная доставка</a>
 									<?php echo do_shortcode('[fibosearch]'); ?>
         </div>
         <div class="header__admin">
@@ -25,7 +25,7 @@
 												$name = $current_user->user_firstname ?? $current_user->user_login;
 												?>
              <a href="<?php echo get_permalink(get_option('woocommerce_myaccount_page_id')) ?>"
-                class="header__link"><?php echo $name; ?></a>
+                class="header__link admin"><?php echo $name; ?></a>
 											<?php else: ?>
              <button type="button" class="header__link admin open-login">Войти</button>
 											<?php endif; ?>

@@ -12,7 +12,6 @@
     flex-shrink: 0
     line-height: 1
     img
-      display: block
       width: 100%
       max-width: 253px
       aspect-ratio: 253/65
@@ -83,12 +82,21 @@
 .header-menu
   .menu
     display: flex
-    flex-wrap: wrap
     gap: 57px
     align-items: center
     position: relative
+    flex-wrap: nowrap
     &>.menu-item a
       padding: 12px 0
+      white-space: nowrap
+    @include max($maxLaptop)
+      overflow-x: auto
+      padding: 0 15px
+      position: relative
+      margin-left: -20px
+      margin-right: -20px
+      &::-webkit-scrollbar
+        display: none
   .sub-menu
     display: none
     position: absolute

@@ -2,10 +2,16 @@
   &__wrap
     display: grid
     grid-template-columns: 1fr 1fr
+    @include max($maxTablet)
+      grid-template-columns: 1fr
+      gap: 24px
   &__images
     display: grid
     grid-template-columns: 1fr 1fr
     gap: 11px 15px
+    img
+      @include max($maxTablet)
+        width: 100%
     img:nth-child(1)
       grid-row: 1/2
       grid-column: 1/3
@@ -16,12 +22,17 @@
       grid-row: 2/3
       grid-column: 2/3
   &__text
-    margin-left: 90px
+    @include min($maxLaptop+1)
+      margin-left: 90px
+    @include between($minLaptop, $maxLaptop)
+      margin-left: 50px
 
     h3
       font: 700 28px/34px $font-family
       margin-bottom: 25px
       color: $darkViolet
+      @include max($maxTablet)
+        text-align: center
     ol
       display: flex
       gap: 32px
@@ -32,8 +43,9 @@
       align-items: center
       justify-content: flex-start
       gap: 34px
-      max-width: 350px
       counter-increment: num
+      @include min($minLaptop)
+        max-width: 350px
       &::before
         content: "0" counter(num)
         font: 700 39px $font-family
@@ -50,7 +62,6 @@
 .gallery
   img
     width: 100%
-    display: block
     object-fit: cover
   &__desc
     position: absolute
@@ -94,8 +105,6 @@
 .about-page
   padding-top: 40px
   .banner
-    border-radius: 53px
-    overflow: hidden
     position: relative
     &__title
       position: absolute
@@ -122,6 +131,8 @@
       display: flex
       gap: 16px
       align-items: flex-start
+      @include between($minTablet, $maxTablet)
+        gap: 12px
     a
       color: $orange
     li
@@ -133,10 +144,14 @@
       color: $textBlack
       max-width: 310px
       counter-increment: num
+      @include between($minTablet, $maxTablet)
+        gap: 16px
       &::before
         content: "0" counter(num)
         font: 700 39px $font-family
         color: rgba(111, 20, 144, 0.29)
+        @include between($minTablet, $maxTablet)
+          font-size: 26px
       span
         font-weight: 700
       p
@@ -150,6 +165,8 @@
     display: grid
     grid-template-columns: repeat(3, 1fr)
     gap: 22px
+    @include between($minTablet, $maxTablet)
+      gap: 16px
     &-item
       border: 2.50px solid #bd7dc1
       border-radius: 15px
@@ -170,6 +187,8 @@
     display: grid
     grid-template-columns: repeat(4, 1fr)
     gap: 13px
+    @include between($minTablet, $maxTablet)
+      gap: 13px 10px
     &-item
       display: flex
       align-items: center
@@ -181,6 +200,8 @@
       color: $darkViolet
       text-align: center
       font: 500 16px $font-family
+      @include between($minTablet, $maxTablet)
+        padding: 10px 7px
 
 .html5_video_players
   border: 5px solid $lightViolet

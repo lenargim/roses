@@ -4,6 +4,8 @@
     grid-template-columns: 200px 1fr
     gap: 30px
     width: 100%
+    @include max($maxLaptop)
+      grid-template-columns: 1fr
   &__main
     width: 100%
   &__loop
@@ -13,6 +15,9 @@
     display: grid
     grid-template-columns: repeat(3, 210px)
     gap: 24px 32px
+    @include between($minTablet,$maxLaptop)
+      grid-template-columns: repeat(4, 1fr)
+      gap: 24px 12px
   &__item
     width: 100%
     aspect-ratio: 1/1
