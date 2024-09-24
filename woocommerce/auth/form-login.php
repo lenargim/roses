@@ -32,7 +32,7 @@ defined('ABSPATH') || exit;
         </button>
         <input type="hidden" name="redirect" value="<?php echo get_permalink(wc_get_page_id('myaccount')) ?>"/>
       </p>
-      <a href="<?php echo get_page_link('sign-in'); ?>" class="modal__link">Зарегистрироваться</a>
+      <a href="<?php echo get_permalink(get_page_by_path('sign-in')); ?>" class="modal__link">Зарегистрироваться</a>
     </form>
   </div>
 </div>

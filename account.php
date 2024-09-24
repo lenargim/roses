@@ -5,7 +5,7 @@
 defined('ABSPATH') || exit;
 
 if (!is_user_logged_in()) {
-	wp_redirect(get_permalink('sign-in'));
+	wp_redirect(get_permalink(get_page_by_path('sign-in')));
 }
 get_template_part('parts/header');
 

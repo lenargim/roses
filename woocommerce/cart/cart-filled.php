@@ -123,7 +123,7 @@
   <div class="cart-block__after">
     <a href="<?php echo get_permalink(woocommerce_get_page_id('shop')); ?>" class="button big violet">Вернуться в
       каталог</a>
-    <a href="<?php echo get_page_link('sign-in'); ?>" class="button big orange">Зарегистрироваться</a>
+    <a href="<?php echo get_permalink(get_page_by_path('sign-in')); ?>" class="button big orange">Зарегистрироваться</a>
     <p class="text">Зарегистрированным пользователям доступны все функции личного кабинета: избранное, лист ожидания,
       список желаний, история заказов, а также возможность копить баллы и получать скидки!</p>
   </div>
